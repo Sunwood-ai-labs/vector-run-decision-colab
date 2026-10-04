@@ -1,0 +1,1371 @@
+{
+  "runnerSchemaVersion": 1,
+  "runnerStatus": "cli_process_exited_zero",
+  "aggregateMeasurementStatus": "not_aggregated",
+  "model": {
+    "id": "vllm-sr/Decision-2.0-Nox-4B",
+    "revision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+    "baseRevision": null
+  },
+  "metadata": {
+    "model": {
+      "id": "vllm-sr/Decision-2.0-Nox-4B",
+      "revision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+      "baseRevision": null,
+      "baseRepo": null,
+      "originRepo": "Qwen/Qwen3.5-4B-Base",
+      "originRevision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+      "sourceAudit": {
+        "manifest_sha256": "49771ea33a451274687ad2a246ce5fb78f8f42ec904fc91a467477179975bb16",
+        "model_identity_sha256": "31d4ee9213686eeed6283d08ed7bce52ebef94ec47b7f97f7e1209f916fe51ea",
+        "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+        "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+        "profile": "qwen-full"
+      }
+    },
+    "hardware": {
+      "gpu": "NVIDIA L4",
+      "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+      "quantization": "none",
+      "dependencies": {
+        "torch": "2.11.0+cu130",
+        "transformers": "5.17.0",
+        "accelerate": "1.15.0",
+        "peft": "0.21.0",
+        "bitsandbytes": "0.50.2",
+        "sentencepiece": "0.2.2",
+        "protobuf": "5.29.6",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.23.2",
+        "huggingface-hub": "1.31.0",
+        "triton": "3.6.0",
+        "causal-conv1d": null,
+        "flash-linear-attention": null
+      }
+    },
+    "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+    "runContract": {
+      "physicsHz": null,
+      "decisionEveryTicks": null,
+      "actions": null,
+      "observationPipeline": null,
+      "series": "q64",
+      "questions": 64,
+      "questionCountPerApiCall": 64,
+      "seeds": [
+        101
+      ],
+      "maxSeconds": 30,
+      "maxJumps": 2,
+      "runKind": "endless_time_capped",
+      "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+    },
+    "runtimeHistory": {
+      "model": "nox",
+      "runtimeReused": false,
+      "weightsCached": false,
+      "priorModelLoaded": false,
+      "priorSystemOneCall": false,
+      "priorInference": false,
+      "priorPrototypeGameRun": false,
+      "evidence": {
+        "runtimeReused": "`colab new --session vector-run-nox --gpu L4` returned `Session READY` after a prior read-only status said this session was not found; this is a new runtime assignment.",
+        "weightsCached": "Checking only the pinned HF snapshot is read-only and does not fetch model files; result and exact file counts are recorded in observations.pinnedWeightCache.",
+        "priorModelLoaded": "No model loader, checkpoint download, or weight-cache preparation was run in this newly assigned VM before this history record.",
+        "priorSystemOneCall": "No system_one request was sent in this newly assigned VM before this history record.",
+        "priorInference": "Only immutable repository clones, pinned checkout gates, common dependency bootstrap, GPU capability query, and read-only pinned HF cache inspection ran before this history record.",
+        "priorPrototypeGameRun": "The fresh assigned runtime was created after the previous dedicated session was reported not found; no prototype repository or game was cloned or run here."
+      }
+    }
+  },
+  "contract": {
+    "physicsHz": null,
+    "decisionEveryTicks": null,
+    "actions": null,
+    "observationPipeline": null,
+    "series": "q64",
+    "questions": 64,
+    "questionCountPerApiCall": 64,
+    "seeds": [
+      101
+    ],
+    "maxSeconds": 30,
+    "maxJumps": 2,
+    "runKind": "endless_time_capped",
+    "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+  },
+  "runtimeHistory": {
+    "model": "nox",
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false,
+    "evidence": {
+      "runtimeReused": "`colab new --session vector-run-nox --gpu L4` returned `Session READY` after a prior read-only status said this session was not found; this is a new runtime assignment.",
+      "weightsCached": "Checking only the pinned HF snapshot is read-only and does not fetch model files; result and exact file counts are recorded in observations.pinnedWeightCache.",
+      "priorModelLoaded": "No model loader, checkpoint download, or weight-cache preparation was run in this newly assigned VM before this history record.",
+      "priorSystemOneCall": "No system_one request was sent in this newly assigned VM before this history record.",
+      "priorInference": "Only immutable repository clones, pinned checkout gates, common dependency bootstrap, GPU capability query, and read-only pinned HF cache inspection ran before this history record.",
+      "priorPrototypeGameRun": "The fresh assigned runtime was created after the previous dedicated session was reported not found; no prototype repository or game was cloned or run here."
+    }
+  },
+  "runtime": {
+    "environment": {
+      "python": "3.13.15",
+      "platform": "Linux Colab",
+      "node": "v24.15.0",
+      "cuda": "13.0",
+      "gpu_probe_error": null,
+      "driver": "580.82.07",
+      "gpu": {
+        "name": "NVIDIA L4",
+        "total_memory_bytes": 23659151360,
+        "free_memory_before_load_bytes": 23255318528,
+        "compute_capability": "8.9",
+        "visible_device_count": 1,
+        "device_index": 0
+      },
+      "dependencies": {
+        "torch": "2.11.0+cu130",
+        "transformers": "5.17.0",
+        "accelerate": "1.15.0",
+        "peft": "0.21.0",
+        "bitsandbytes": "0.50.2",
+        "sentencepiece": "0.2.2",
+        "protobuf": "5.29.6",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.23.2",
+        "huggingface-hub": "1.31.0",
+        "triton": "3.6.0",
+        "causal-conv1d": null,
+        "flash-linear-attention": null
+      }
+    },
+    "condition": {
+      "gpu": "NVIDIA L4",
+      "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+      "quantization": "none",
+      "offload": "none",
+      "singleModelPerRuntime": true
+    },
+    "modelPhaseDefinition": "loadMs measures this process's model load; q3 request 1 is the first API call after model load, request 2 is warm, request 3+ is steady; q64 request 1 is its first API call after q3 on the same loaded model. This does not establish a cold Colab runtime, GPU, filesystem, or kernel cache.",
+    "windowDefinition": {
+      "durationSeconds": 1.0,
+      "origin": "series CLI start",
+      "latencies": "request starts grouped by elapsed window"
+    },
+    "cacheObservations": {
+      "huggingFacePinnedSnapshot": {
+        "beforeModelLoad": {
+          "pinnedSnapshot": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "afterModelLoad": {
+          "pinnedSnapshot": {
+            "present": true,
+            "fileCount": 40,
+            "bytes": 9716487471,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "after_q64": {
+          "pinnedSnapshot": {
+            "present": true,
+            "fileCount": 40,
+            "bytes": 9716487471,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        }
+      },
+      "runtimeCaches": {
+        "beforeModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "warmHistory": "unknown; snapshots show directory state only",
+        "afterModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "after_q64": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        }
+      }
+    },
+    "measuredAtUtc": "2026-10-04T16:07:09.625882+00:00",
+    "loadMs": 109893.08675000006,
+    "loaderMetadata": {},
+    "elapsedWallMs": 11651.45254999993,
+    "gpuPeakAllocatedBytes": 17448664064,
+    "gpuPeakReservedBytes": 18924699648,
+    "inferenceRecords": [
+      {
+        "index": 1,
+        "phase": "first",
+        "firstApiCallOfSeries": true,
+        "firstApiCallAfterModelLoad": false,
+        "series": "q64",
+        "windowIndex1s": 0,
+        "windowSeconds": 1.0,
+        "questionCount": 64,
+        "request": {
+          "model": "vllm-sr/Decision-2.0-Nox-4B",
+          "state": {
+            "schema": "vector-run-visible-state/v1",
+            "tick": 16,
+            "dead": false,
+            "player": {
+              "y": 0,
+              "vy": 0,
+              "speed": 250.29333333333332,
+              "held": false,
+              "jumpsUsed": 0,
+              "maxJumps": 2
+            },
+            "obstacles": [],
+            "probes": [
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true,
+              false,
+              true
+            ]
+          },
+          "questions": {
+            "action": {
+              "type": "choice",
+              "instructions": "画面は横800×縦360、地面はy=278。playerの固定boxはx=116,width=34,height=42。player.yは地面からの高さで上向きが正、vyも上向きが正。obstacles[].xは画面左端、width/heightはbox寸法です。この可視状態だけから次の操作を1つ選んでください。heldは維持されます。jump上限はstate.player.maxJumpsです（標準設定は2回）。2回目のjumpにはreleaseしてからjumpを再pressします。着地すると回数が戻ります。",
+              "criteria": {
+                "wait": "ジャンプ入力を新しく押さず、現在のheld状態を維持する。",
+                "jump": "ジャンプ入力を押す。held中や上限到達中は受理されない場合があります。",
+                "release": "ジャンプ入力を離す。"
+              }
+            },
+            "commit": {
+              "type": "noul",
+              "instructions": "選んだ操作を実行する意思の強さを数値で示してください。説明文は出力しないでください。"
+            },
+            "danger": {
+              "type": "score",
+              "instructions": "この可視状態で操作を選ぶ危険度を3段階で評価してください。",
+              "criteria": [
+                "safe",
+                "caution",
+                "danger"
+              ]
+            },
+            "p0": {
+              "type": "noul",
+              "instructions": "state.probes[0] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p1": {
+              "type": "noul",
+              "instructions": "state.probes[1] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p2": {
+              "type": "noul",
+              "instructions": "state.probes[2] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p3": {
+              "type": "noul",
+              "instructions": "state.probes[3] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p4": {
+              "type": "noul",
+              "instructions": "state.probes[4] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p5": {
+              "type": "noul",
+              "instructions": "state.probes[5] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p6": {
+              "type": "noul",
+              "instructions": "state.probes[6] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p7": {
+              "type": "noul",
+              "instructions": "state.probes[7] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p8": {
+              "type": "noul",
+              "instructions": "state.probes[8] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p9": {
+              "type": "noul",
+              "instructions": "state.probes[9] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p10": {
+              "type": "noul",
+              "instructions": "state.probes[10] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p11": {
+              "type": "noul",
+              "instructions": "state.probes[11] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p12": {
+              "type": "noul",
+              "instructions": "state.probes[12] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p13": {
+              "type": "noul",
+              "instructions": "state.probes[13] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p14": {
+              "type": "noul",
+              "instructions": "state.probes[14] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p15": {
+              "type": "noul",
+              "instructions": "state.probes[15] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p16": {
+              "type": "noul",
+              "instructions": "state.probes[16] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p17": {
+              "type": "noul",
+              "instructions": "state.probes[17] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p18": {
+              "type": "noul",
+              "instructions": "state.probes[18] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p19": {
+              "type": "noul",
+              "instructions": "state.probes[19] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p20": {
+              "type": "noul",
+              "instructions": "state.probes[20] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p21": {
+              "type": "noul",
+              "instructions": "state.probes[21] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p22": {
+              "type": "noul",
+              "instructions": "state.probes[22] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p23": {
+              "type": "noul",
+              "instructions": "state.probes[23] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p24": {
+              "type": "noul",
+              "instructions": "state.probes[24] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p25": {
+              "type": "noul",
+              "instructions": "state.probes[25] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p26": {
+              "type": "noul",
+              "instructions": "state.probes[26] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p27": {
+              "type": "noul",
+              "instructions": "state.probes[27] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p28": {
+              "type": "noul",
+              "instructions": "state.probes[28] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p29": {
+              "type": "noul",
+              "instructions": "state.probes[29] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p30": {
+              "type": "noul",
+              "instructions": "state.probes[30] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p31": {
+              "type": "noul",
+              "instructions": "state.probes[31] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p32": {
+              "type": "noul",
+              "instructions": "state.probes[32] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p33": {
+              "type": "noul",
+              "instructions": "state.probes[33] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p34": {
+              "type": "noul",
+              "instructions": "state.probes[34] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p35": {
+              "type": "noul",
+              "instructions": "state.probes[35] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p36": {
+              "type": "noul",
+              "instructions": "state.probes[36] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p37": {
+              "type": "noul",
+              "instructions": "state.probes[37] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p38": {
+              "type": "noul",
+              "instructions": "state.probes[38] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p39": {
+              "type": "noul",
+              "instructions": "state.probes[39] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p40": {
+              "type": "noul",
+              "instructions": "state.probes[40] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p41": {
+              "type": "noul",
+              "instructions": "state.probes[41] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p42": {
+              "type": "noul",
+              "instructions": "state.probes[42] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p43": {
+              "type": "noul",
+              "instructions": "state.probes[43] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p44": {
+              "type": "noul",
+              "instructions": "state.probes[44] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p45": {
+              "type": "noul",
+              "instructions": "state.probes[45] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p46": {
+              "type": "noul",
+              "instructions": "state.probes[46] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p47": {
+              "type": "noul",
+              "instructions": "state.probes[47] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p48": {
+              "type": "noul",
+              "instructions": "state.probes[48] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p49": {
+              "type": "noul",
+              "instructions": "state.probes[49] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p50": {
+              "type": "noul",
+              "instructions": "state.probes[50] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p51": {
+              "type": "noul",
+              "instructions": "state.probes[51] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p52": {
+              "type": "noul",
+              "instructions": "state.probes[52] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p53": {
+              "type": "noul",
+              "instructions": "state.probes[53] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p54": {
+              "type": "noul",
+              "instructions": "state.probes[54] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p55": {
+              "type": "noul",
+              "instructions": "state.probes[55] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p56": {
+              "type": "noul",
+              "instructions": "state.probes[56] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p57": {
+              "type": "noul",
+              "instructions": "state.probes[57] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p58": {
+              "type": "noul",
+              "instructions": "state.probes[58] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p59": {
+              "type": "noul",
+              "instructions": "state.probes[59] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            },
+            "p60": {
+              "type": "noul",
+              "instructions": "state.probes[60] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+            }
+          }
+        },
+        "modelResponse": {
+          "model": "Decision-2.0-Nox-4B",
+          "answers": {
+            "action": {
+              "type": "choice",
+              "choice": "jump",
+              "probabilities": {
+                "wait": 0.37384048188771307,
+                "jump": 0.44903869272040975,
+                "release": 0.17712082539187723
+              },
+              "confidence": 0.05887173875285423
+            },
+            "commit": {
+              "type": "noul",
+              "noul": 0.27361196597910353
+            },
+            "danger": {
+              "type": "score",
+              "score": 0.18305260295839687,
+              "probabilities": {
+                "0": 0.8512199725382468,
+                "1": 0.1145074519651098,
+                "2": 0.03427257549664353
+              },
+              "confidence": 0.544074995498768,
+              "legend": {
+                "0": "safe",
+                "1": "caution",
+                "2": "danger"
+              }
+            },
+            "p0": {
+              "type": "noul",
+              "noul": 0.9323585075565499
+            },
+            "p1": {
+              "type": "noul",
+              "noul": 0.13254506856653764
+            },
+            "p2": {
+              "type": "noul",
+              "noul": 0.5014053397126454
+            },
+            "p3": {
+              "type": "noul",
+              "noul": 0.3181788767702193
+            },
+            "p4": {
+              "type": "noul",
+              "noul": 0.25578980645392785
+            },
+            "p5": {
+              "type": "noul",
+              "noul": 0.4267746348436304
+            },
+            "p6": {
+              "type": "noul",
+              "noul": 0.33782446798384175
+            },
+            "p7": {
+              "type": "noul",
+              "noul": 0.4909630276258213
+            },
+            "p8": {
+              "type": "noul",
+              "noul": 0.3653997682517589
+            },
+            "p9": {
+              "type": "noul",
+              "noul": 0.5632029883548934
+            },
+            "p10": {
+              "type": "noul",
+              "noul": 0.4196456453437871
+            },
+            "p11": {
+              "type": "noul",
+              "noul": 0.45563464362983386
+            },
+            "p12": {
+              "type": "noul",
+              "noul": 0.4583169554838291
+            },
+            "p13": {
+              "type": "noul",
+              "noul": 0.5216182166976366
+            },
+            "p14": {
+              "type": "noul",
+              "noul": 0.5208471113536108
+            },
+            "p15": {
+              "type": "noul",
+              "noul": 0.5443691207034707
+            },
+            "p16": {
+              "type": "noul",
+              "noul": 0.46743778419590903
+            },
+            "p17": {
+              "type": "noul",
+              "noul": 0.4768933142936826
+            },
+            "p18": {
+              "type": "noul",
+              "noul": 0.4793600673603227
+            },
+            "p19": {
+              "type": "noul",
+              "noul": 0.510324582420344
+            },
+            "p20": {
+              "type": "noul",
+              "noul": 0.4761033239905592
+            },
+            "p21": {
+              "type": "noul",
+              "noul": 0.49981231988357794
+            },
+            "p22": {
+              "type": "noul",
+              "noul": 0.4855113555960035
+            },
+            "p23": {
+              "type": "noul",
+              "noul": 0.5010061399469222
+            },
+            "p24": {
+              "type": "noul",
+              "noul": 0.5010501801425795
+            },
+            "p25": {
+              "type": "noul",
+              "noul": 0.5013496991991332
+            },
+            "p26": {
+              "type": "noul",
+              "noul": 0.48949029516511156
+            },
+            "p27": {
+              "type": "noul",
+              "noul": 0.5009368647101764
+            },
+            "p28": {
+              "type": "noul",
+              "noul": 0.48750913061658496
+            },
+            "p29": {
+              "type": "noul",
+              "noul": 0.49766177898468683
+            },
+            "p30": {
+              "type": "noul",
+              "noul": 0.4648516430371162
+            },
+            "p31": {
+              "type": "noul",
+              "noul": 0.4700669490469778
+            },
+            "p32": {
+              "type": "noul",
+              "noul": 0.4695568524225374
+            },
+            "p33": {
+              "type": "noul",
+              "noul": 0.4786550458242064
+            },
+            "p34": {
+              "type": "noul",
+              "noul": 0.47427103560961675
+            },
+            "p35": {
+              "type": "noul",
+              "noul": 0.4830809910228383
+            },
+            "p36": {
+              "type": "noul",
+              "noul": 0.4780513600263719
+            },
+            "p37": {
+              "type": "noul",
+              "noul": 0.4849864054565986
+            },
+            "p38": {
+              "type": "noul",
+              "noul": 0.4711166826215095
+            },
+            "p39": {
+              "type": "noul",
+              "noul": 0.4792636396755507
+            },
+            "p40": {
+              "type": "noul",
+              "noul": 0.4639305798734656
+            },
+            "p41": {
+              "type": "noul",
+              "noul": 0.4791132871248137
+            },
+            "p42": {
+              "type": "noul",
+              "noul": 0.46017728258512364
+            },
+            "p43": {
+              "type": "noul",
+              "noul": 0.4774637468252494
+            },
+            "p44": {
+              "type": "noul",
+              "noul": 0.46986860632195665
+            },
+            "p45": {
+              "type": "noul",
+              "noul": 0.47425624823657136
+            },
+            "p46": {
+              "type": "noul",
+              "noul": 0.47260887624598025
+            },
+            "p47": {
+              "type": "noul",
+              "noul": 0.47816209948521043
+            },
+            "p48": {
+              "type": "noul",
+              "noul": 0.4596855227614675
+            },
+            "p49": {
+              "type": "noul",
+              "noul": 0.47278958243740676
+            },
+            "p50": {
+              "type": "noul",
+              "noul": 0.44780421645907564
+            },
+            "p51": {
+              "type": "noul",
+              "noul": 0.47486309863150095
+            },
+            "p52": {
+              "type": "noul",
+              "noul": 0.4614073785391785
+            },
+            "p53": {
+              "type": "noul",
+              "noul": 0.4739616229907786
+            },
+            "p54": {
+              "type": "noul",
+              "noul": 0.46519038659622497
+            },
+            "p55": {
+              "type": "noul",
+              "noul": 0.46280785723151596
+            },
+            "p56": {
+              "type": "noul",
+              "noul": 0.4641829778189265
+            },
+            "p57": {
+              "type": "noul",
+              "noul": 0.4655299556915533
+            },
+            "p58": {
+              "type": "noul",
+              "noul": 0.456437478333921
+            },
+            "p59": {
+              "type": "noul",
+              "noul": 0.463965426663347
+            },
+            "p60": {
+              "type": "noul",
+              "noul": 0.44785815177514243
+            }
+          },
+          "usage": {
+            "input_tokens": 15228,
+            "output_tokens": 0
+          }
+        },
+        "response": {
+          "model": "Decision-2.0-Nox-4B",
+          "answers": {
+            "action": {
+              "type": "choice",
+              "choice": "jump",
+              "probabilities": {
+                "wait": 0.37384048188771307,
+                "jump": 0.44903869272040975,
+                "release": 0.17712082539187723
+              },
+              "confidence": 0.05887173875285423
+            },
+            "commit": {
+              "type": "noul",
+              "noul": 0.27361196597910353
+            },
+            "danger": {
+              "type": "score",
+              "score": 0.18305260295839687,
+              "probabilities": {
+                "0": 0.8512199725382468,
+                "1": 0.1145074519651098,
+                "2": 0.03427257549664353
+              },
+              "confidence": 0.544074995498768,
+              "legend": {
+                "0": "safe",
+                "1": "caution",
+                "2": "danger"
+              }
+            },
+            "p0": {
+              "type": "noul",
+              "noul": 0.9323585075565499
+            },
+            "p1": {
+              "type": "noul",
+              "noul": 0.13254506856653764
+            },
+            "p2": {
+              "type": "noul",
+              "noul": 0.5014053397126454
+            },
+            "p3": {
+              "type": "noul",
+              "noul": 0.3181788767702193
+            },
+            "p4": {
+              "type": "noul",
+              "noul": 0.25578980645392785
+            },
+            "p5": {
+              "type": "noul",
+              "noul": 0.4267746348436304
+            },
+            "p6": {
+              "type": "noul",
+              "noul": 0.33782446798384175
+            },
+            "p7": {
+              "type": "noul",
+              "noul": 0.4909630276258213
+            },
+            "p8": {
+              "type": "noul",
+              "noul": 0.3653997682517589
+            },
+            "p9": {
+              "type": "noul",
+              "noul": 0.5632029883548934
+            },
+            "p10": {
+              "type": "noul",
+              "noul": 0.4196456453437871
+            },
+            "p11": {
+              "type": "noul",
+              "noul": 0.45563464362983386
+            },
+            "p12": {
+              "type": "noul",
+              "noul": 0.4583169554838291
+            },
+            "p13": {
+              "type": "noul",
+              "noul": 0.5216182166976366
+            },
+            "p14": {
+              "type": "noul",
+              "noul": 0.5208471113536108
+            },
+            "p15": {
+              "type": "noul",
+              "noul": 0.5443691207034707
+            },
+            "p16": {
+              "type": "noul",
+              "noul": 0.46743778419590903
+            },
+            "p17": {
+              "type": "noul",
+              "noul": 0.4768933142936826
+            },
+            "p18": {
+              "type": "noul",
+              "noul": 0.4793600673603227
+            },
+            "p19": {
+              "type": "noul",
+              "noul": 0.510324582420344
+            },
+            "p20": {
+              "type": "noul",
+              "noul": 0.4761033239905592
+            },
+            "p21": {
+              "type": "noul",
+              "noul": 0.49981231988357794
+            },
+            "p22": {
+              "type": "noul",
+              "noul": 0.4855113555960035
+            },
+            "p23": {
+              "type": "noul",
+              "noul": 0.5010061399469222
+            },
+            "p24": {
+              "type": "noul",
+              "noul": 0.5010501801425795
+            },
+            "p25": {
+              "type": "noul",
+              "noul": 0.5013496991991332
+            },
+            "p26": {
+              "type": "noul",
+              "noul": 0.48949029516511156
+            },
+            "p27": {
+              "type": "noul",
+              "noul": 0.5009368647101764
+            },
+            "p28": {
+              "type": "noul",
+              "noul": 0.48750913061658496
+            },
+            "p29": {
+              "type": "noul",
+              "noul": 0.49766177898468683
+            },
+            "p30": {
+              "type": "noul",
+              "noul": 0.4648516430371162
+            },
+            "p31": {
+              "type": "noul",
+              "noul": 0.4700669490469778
+            },
+            "p32": {
+              "type": "noul",
+              "noul": 0.4695568524225374
+            },
+            "p33": {
+              "type": "noul",
+              "noul": 0.4786550458242064
+            },
+            "p34": {
+              "type": "noul",
+              "noul": 0.47427103560961675
+            },
+            "p35": {
+              "type": "noul",
+              "noul": 0.4830809910228383
+            },
+            "p36": {
+              "type": "noul",
+              "noul": 0.4780513600263719
+            },
+            "p37": {
+              "type": "noul",
+              "noul": 0.4849864054565986
+            },
+            "p38": {
+              "type": "noul",
+              "noul": 0.4711166826215095
+            },
+            "p39": {
+              "type": "noul",
+              "noul": 0.4792636396755507
+            },
+            "p40": {
+              "type": "noul",
+              "noul": 0.4639305798734656
+            },
+            "p41": {
+              "type": "noul",
+              "noul": 0.4791132871248137
+            },
+            "p42": {
+              "type": "noul",
+              "noul": 0.46017728258512364
+            },
+            "p43": {
+              "type": "noul",
+              "noul": 0.4774637468252494
+            },
+            "p44": {
+              "type": "noul",
+              "noul": 0.46986860632195665
+            },
+            "p45": {
+              "type": "noul",
+              "noul": 0.47425624823657136
+            },
+            "p46": {
+              "type": "noul",
+              "noul": 0.47260887624598025
+            },
+            "p47": {
+              "type": "noul",
+              "noul": 0.47816209948521043
+            },
+            "p48": {
+              "type": "noul",
+              "noul": 0.4596855227614675
+            },
+            "p49": {
+              "type": "noul",
+              "noul": 0.47278958243740676
+            },
+            "p50": {
+              "type": "noul",
+              "noul": 0.44780421645907564
+            },
+            "p51": {
+              "type": "noul",
+              "noul": 0.47486309863150095
+            },
+            "p52": {
+              "type": "noul",
+              "noul": 0.4614073785391785
+            },
+            "p53": {
+              "type": "noul",
+              "noul": 0.4739616229907786
+            },
+            "p54": {
+              "type": "noul",
+              "noul": 0.46519038659622497
+            },
+            "p55": {
+              "type": "noul",
+              "noul": 0.46280785723151596
+            },
+            "p56": {
+              "type": "noul",
+              "noul": 0.4641829778189265
+            },
+            "p57": {
+              "type": "noul",
+              "noul": 0.4655299556915533
+            },
+            "p58": {
+              "type": "noul",
+              "noul": 0.456437478333921
+            },
+            "p59": {
+              "type": "noul",
+              "noul": 0.463965426663347
+            },
+            "p60": {
+              "type": "noul",
+              "noul": 0.44785815177514243
+            }
+          },
+          "usage": {
+            "input_tokens": 15228,
+            "output_tokens": 0
+          },
+          "measurements": {
+            "system_one_ms": 11379.645839999966,
+            "timing_scope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
+            "neural_forward_calls": 1,
+            "neural_forward_batches": [
+              {
+                "input_ids_shape": [
+                  64,
+                  392
+                ],
+                "batch_size": 64,
+                "padded_tokens_per_question": 392
+              }
+            ],
+            "request_index": 32,
+            "gpu_peak_allocated_bytes": 17448664064,
+            "gpu_peak_reserved_bytes": 18924699648
+          }
+        },
+        "status": "ok",
+        "system_one_ms": 11379.645839999966,
+        "timing_scope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
+        "neural_forward_calls": 1,
+        "neural_forward_batches": [
+          {
+            "input_ids_shape": [
+              64,
+              392
+            ],
+            "batch_size": 64,
+            "padded_tokens_per_question": 392
+          }
+        ],
+        "request_index": 32,
+        "gpu_peak_allocated_bytes": 17448664064,
+        "gpu_peak_reserved_bytes": 18924699648,
+        "serverRequestMs": 11380.169902000034
+      }
+    ],
+    "inferenceTimings": {
+      "first": {
+        "systemOne": {
+          "count": 1,
+          "mean_ms": 11379.645839999966,
+          "p50_ms": 11379.645839999966,
+          "p95_ms": 11379.645839999966
+        },
+        "serverRequest": {
+          "count": 1,
+          "mean_ms": 11380.169902000034,
+          "p50_ms": 11380.169902000034,
+          "p95_ms": 11380.169902000034
+        },
+        "errors": 0
+      },
+      "warm": {
+        "systemOne": {
+          "count": 0,
+          "mean_ms": null,
+          "p50_ms": null,
+          "p95_ms": null
+        },
+        "serverRequest": {
+          "count": 0,
+          "mean_ms": null,
+          "p50_ms": null,
+          "p95_ms": null
+        },
+        "errors": 0
+      },
+      "steady": {
+        "systemOne": {
+          "count": 0,
+          "mean_ms": null,
+          "p50_ms": null,
+          "p95_ms": null
+        },
+        "serverRequest": {
+          "count": 0,
+          "mean_ms": null,
+          "p50_ms": null,
+          "p95_ms": null
+        },
+        "errors": 0
+      },
+      "all": {
+        "systemOne": {
+          "count": 1,
+          "mean_ms": 11379.645839999966,
+          "p50_ms": 11379.645839999966,
+          "p95_ms": 11379.645839999966
+        },
+        "serverRequest": {
+          "count": 1,
+          "mean_ms": 11380.169902000034,
+          "p50_ms": 11380.169902000034,
+          "p95_ms": 11380.169902000034
+        },
+        "errors": 0
+      },
+      "windows1s": [
+        {
+          "index": 0,
+          "startMs": 0,
+          "endMs": 1000,
+          "systemOne": {
+            "count": 1,
+            "mean_ms": 11379.645839999966,
+            "p50_ms": 11379.645839999966,
+            "p95_ms": 11379.645839999966
+          },
+          "serverRequest": {
+            "count": 1,
+            "mean_ms": 11380.169902000034,
+            "p50_ms": 11380.169902000034,
+            "p95_ms": 11380.169902000034
+          },
+          "errors": 0
+        }
+      ]
+    },
+    "inferenceDrained": true,
+    "gameTraceTimingSource": "raw game report; serverRequestMs excludes client transport"
+  },
+  "gameReport": {
+    "file": "nox-q64.game.json",
+    "sha256": "a242a783dda671d37fe3511d26c19347c12e57e4579b504742ed286e6036e10e",
+    "validJson": true,
+    "jsonType": "dict",
+    "parseError": null
+  },
+  "gameReportStatus": {
+    "jsonStatus": "valid",
+    "statusFields": [
+      {
+        "path": "$.episodes[].terminalStatus",
+        "valueCounts": {
+          "collision": 1
+        }
+      },
+      {
+        "path": "$.runs[].decisions[].httpStatus",
+        "valueCounts": {
+          "200": 1
+        }
+      },
+      {
+        "path": "$.runs[].decisions[].status",
+        "valueCounts": {
+          "late_answer_not_applied": 1,
+          "skipped_outstanding": 20
+        }
+      },
+      {
+        "path": "$.runs[].terminalStatus",
+        "valueCounts": {
+          "collision": 1
+        }
+      }
+    ],
+    "assessment": "raw_status_fields_captured",
+    "aggregateMeasurementStatus": "not_aggregated"
+  },
+  "aggregateProblems": [],
+  "cli": {
+    "exitCode": 0,
+    "state": "exited",
+    "error": null
+  }
+}

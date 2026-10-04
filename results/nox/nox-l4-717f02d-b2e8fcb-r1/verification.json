@@ -1,0 +1,347 @@
+{
+  "schemaVersion": "vector-run-formal-verification/v1",
+  "formalBenchmark": true,
+  "model": "vllm-sr/Decision-2.0-Nox-4B",
+  "gameRepository": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkRepository": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "baseModel": {
+    "repository": "Qwen/Qwen3.5-4B-Base",
+    "revision": "1001bb4d826a52d1f399e183466143f4da7b741b"
+  },
+  "modelRevision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+  "gpu": {
+    "name": "NVIDIA L4",
+    "memoryBytes": 23659151360,
+    "cuda": "13.0",
+    "driver": "580.82.07",
+    "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+    "quantization": "none",
+    "offload": "none"
+  },
+  "runtimeHistory": {
+    "model": "nox",
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false,
+    "evidence": {
+      "runtimeReused": "`colab new --session vector-run-nox --gpu L4` returned `Session READY` after a prior read-only status said this session was not found; this is a new runtime assignment.",
+      "weightsCached": "Checking only the pinned HF snapshot is read-only and does not fetch model files; result and exact file counts are recorded in observations.pinnedWeightCache.",
+      "priorModelLoaded": "No model loader, checkpoint download, or weight-cache preparation was run in this newly assigned VM before this history record.",
+      "priorSystemOneCall": "No system_one request was sent in this newly assigned VM before this history record.",
+      "priorInference": "Only immutable repository clones, pinned checkout gates, common dependency bootstrap, GPU capability query, and read-only pinned HF cache inspection ran before this history record.",
+      "priorPrototypeGameRun": "The fresh assigned runtime was created after the previous dedicated session was reported not found; no prototype repository or game was cloned or run here."
+    },
+    "evidenceStoredInRunnerJson": true
+  },
+  "cacheObservations": {
+    "pinnedModelWeights": {
+      "beforeLoad": {
+        "present": false,
+        "fileCount": null,
+        "bytes": null
+      },
+      "afterLoad": {
+        "present": true,
+        "fileCount": 40,
+        "bytes": 9716487471
+      },
+      "downloadActivity": "unknown; transfer events were not observed"
+    },
+    "cudaAndTriton": {
+      "beforeLoad": {
+        "cudaCompiler": {
+          "present": true,
+          "fileCount": 0,
+          "bytes": 0
+        },
+        "triton": {
+          "present": false,
+          "fileCount": null,
+          "bytes": null
+        },
+        "torchExtensions": {
+          "present": false,
+          "fileCount": null,
+          "bytes": null
+        },
+        "torchInductor": {
+          "present": false,
+          "fileCount": null,
+          "bytes": null
+        }
+      },
+      "afterLoad": {
+        "cudaCompiler": {
+          "present": true,
+          "fileCount": 0,
+          "bytes": 0
+        },
+        "triton": {
+          "present": false,
+          "fileCount": null,
+          "bytes": null
+        },
+        "torchExtensions": {
+          "present": false,
+          "fileCount": null,
+          "bytes": null
+        },
+        "torchInductor": {
+          "present": true,
+          "fileCount": 0,
+          "bytes": 0
+        }
+      },
+      "warmHistory": "unknown; directory state does not establish cache hits or warm duration"
+    }
+  },
+  "contract": {
+    "physicsHz": 120,
+    "actionSet": [
+      "wait",
+      "jump",
+      "release"
+    ],
+    "dispatchEveryTicks": 16,
+    "maximumSeconds": 30,
+    "observationPipeline": "structured-visible-state-v1",
+    "pureNeuralForwardMs": null,
+    "pureForwardTimingNote": "system_one_ms includes tokenization and wrapper; forward calls/shapes are measured separately."
+  },
+  "series": {
+    "q3": {
+      "validator": {
+        "valid": true,
+        "questionCount": 3,
+        "runs": 5,
+        "terminals": [
+          "collision",
+          "collision",
+          "collision",
+          "collision",
+          "collision"
+        ]
+      },
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ],
+      "outcomes": [
+        {
+          "seed": 101,
+          "terminalStatus": "collision",
+          "censored": false,
+          "finalTick": 346,
+          "survivalSeconds": 2.8833333333333333,
+          "distanceMetres": 72.99783055555557,
+          "inputTicks": 2,
+          "finalSnapshotHashPresent": true
+        },
+        {
+          "seed": 202,
+          "terminalStatus": "collision",
+          "censored": false,
+          "finalTick": 346,
+          "survivalSeconds": 2.8833333333333333,
+          "distanceMetres": 72.99783055555557,
+          "inputTicks": 6,
+          "finalSnapshotHashPresent": true
+        },
+        {
+          "seed": 303,
+          "terminalStatus": "collision",
+          "censored": false,
+          "finalTick": 363,
+          "survivalSeconds": 3.025,
+          "distanceMetres": 76.63156875,
+          "inputTicks": 6,
+          "finalSnapshotHashPresent": true
+        },
+        {
+          "seed": 404,
+          "terminalStatus": "collision",
+          "censored": false,
+          "finalTick": 345,
+          "survivalSeconds": 2.875,
+          "distanceMetres": 72.78421875000001,
+          "inputTicks": 6,
+          "finalSnapshotHashPresent": true
+        },
+        {
+          "seed": 505,
+          "terminalStatus": "collision",
+          "censored": false,
+          "finalTick": 362,
+          "survivalSeconds": 3.0166666666666666,
+          "distanceMetres": 76.41769722222222,
+          "inputTicks": 6,
+          "finalSnapshotHashPresent": true
+        }
+      ],
+      "dispatchStatuses": {
+        "answered": 26,
+        "skipped_outstanding": 76,
+        "late_answer_not_applied": 5
+      },
+      "runnerStatus": "cli_process_exited_zero",
+      "runnerAggregateMeasurementStatus": "not_aggregated",
+      "apiCalls": 31,
+      "apiResponsesPreserved": 31,
+      "lateResponsesPreserved": 5,
+      "inferenceDrained": true,
+      "forwardCalls": 31,
+      "allCallsSingleForward": true,
+      "forwardBatchShapes": [
+        [
+          3,
+          328
+        ],
+        [
+          3,
+          392
+        ],
+        [
+          3,
+          376
+        ],
+        [
+          3,
+          360
+        ],
+        [
+          3,
+          344
+        ]
+      ],
+      "pureNeuralForwardMs": null,
+      "systemOneTiming": {
+        "first": {
+          "count": 1,
+          "meanMs": 1956.1183020000499,
+          "p50Ms": 1956.1183020000499,
+          "p95Ms": 1956.1183020000499,
+          "errors": 0
+        },
+        "warm": {
+          "count": 1,
+          "meanMs": 406.7796429999362,
+          "p50Ms": 406.7796429999362,
+          "p95Ms": 406.7796429999362,
+          "errors": 0
+        },
+        "steady": {
+          "count": 29,
+          "meanMs": 368.0522041724136,
+          "p50Ms": 357.6395009999942,
+          "p95Ms": 412.48747500003446,
+          "errors": 0
+        },
+        "all": {
+          "count": 31,
+          "meanMs": 420.5294150322574,
+          "p50Ms": 358.4785670000201,
+          "p95Ms": 413.3177810001598,
+          "errors": 0
+        }
+      },
+      "loadMs": 109893.08675000006,
+      "peakAllocatedBytes": 10175174144,
+      "peakReservedBytes": 10412359680
+    },
+    "q64": {
+      "validator": {
+        "valid": true,
+        "questionCount": 64,
+        "runs": 1,
+        "terminals": [
+          "collision"
+        ]
+      },
+      "seeds": [
+        101
+      ],
+      "outcomes": [
+        {
+          "seed": 101,
+          "terminalStatus": "collision",
+          "censored": false,
+          "finalTick": 346,
+          "survivalSeconds": 2.8833333333333333,
+          "distanceMetres": 72.99783055555557,
+          "inputTicks": 0,
+          "finalSnapshotHashPresent": true
+        }
+      ],
+      "dispatchStatuses": {
+        "late_answer_not_applied": 1,
+        "skipped_outstanding": 20
+      },
+      "runnerStatus": "cli_process_exited_zero",
+      "runnerAggregateMeasurementStatus": "not_aggregated",
+      "apiCalls": 1,
+      "apiResponsesPreserved": 1,
+      "lateResponsesPreserved": 1,
+      "inferenceDrained": true,
+      "forwardCalls": 1,
+      "allCallsSingleForward": true,
+      "forwardBatchShapes": [
+        [
+          64,
+          392
+        ]
+      ],
+      "pureNeuralForwardMs": null,
+      "systemOneTiming": {
+        "first": {
+          "count": 1,
+          "meanMs": 11379.645839999966,
+          "p50Ms": 11379.645839999966,
+          "p95Ms": 11379.645839999966,
+          "errors": 0
+        },
+        "warm": {
+          "count": 0,
+          "meanMs": null,
+          "p50Ms": null,
+          "p95Ms": null,
+          "errors": 0
+        },
+        "steady": {
+          "count": 0,
+          "meanMs": null,
+          "p50Ms": null,
+          "p95Ms": null,
+          "errors": 0
+        },
+        "all": {
+          "count": 1,
+          "meanMs": 11379.645839999966,
+          "p50Ms": 11379.645839999966,
+          "p95Ms": 11379.645839999966,
+          "errors": 0
+        }
+      },
+      "loadMs": 109893.08675000006,
+      "peakAllocatedBytes": 17448664064,
+      "peakReservedBytes": 18924699648
+    }
+  },
+  "artifactSafety": {
+    "filesScanned": [
+      "nox-q3.game.json",
+      "nox-q3.runner.json",
+      "nox-q64.game.json",
+      "nox-q64.runner.json"
+    ],
+    "secretMatches": 0,
+    "sessionIdentifiersPresent": false
+  }
+}
