@@ -1,0 +1,484 @@
+{
+  "schema_version": "vector-run-source-audit/1",
+  "audited_at_utc": "2026-10-04T14:05:54.422637+00:00",
+  "model_id": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
+  "revision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+  "audit_scope": "Pinned public source, metadata and isolated pure-function checks. No weights, runtime allocation or GPU inference.",
+  "huggingface_api": {
+    "url": "https://huggingface.co/api/models/vllm-sr/Decision-2.0-Sol-2B-Reasoning/revision/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+    "resolved_sha": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+    "private": false,
+    "gated": false,
+    "last_modified": "2026-10-04T09:59:56.000Z"
+  },
+  "architecture": {
+    "wrapper": [
+      "Decision2Model"
+    ],
+    "backbone": [
+      "Qwen3_5TextModel"
+    ],
+    "model_type": "qwen3_5_text",
+    "runtime_family": "decision2-qwen-full",
+    "profile": "qwen-full",
+    "max_input_tokens_per_question": 16384,
+    "max_options": 255,
+    "loaded_parameters_manifest_reported": 1883930944,
+    "parameter_counts_independently_verified": false,
+    "external_base_required": false,
+    "decision_architecture": "qwen3.5-text-endpoints-global-query-shared-bilinear-mlp"
+  },
+  "lineage": {
+    "direct_origin": {
+      "relation": "finetune",
+      "repo_id": "vllm-sr/Decision-2.0-Sol-2B",
+      "revision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+      "summary": "Continued training of the base Decision 2.0 model of the same size on reasoning problems with supervised intermediate steps, interpolated with the base weights. Same architecture, tokenizer, prompt format and runtime as the base model."
+    },
+    "upstream_backbone_repo": "Qwen/Qwen3.5-2B",
+    "upstream_backbone_revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+    "revision_api_checks": [
+      {
+        "repo_id": "vllm-sr/Decision-2.0-Sol-2B",
+        "revision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+        "api_url": "https://huggingface.co/api/models/vllm-sr/Decision-2.0-Sol-2B/revision/64235bef55dad29387dd16da7c90e038bf2f0972",
+        "resolved_sha": "64235bef55dad29387dd16da7c90e038bf2f0972"
+      },
+      {
+        "repo_id": "Qwen/Qwen3.5-2B",
+        "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+        "api_url": "https://huggingface.co/api/models/Qwen/Qwen3.5-2B/revision/15852e8c16360a2fea060d615a32b45270f8a8fc",
+        "resolved_sha": "15852e8c16360a2fea060d615a32b45270f8a8fc"
+      }
+    ]
+  },
+  "numerics": {
+    "remote_loader_accepted_dtype": [
+      null,
+      "auto"
+    ],
+    "remote_loader_accepted_torch_dtype": [
+      null,
+      "auto"
+    ],
+    "bf16_resident_default": true,
+    "gpu_autocast": "bfloat16",
+    "head_compute": "float32",
+    "backbone_residency": "BF16-exact Linear weights and biases become BF16; other tensors and non-BF16-exact Linears remain FP32. This is mixed residency, not blanket BF16 casting.",
+    "packaged_parameter_dtype_field": "float32",
+    "backbone_config_dtype_field": "float32",
+    "calibration": null,
+    "probability_temperature": 1.0,
+    "share_context_default": false,
+    "quantization": "None; quantization_config/load_in_4bit are unsupported remote loader kwargs.",
+    "evidence": [
+      {
+        "path": "modeling_decision2.py",
+        "lines": [
+          349
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/modeling_decision2.py#L349"
+      },
+      {
+        "path": "modeling_decision2.py",
+        "lines": [
+          362
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/modeling_decision2.py#L362"
+      },
+      {
+        "path": "decision2/qwen.py",
+        "lines": [
+          75
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/qwen.py#L75"
+      },
+      {
+        "path": "decision2/qwen.py",
+        "lines": [
+          373
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/qwen.py#L373"
+      }
+    ]
+  },
+  "api": {
+    "entry": "transformers.AutoModel.from_pretrained(model_id, revision=revision, trust_remote_code=True, device=\"cuda:0\", bf16_resident=True); model.system_one(state=state, questions=questions)",
+    "forward_alias": "model(state=state, questions=questions) delegates to system_one",
+    "state_types": [
+      "string",
+      "object",
+      "array"
+    ],
+    "japanese_text": "Source preserves Unicode state and instructions. Isolated pure-function check passed; GPU execution and model semantic quality remain unverified.",
+    "question_types": [
+      "choice",
+      "noul",
+      "score"
+    ],
+    "choice_criteria": "Mapping of 2..255 nonempty string keys to text / structured descriptions; four actions may all be included.",
+    "choice_output": [
+      "type",
+      "choice",
+      "probabilities"
+    ],
+    "raw_probabilities": "Softmax over all supplied candidate logits at temperature 1, no calibration file; returned choice probability map is the runtime uncalibrated probability distribution. Raw logits are not returned by this public API.",
+    "single_forward_condition": "All valid questions run in one batch when rounded-up maximum encoded token length times question count is within the GPU token budget. Otherwise the API performs multiple microbatch forwards; count actual forwards in benchmark. share_context remains off.",
+    "gpu_forward_padded_token_budget": 524287,
+    "three_questions_at_16384_tokens_forward_count_static": 1,
+    "sixty_four_questions_at_1000_tokens_forward_count_static": 1,
+    "sixty_four_questions_at_16384_tokens_forward_count_static": 3,
+    "sixty_four_questions_max_padded_tokens_for_single_forward": 8184,
+    "no_text_generation": true,
+    "evidence": [
+      {
+        "path": "decision2/qwen.py",
+        "lines": [
+          317
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/qwen.py#L317"
+      },
+      {
+        "path": "decision2/_vendor/dev2model/decision_model.py",
+        "lines": [
+          52
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/decision_model.py#L52"
+      },
+      {
+        "path": "decision2/_vendor/dev2model/data.py",
+        "lines": [
+          40
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/data.py#L40"
+      },
+      {
+        "path": "decision2/_vendor/dev2model/infer.py",
+        "lines": [
+          180
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/infer.py#L180"
+      },
+      {
+        "path": "decision2/qwen.py",
+        "lines": [
+          135
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/qwen.py#L135"
+      },
+      {
+        "path": "decision2/qwen.py",
+        "lines": [
+          379,
+          384
+        ],
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/blob/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/qwen.py#L379"
+      }
+    ]
+  },
+  "dependencies": {
+    "model_card_install": "pip install \"transformers>=5.17\" torch safetensors",
+    "manifest_tested_transformers": [
+      "5.17.0",
+      "5.18.0"
+    ],
+    "backbone_config_transformers_version": "5.17.0",
+    "all_absolute_import_roots_static": [
+      "__future__",
+      "argparse",
+      "collections",
+      "contextlib",
+      "copy",
+      "dataclasses",
+      "functools",
+      "hashlib",
+      "huggingface_hub",
+      "importlib",
+      "inspect",
+      "json",
+      "math",
+      "numpy",
+      "os",
+      "pathlib",
+      "peft",
+      "re",
+      "safetensors",
+      "shutil",
+      "struct",
+      "sys",
+      "tempfile",
+      "threading",
+      "time",
+      "torch",
+      "transformers",
+      "triton",
+      "types",
+      "typing",
+      "warnings"
+    ],
+    "notes": [
+      "huggingface_hub used to download the pinned package.",
+      "peft and additional architecture paths are conditional code paths; not established as dependencies of this full Sol-Reasoning checkpoint.",
+      "fast kernels and graphs target verified ROCm configurations; audit does not assert A100 fast-kernel availability.",
+      "Actual GPU environment versions must be measured separately."
+    ]
+  },
+  "license": {
+    "spdx": "apache-2.0",
+    "components": [
+      {
+        "component": "Decision-2.0-Sol-2B-Reasoning weights, decision head, package runtime, card and artwork",
+        "licence": "apache-2.0",
+        "source": "vllm-sr/Decision-2.0-Sol-2B-Reasoning"
+      },
+      {
+        "component": "Decision-2.0-Sol-2B (direct weight origin, continued training)",
+        "licence": "apache-2.0",
+        "source": "vllm-sr/Decision-2.0-Sol-2B@64235bef55dad29387dd16da7c90e038bf2f0972"
+      },
+      {
+        "component": "Decision 1.0 Sol-2B weights (direct weight origin, fully fine-tuned)",
+        "licence": "apache-2.0",
+        "source": "vllm-sr/Decision-1.0-Sol-2B@ce0c018a"
+      },
+      {
+        "component": "Qwen3.5-2B text backbone and tokenizer (upstream of Decision 1.0 Sol)",
+        "licence": "apache-2.0",
+        "source": "Qwen/Qwen3.5-2B@15852e8c"
+      }
+    ],
+    "license_text_header_checked": true
+  },
+  "source_files": [
+    {
+      "path": "configuration_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/configuration_decision2.py",
+      "sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "bytes": 692,
+      "manifest_sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/__init__.py",
+      "sha256": "10fea99a87686a8f5d99e9a8a91573ce1ddb7bc702f22b1fa21d3de258a4054a",
+      "bytes": 164,
+      "manifest_sha256": "10fea99a87686a8f5d99e9a8a91573ce1ddb7bc702f22b1fa21d3de258a4054a",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/__init__.py",
+      "sha256": "fe3babbdd871fa7c0cf919320a66efd1249253abe6bd7cdc5e33352dc46adeef",
+      "bytes": 40,
+      "manifest_sha256": "fe3babbdd871fa7c0cf919320a66efd1249253abe6bd7cdc5e33352dc46adeef",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/__init__.py",
+      "sha256": "4611a85789fae8f06395702a2975592e66e16a8632487c5f9255c0ce68c700d1",
+      "bytes": 40,
+      "manifest_sha256": "4611a85789fae8f06395702a2975592e66e16a8632487c5f9255c0ce68c700d1",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/calibration.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/calibration.py",
+      "sha256": "71633a04533c7022e1606ed2734107f33839454c34c993fe16d80c8413d1c561",
+      "bytes": 11472,
+      "manifest_sha256": "71633a04533c7022e1606ed2734107f33839454c34c993fe16d80c8413d1c561",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/data.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/data.py",
+      "sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "bytes": 7172,
+      "manifest_sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/decision_model.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/decision_model.py",
+      "sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "bytes": 31910,
+      "manifest_sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/infer.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/infer.py",
+      "sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "bytes": 28254,
+      "manifest_sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/lora.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/lora.py",
+      "sha256": "171cb0aaf4c71ba3cf69292b1f3efad8ec63db66bd2631e3b1445f08ff83ada4",
+      "bytes": 10902,
+      "manifest_sha256": "171cb0aaf4c71ba3cf69292b1f3efad8ec63db66bd2631e3b1445f08ff83ada4",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/score_bias.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/score_bias.py",
+      "sha256": "837974bb8abb8c51c907e4f025e2632bd59bc2875eb55a4343d7bd4274622646",
+      "bytes": 3648,
+      "manifest_sha256": "837974bb8abb8c51c907e4f025e2632bd59bc2875eb55a4343d7bd4274622646",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/source.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/_vendor/dev2model/source.py",
+      "sha256": "ef7b30171c4befb26163ea4d3d6e5add9dc602228a476d6f0ead9d40b450c7e3",
+      "bytes": 1785,
+      "manifest_sha256": "ef7b30171c4befb26163ea4d3d6e5add9dc602228a476d6f0ead9d40b450c7e3",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/api.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/api.py",
+      "sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "bytes": 9624,
+      "manifest_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/fast.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/fast.py",
+      "sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "bytes": 32395,
+      "manifest_sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/fast_kernels.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/fast_kernels.py",
+      "sha256": "6a697c105df4770ac962304fd3e4c3e9a86db091715b99fca6ec08bb851bb0a5",
+      "bytes": 16737,
+      "manifest_sha256": "6a697c105df4770ac962304fd3e4c3e9a86db091715b99fca6ec08bb851bb0a5",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/qwen.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/qwen.py",
+      "sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "bytes": 16827,
+      "manifest_sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision2/shared_ctx.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision2/shared_ctx.py",
+      "sha256": "3ea492989258d460b28a5b568e388696a8d07c0b985f960e38d3c99d68620be9",
+      "bytes": 36730,
+      "manifest_sha256": "3ea492989258d460b28a5b568e388696a8d07c0b985f960e38d3c99d68620be9",
+      "matches_manifest": true
+    },
+    {
+      "path": "modeling_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/modeling_decision2.py",
+      "sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "bytes": 19865,
+      "manifest_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "matches_manifest": true
+    },
+    {
+      "path": "pipeline_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/pipeline_decision2.py",
+      "sha256": "3393faec770ddaa9045a7e41092ad17cee5310fe74187deb6f58bbe718b0c1c3",
+      "bytes": 2094,
+      "manifest_sha256": "3393faec770ddaa9045a7e41092ad17cee5310fe74187deb6f58bbe718b0c1c3",
+      "matches_manifest": true
+    },
+    {
+      "path": "MODEL_MANIFEST.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/MODEL_MANIFEST.json",
+      "sha256": "8c662dddc1b1e5e1fd9a2eda0a6d4b1b244392433137b3c6dd005ffb7833ddc4",
+      "bytes": 19301,
+      "manifest_sha256": null,
+      "matches_manifest": null
+    },
+    {
+      "path": "config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/config.json",
+      "sha256": "c6b2db168631672043a902e4121ba5cffaee7a92a93f343a1757d69a550f2758",
+      "bytes": 1265,
+      "manifest_sha256": "c6b2db168631672043a902e4121ba5cffaee7a92a93f343a1757d69a550f2758",
+      "matches_manifest": true
+    },
+    {
+      "path": "backbone/config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/backbone/config.json",
+      "sha256": "071e97d8291168ba712237744c9a60e733acce554e6164322d22550dc96de19b",
+      "bytes": 1788,
+      "manifest_sha256": "071e97d8291168ba712237744c9a60e733acce554e6164322d22550dc96de19b",
+      "matches_manifest": true
+    },
+    {
+      "path": "decision_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/decision_config.json",
+      "sha256": "8065692992b4a56bad89239ce69a28b57df111c7fbe3deaea5316c54f8055b41",
+      "bytes": 3164,
+      "manifest_sha256": "8065692992b4a56bad89239ce69a28b57df111c7fbe3deaea5316c54f8055b41",
+      "matches_manifest": true
+    },
+    {
+      "path": "README.md",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/README.md",
+      "sha256": "1ed2a88f34d44766c6efd82fcae5b96e1d53c1fcbcc7c455de03690754fb1ee6",
+      "bytes": 4828,
+      "manifest_sha256": "1ed2a88f34d44766c6efd82fcae5b96e1d53c1fcbcc7c455de03690754fb1ee6",
+      "matches_manifest": true
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Sol-2B-Reasoning/resolve/ace3ae7032a4f96ffe6be778b9a72e36b68d6e29/LICENSE",
+      "sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "bytes": 11544,
+      "manifest_sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "matches_manifest": true
+    }
+  ],
+  "validation": {
+    "all_fetched_declared_file_hashes_match_manifest": true,
+    "python_source_ast_parse": "all remote Python files parsed",
+    "isolated_pure_function_checks": [
+      "Japanese string accepted by API payload validator",
+      "Japanese state and instructions retained in segmented prompt",
+      "all four action criteria retained as Unicode",
+      "choice softmax probabilities sum to 1",
+      "GPU token budget and 3 / 64 question microbatch boundary checks"
+    ],
+    "japanese_state_probe": "VECTOR RUN。前方に障害物。速度は一定。ジャンプ・スライド・攻撃・維持から選ぶ。",
+    "japanese_instructions_probe": "現在の状態に適した行動を選んでください。",
+    "weights_downloaded": false,
+    "gpu_inference_performed": false,
+    "full_bundle_integrity_verified": false,
+    "reason_full_bundle_not_verified": "Weight files and assets were not downloaded; only listed text sources were SHA-256 checked."
+  },
+  "unresolved": [
+    "Actual GPU loader success, encoded prompt token counts, forward counts and per-request raw probability traces require the model benchmark runtime.",
+    "Peak VRAM, first and warm timings, exact CUDA/dependency versions are not source-audit measurements."
+  ],
+  "download_contract": {
+    "revision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+    "allow_patterns": "Exact list of keys of MODEL_MANIFEST.json.files_sha256, plus MODEL_MANIFEST.json. Optional .gitattributes is tolerated.",
+    "ignore_patterns": [],
+    "weight_files": [
+      "backbone/model-00001-of-00002.safetensors",
+      "backbone/model-00002-of-00002.safetensors",
+      "decision_head.safetensors"
+    ],
+    "external_base_download_required": false,
+    "integrity_note": "Native verify_bundle requires exact inventory including README, LICENSE, tokenizer and listed artwork. Do not filter assets or add audit files into downloaded package root."
+  },
+  "reproduction": {
+    "protocol": "Fetch pinned revision metadata, resolve each source_files URL as bytes, compare SHA-256 with both this artifact and the pinned MODEL_MANIFEST.json.files_sha256. Parse all .py files with ast.parse. Pure-function probes isolate canonical, _payload, segments, _api_json_payload, question_to_row, normalized_answer, forward_token_budget and micro_batches without importing or loading the model.",
+    "network_authentication": "Public HTTPS only; no authentication headers or credentials used.",
+    "weight_verification": "Deferred to actual runtime full-bundle verification; source audit does not independently verify any weight hash."
+  }
+}

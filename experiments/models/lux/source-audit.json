@@ -1,0 +1,327 @@
+{
+  "schema": "vector-run-model-source-audit/1",
+  "model": "vllm-sr/Decision-2.0-Lux-9B",
+  "revision": "78bf3c03d9147aeb30b641edfe0e30ed04887ca5",
+  "audited_at_utc": "2026-10-04T14:08:19.662142+00:00",
+  "status": "source_audited_gpu_benchmark_not_measured_colab_allocation_refused",
+  "api_url": "https://huggingface.co/api/models/vllm-sr/Decision-2.0-Lux-9B",
+  "provenance": {
+    "origin_repo": "vllm-sr/Decision-1.0-Lux-9B",
+    "origin_revision": "bd45a30aee8c84032791c245c70f86dee5389cc8",
+    "base_repo": "Qwen/Qwen3.5-9B",
+    "base_revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "external_base_required": false,
+    "profile": "qwen-full",
+    "model_fingerprint_sha256": "0ece5faa210173f443f353474b419fd913a253b06645da3e8370c2db0e1c3339",
+    "license_spdx": "Apache-2.0"
+  },
+  "architecture": {
+    "remote_architecture": [
+      "Decision2Model"
+    ],
+    "backbone_architecture": [
+      "Qwen3_5TextModel"
+    ],
+    "decision_architecture": "qwen3.5-text-endpoints-global-query-shared-bilinear-mlp",
+    "prompt_version": "decision2-segmented-options-global-query-v1",
+    "text_only": true,
+    "vision_tower": false,
+    "loaded_parameters": 7940895744,
+    "backbone_parameters": 7936684544,
+    "head_parameters": 4211200,
+    "max_input_tokens": 16384,
+    "max_options": 255,
+    "hidden_size": 4096,
+    "layers": 32,
+    "vocab_size": 248320
+  },
+  "runtime": {
+    "loader": "transformers.AutoModel.from_pretrained",
+    "trust_remote_code": true,
+    "revision": "78bf3c03d9147aeb30b641edfe0e30ed04887ca5",
+    "device_map": "cuda:0",
+    "dtype_argument": "auto or None only",
+    "bf16_resident": true,
+    "backbone_compute": "BF16 autocast",
+    "resident_weights": "BF16-exact Linear weights BF16; embedding/norms/conv/residual tensors FP32",
+    "head_compute": "FP32",
+    "quantization": "none; external 4bit/8bit unsupported by remote loader",
+    "share_context": false,
+    "temperature": 1.0,
+    "calibration": null,
+    "score_bias": null,
+    "tested_transformers": [
+      "5.17.0",
+      "5.18.0"
+    ],
+    "published_dependencies": [
+      "transformers>=5.17",
+      "torch",
+      "safetensors"
+    ],
+    "cuda_fast_path": "NVIDIA GPUs use eager forward; exact HIP/Triton path is ROCm specific"
+  },
+  "remote_api": {
+    "entry": "model.system_one(state=state_string, questions=question_mapping)",
+    "forward_entry": "Decision2Model.forward delegates to system_one; QwenDecision.system_one calls backend.model(**batch)",
+    "accepted_state": [
+      "text string",
+      "JSON object",
+      "JSON array"
+    ],
+    "string_preservation": "_payload returns a string unchanged; objects/arrays use canonical JSON",
+    "japanese_prompt_support": "Unicode state and question instructions are accepted; encoder does not translate them. Successful Japanese inference is unmeasured.",
+    "encoder_template": {
+      "prefix": "Context:\n{state}\n\nTask type: {task_type}\nQuestion:\n{instructions}\nOptions:",
+      "option": "\n<option>\n{canonical option JSON}\n</option>",
+      "suffix": "\n\nSelect the single option best supported by the context and instructions.\nDecision:"
+    },
+    "outputs": {
+      "choice": "answers[qid].probabilities and .choice",
+      "noul": "answers[qid].noul (true probability; false complement is 1-p)",
+      "score": "answers[qid].probabilities and expected .score"
+    },
+    "raw_probabilities": "Uncalibrated temperature-1 softmax; preserve all returned probabilities, not only argmax. Noul has a scalar probability in public output.",
+    "forward_batch": "All valid questions normally padded and batched together; runtime can split micro-batches by forward-token budget. One API request alone does not prove one neural forward.",
+    "forward_token_budget": 262143,
+    "over_budget": "max_length_exceeded; never truncates",
+    "one_forward_verification": "Runtime instrumentation of backend.model forward is required for both 3 and 64 questions."
+  },
+  "vram_static_audit": {
+    "method": "Read only first 8 bytes and safetensors JSON headers with HTTP Range; no tensor payload downloaded. Aggregate element counts and data_offsets; compare with backbone index and manifest.",
+    "tensor_payload_downloaded": false,
+    "headers": [
+      {
+        "file": "backbone/model-00001-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00001-of-00009.safetensors",
+        "header_bytes": 128,
+        "header_sha256": "a337481b2a56ac1eb54eee0132f3e3a1afa3d2a16d071fcdc3fe1f5c2fa52edf"
+      },
+      {
+        "file": "backbone/model-00002-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00002-of-00009.safetensors",
+        "header_bytes": 6736,
+        "header_sha256": "3aee75af2353545b2d5f58186b36e2d0ff3c6efbc9abba04efe837c878591816"
+      },
+      {
+        "file": "backbone/model-00003-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00003-of-00009.safetensors",
+        "header_bytes": 6640,
+        "header_sha256": "11a900e5006fbccee912139698a6a1078b576614f00fb96ffab65626ffe263bc"
+      },
+      {
+        "file": "backbone/model-00004-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00004-of-00009.safetensors",
+        "header_bytes": 6176,
+        "header_sha256": "1504a0786e954b368622b4ae858067cbb3e7fe46137f43789bdf7b373f6ba0a7"
+      },
+      {
+        "file": "backbone/model-00005-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00005-of-00009.safetensors",
+        "header_bytes": 6920,
+        "header_sha256": "107c7191ad25f136cded9aa4b73df32de2ed1fad9f978f5803d789e71f1ae51e"
+      },
+      {
+        "file": "backbone/model-00006-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00006-of-00009.safetensors",
+        "header_bytes": 5864,
+        "header_sha256": "477cbe7247c57f7f1bf40b7b9dd7840249e53e0da6e5cf94f3177aa0e159f69e"
+      },
+      {
+        "file": "backbone/model-00007-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00007-of-00009.safetensors",
+        "header_bytes": 6056,
+        "header_sha256": "0235f449142e2bb1a3c984df22fd00dc2658eb0de7b1aa66e3fb4afd9fd9ff65"
+      },
+      {
+        "file": "backbone/model-00008-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00008-of-00009.safetensors",
+        "header_bytes": 6376,
+        "header_sha256": "49dfce8a3668a172f22ca260d9d48f1d5e1f6a1b3d96d5f08a3eec46964fd92a"
+      },
+      {
+        "file": "backbone/model-00009-of-00009.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model-00009-of-00009.safetensors",
+        "header_bytes": 320,
+        "header_sha256": "43cfe9c09e6db3857d1c618050d654c4aca72850c59c2951ab4e89eb3265f7c1"
+      },
+      {
+        "file": "decision_head.safetensors",
+        "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/resolve/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision_head.safetensors",
+        "header_bytes": 848,
+        "header_sha256": "2c4f14ff3bc8a44042baa7c82b5b2f547bc94412cc8c39a784ba7c362151ac5e"
+      }
+    ],
+    "backbone_index_metadata": {
+      "total_parameters": 7936684544,
+      "total_size": 17909729280
+    },
+    "tensor_dtypes": {
+      "BF16": {
+        "tensors": 248,
+        "parameters": 6918504448,
+        "bytes": 13837008896
+      },
+      "F32": {
+        "tensors": 188,
+        "parameters": 1022391296,
+        "bytes": 4089565184
+      }
+    },
+    "fp32_embedding_parameters": 1017118720,
+    "fp32_embedding_bytes": 4068474880,
+    "head_bytes": 16844800,
+    "resident_tensor_bytes": 17926574080,
+    "resident_tensor_gib": 16.695423126220703,
+    "nominal_24_decimal_gb_headroom_bytes": 6073425920,
+    "nominal_24_gib_headroom_bytes": 7843229696,
+    "l4_assessment": "Weights fit a dedicated 24GB L4 statically with about 5.66GiB headroom under 24 decimal GB. A bounded dedicated L4 allocation attempt is reasonable. Actual device capacity/free memory, activation/workspace and 64-question peak remain unmeasured; A10040 offers more headroom.",
+    "load_transient": "Loader creates FP32 model on CPU, restores exact BF16 Linear weights on CPU, then moves to GPU. Full FP32 parameter storage alone would be 31,763,582,976 bytes (~29.58GiB), excluding checkpoint/mmap/Python temporary memory. No full-FP32 GPU stage in audited qwen.py.",
+    "excluded_from_static_estimate": [
+      "CUDA context",
+      "allocator reservation",
+      "activation tensors",
+      "attention/gated-delta workspaces",
+      "temporary casts",
+      "padded 3/64-question batch memory"
+    ],
+    "peak_gpu_measured_bytes": null
+  },
+  "benchmark_contract": {
+    "timing": "realtime",
+    "physics_fps": 60,
+    "decision_every_frames": 8,
+    "one_outstanding_inference": true,
+    "reflex_assistance": false,
+    "candidate_restriction": false,
+    "action_candidates": [
+      "hold",
+      "jump",
+      "slide",
+      "strike"
+    ],
+    "primary": {
+      "questions": 3,
+      "seeds": [
+        1,
+        2,
+        3
+      ]
+    },
+    "stress": {
+      "questions": 64,
+      "seeds": [
+        1
+      ]
+    },
+    "required_trace": [
+      "remote API state string",
+      "Japanese state prompt and question instructions",
+      "all returned raw probability fields",
+      "neural forward count and timing",
+      "dispatch/completion/application frame",
+      "skipped opportunities and errors"
+    ],
+    "game_commit": null,
+    "game_commit_note": "Measured game commit must be recorded by the runner after shared harness integration.",
+    "actual_state_prompt": null,
+    "actual_state_prompt_status": "Await authoritative shared harness runtime trace; do not substitute an invented sample."
+  },
+  "sources": [
+    {
+      "file": "README.md",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/README.md",
+      "sha256": "6eb1f152418ea30ef2a46f641a5b00a758805efc3d9a96790e7685d721b54405",
+      "matches_manifest": true
+    },
+    {
+      "file": "LICENSE",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/LICENSE",
+      "sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "matches_manifest": true
+    },
+    {
+      "file": "config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/config.json",
+      "sha256": "31d19d0b9ea246729c9b2964b219728ac0c51714b8c3bb231d757bef2d1cda2c",
+      "matches_manifest": true
+    },
+    {
+      "file": "MODEL_MANIFEST.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/MODEL_MANIFEST.json",
+      "sha256": "4e0f4ca0cf3c833933f9bed3021012d061910016c9f4ca43b34f5d66e8d0a260",
+      "matches_manifest": null
+    },
+    {
+      "file": "decision_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision_config.json",
+      "sha256": "f274ab0841577c46c746321a2f238e15087d5c44d3aeb32b447aedfb9c47e313",
+      "matches_manifest": true
+    },
+    {
+      "file": "backbone/config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/config.json",
+      "sha256": "fe4a44abcba0abed76d80f4840b761704a29236113cafd9cd7c84c6435f511c6",
+      "matches_manifest": true
+    },
+    {
+      "file": "backbone/model.safetensors.index.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/backbone/model.safetensors.index.json",
+      "sha256": "d6cee5639ed3cacfdfc0f76d5810e08da55f349a2879656675356cd7b2550d5c",
+      "matches_manifest": true
+    },
+    {
+      "file": "configuration_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/configuration_decision2.py",
+      "sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "matches_manifest": true
+    },
+    {
+      "file": "modeling_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/modeling_decision2.py",
+      "sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "matches_manifest": true
+    },
+    {
+      "file": "decision2/api.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision2/api.py",
+      "sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "matches_manifest": true
+    },
+    {
+      "file": "decision2/qwen.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision2/qwen.py",
+      "sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "matches_manifest": true
+    },
+    {
+      "file": "decision2/fast.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision2/fast.py",
+      "sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "matches_manifest": true
+    },
+    {
+      "file": "decision2/_vendor/dev2model/infer.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision2/_vendor/dev2model/infer.py",
+      "sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "matches_manifest": true
+    },
+    {
+      "file": "decision2/_vendor/dev2model/decision_model.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Lux-9B/raw/78bf3c03d9147aeb30b641edfe0e30ed04887ca5/decision2/_vendor/dev2model/decision_model.py",
+      "sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "matches_manifest": true
+    }
+  ],
+  "runtime_allocation": {
+    "status": "unavailable",
+    "sanitized_evidence": "results/lux/availability.json",
+    "attempted_gpus": [
+      "A100",
+      "L4"
+    ],
+    "created": false,
+    "retry_policy": "No further retry until parent coordinates a released slot.",
+    "other_sessions_stopped": false
+  }
+}

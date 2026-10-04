@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "model_resident_ready": true,
+  "health": {
+    "ok": true,
+    "model": "vllm-sr/Decision-2.0-Vega-27B",
+    "mock": false,
+    "metadata": {
+      "revision": "7aec49ae11a18741706da549ab626b9052795fe7",
+      "baseRevision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+      "dtype": "bfloat16",
+      "quantization": "none"
+    }
+  },
+  "game_benchmark_completed": false,
+  "system_one_called": false,
+  "errors": [],
+  "gpu_name_total_used_free_mib": "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 66850 MiB, 30401 MiB",
+  "optional_torchao_removed": true
+}

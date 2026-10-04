@@ -1,0 +1,1081 @@
+{
+  "schema": "vector-run-model-source-audit/1",
+  "audited_at_utc": "2026-10-04T14:06:54.621794+00:00",
+  "method": "Unauthenticated public HTTPS metadata/source inspection; AST parsing only; no remote code execution or weight downloads",
+  "model": {
+    "repo_id": "vllm-sr/Decision-2.0-Eos-0.8B",
+    "revision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+    "current_main_revision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+    "profile": "qwen-full",
+    "architectures": [
+      "Decision2Model"
+    ],
+    "auto_map": {
+      "AutoConfig": "configuration_decision2.Decision2Config",
+      "AutoModel": "modeling_decision2.Decision2Model"
+    },
+    "backbone_architectures": [
+      "Qwen3_5TextModel"
+    ],
+    "base_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "external_base": null,
+    "parameters_loaded_manifest": 753446208,
+    "max_input_tokens_per_question": 16384,
+    "license": "apache-2.0",
+    "runtime_source": {
+      "commit": "fbedfded8ce33c7c25a99b8fb1f71f733b2c2c44",
+      "content_manifest_sha256": "444be5356ec8370d568edd8ed5234e91f386242be845b39887b77a864c9bbc8c",
+      "tree": "131bdbb11af430dec93ee0a7f4770a25a6276ea7"
+    },
+    "automap_source": {
+      "commit": "99432d1a7da5adbc70212df78ae7ebf7e50b41e4",
+      "content_manifest_sha256": "3bede2ca1fc0b805c167bf5ae6b2bd824a3b64d1b6ae98478d04add1cc1444ff",
+      "tree": "fbf37474b1ce2efd228b7f50803848c6f60ebbd2"
+    }
+  },
+  "provenance": [
+    {
+      "role": "direct_finetune_origin",
+      "repo_id": "vllm-sr/Decision-1.0-Eos-0.8B",
+      "revision": "363c4a5e56afc115b1c78c837633956d0bbb63ab",
+      "current_main_revision": "2ca39a23e3f4500873ebcd8f97394268e27d3167",
+      "loaded_as_external_base": false,
+      "verification_url": "https://huggingface.co/api/models/vllm-sr/Decision-1.0-Eos-0.8B/revision/363c4a5e56afc115b1c78c837633956d0bbb63ab"
+    },
+    {
+      "role": "upstream_text_backbone_and_tokenizer",
+      "repo_id": "Qwen/Qwen3.5-0.8B",
+      "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "current_main_revision": "2fc06364715b967f1860aea9cf38778875588b17",
+      "loaded_as_external_base": false,
+      "verification_url": "https://huggingface.co/api/models/Qwen/Qwen3.5-0.8B/revision/2fc06364715b967f1860aea9cf38778875588b17"
+    }
+  ],
+  "loader_contract": {
+    "class": "modeling_decision2.Decision2Model",
+    "load": {
+      "trust_remote_code": true,
+      "revision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+      "device": "cuda:0",
+      "bf16_resident": true
+    },
+    "dtype_argument": "Omit dtype/torch_dtype or use 'auto'; explicit BF16 dtype is rejected",
+    "device_map": "Single device only; device='cuda:0' or device_map={'': 'cuda:0'}",
+    "gpu_numerics": "BF16-exact backbone Linear weights resident in BF16 and BF16 autocast; embeddings/norms/conv and nonexact weights remain FP32; head computes FP32",
+    "gpu_requirement": "CUDA/ROCm torch.cuda.is_bf16_supported() must be true",
+    "quantization": "No supported 4-bit quantization loader argument; no quantization used",
+    "cpu_numerics": "FP32; CPU inference is not a GPU benchmark",
+    "share_context": "Off by default; remote wrapper does not accept share_context, graphs or kernels kwargs"
+  },
+  "system_one_contract": {
+    "call": "model.system_one(state=state_string, questions=question_mapping)",
+    "state_types": [
+      "str",
+      "dict",
+      "list"
+    ],
+    "state_string_behavior": "String is inserted verbatim into Context; no extra JSON quoting; Japanese Unicode is accepted",
+    "japanese_state_example": "プレイヤーは地上にいる。前方に障害物がある。ゲーム時間は進み続ける。",
+    "example_status": "Illustrative API input only; not an inference result or the measured game prompt",
+    "question_types": [
+      "choice",
+      "noul",
+      "score"
+    ],
+    "choice_criteria": "Object with 2..255 option keys; all hold/jump/slide/strike options must be supplied",
+    "output": [
+      "model",
+      "answers",
+      "usage.input_tokens",
+      "usage.output_tokens"
+    ],
+    "choice_answer_fields": [
+      "type",
+      "choice",
+      "probabilities",
+      "confidence"
+    ],
+    "raw_probabilities": "Softmax of valid candidate logits at temperature 1; no calibration or score bias; not raw logits; returned mapping can be saved verbatim",
+    "text_generation_tokens": 0,
+    "over_budget": "Per-question max_length_exceeded error; no truncation",
+    "one_underlying_forward": "One batch if question_count * round_up(max_encoded_question_tokens, 8) <= forward_token_budget; otherwise native runtime uses multiple microbatches",
+    "forward_token_budget": 524287,
+    "three_questions": "All three valid questions fit one forward within 16384-token per-question cap",
+    "sixty_four_questions_max_padded_length_for_one_forward": 8184,
+    "actual_forward_count": "Not dynamically verified; instrument/record during GPU runs"
+  },
+  "dependencies": {
+    "publisher_scored_runtime_requirements": {
+      "causal-conv1d": "1.7.0 (GPU convolution kernels)",
+      "flash-linear-attention": "0.5.2 (GPU gated-delta kernels)",
+      "python": "3.12.13",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "torch": "2.12.0+git6bbd260 (ROCm 7.2 build; one ROCm GPU tested)",
+      "transformers": "5.17.0",
+      "triton": "3.7.1 (persisted autotune cache)"
+    },
+    "publisher_transformers_tested": [
+      "5.17.0",
+      "5.18.0"
+    ],
+    "local_audit_dependencies": "Python 3.12 standard library only",
+    "actual_gpu_runtime_dependencies": null
+  },
+  "static_checks": {
+    "qwen_full_no_external_base": true,
+    "bf16_autocast_fp32_head": true,
+    "uncalibrated_probabilities": true,
+    "state_string_preserved": true,
+    "json_unicode_preserved": true,
+    "remote_dtype_fixed": true,
+    "bf16_gpu_required": true,
+    "single_batch_when_budget_fits": true,
+    "normalized_probabilities": true
+  },
+  "source_locations": {
+    "modeling_decision2.py": {
+      "RUNTIME_OPTIONS =": [
+        44
+      ],
+      "def from_pretrained(": [
+        327
+      ],
+      "def system_one(": [
+        440
+      ],
+      "numerics are fixed": [
+        352,
+        458,
+        477
+      ],
+      "def _import_runtime(": [
+        214
+      ]
+    },
+    "decision2/qwen.py": {
+      "def keep_linear_bf16(": [
+        75
+      ],
+      "def forward_token_budget(": [
+        115
+      ],
+      "def micro_batches(": [
+        135
+      ],
+      "def system_one(": [
+        305
+      ],
+      "self.model(**batch)": [
+        379,
+        384
+      ],
+      "temperatures =": [
+        178,
+        247
+      ],
+      "is_bf16_supported": [
+        250
+      ]
+    },
+    "decision2/_vendor/dev2model/decision_model.py": {
+      "def _payload(": [
+        52
+      ],
+      "def segments(": [
+        56
+      ],
+      "def forward(": [
+        239,
+        659
+      ]
+    },
+    "decision2/_vendor/dev2model/infer.py": {
+      "def _api_json_payload(": [
+        149
+      ],
+      "def normalized_answer(": [
+        180
+      ],
+      "def product_answer(": [
+        220
+      ]
+    }
+  },
+  "risks_and_unverified": [
+    "trust_remote_code executes repository Python during loading; hashes are verified here but this is not a comprehensive security audit",
+    "Publisher dependency/parity evidence is from ROCm GPU; CUDA A100 compatibility, timings and VRAM are unverified until a real dedicated runtime run",
+    "No actual model inference or Japanese game prompt was run by this source audit",
+    "64-question requests can exceed the one-forward padded-token budget; record actual token lengths and forward count",
+    "Do not replace immutable training origin with its newer current main revision",
+    "Record actual installed dependencies, GPU and mixed dtype behavior separately from publisher metadata"
+  ],
+  "sources": [
+    {
+      "path": "LICENSE",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358,
+      "manifest_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "manifest_match": true
+    },
+    {
+      "path": "MODEL_MANIFEST.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/MODEL_MANIFEST.json",
+      "sha256": "e8b1081be4a76deca5247792a4031c8e19e2b52b95d91775c13d9e257c407101",
+      "bytes": 18844,
+      "manifest_sha256": null,
+      "manifest_match": null
+    },
+    {
+      "path": "README.md",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/README.md",
+      "sha256": "5966bf84cf122009981c59a3182ad17532f1f5cc51361bed100c821fdf00c3b2",
+      "bytes": 4118,
+      "manifest_sha256": "5966bf84cf122009981c59a3182ad17532f1f5cc51361bed100c821fdf00c3b2",
+      "manifest_match": true
+    },
+    {
+      "path": "backbone/config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/backbone/config.json",
+      "sha256": "2b5d7e14da681afa0f2717f4e450c8a4cd05d41a7aff99231578d5aa3a6bad73",
+      "bytes": 1788,
+      "manifest_sha256": "2b5d7e14da681afa0f2717f4e450c8a4cd05d41a7aff99231578d5aa3a6bad73",
+      "manifest_match": true
+    },
+    {
+      "path": "config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/config.json",
+      "sha256": "992aed58ec4cb5c29976e658e9ecdb6991147924b50375fecce5ecd4691b6e28",
+      "bytes": 1093,
+      "manifest_sha256": "992aed58ec4cb5c29976e658e9ecdb6991147924b50375fecce5ecd4691b6e28",
+      "manifest_match": true
+    },
+    {
+      "path": "configuration_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/configuration_decision2.py",
+      "sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "bytes": 692,
+      "manifest_sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "transformers"
+        ],
+        "classes": [
+          {
+            "name": "Decision2Config",
+            "line": 15,
+            "methods": []
+          }
+        ]
+      }
+    },
+    {
+      "path": "decision2/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/__init__.py",
+      "sha256": "10fea99a87686a8f5d99e9a8a91573ce1ddb7bc702f22b1fa21d3de258a4054a",
+      "bytes": 164,
+      "manifest_sha256": "10fea99a87686a8f5d99e9a8a91573ce1ddb7bc702f22b1fa21d3de258a4054a",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".api"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/__init__.py",
+      "sha256": "fe3babbdd871fa7c0cf919320a66efd1249253abe6bd7cdc5e33352dc46adeef",
+      "bytes": 40,
+      "manifest_sha256": "fe3babbdd871fa7c0cf919320a66efd1249253abe6bd7cdc5e33352dc46adeef",
+      "manifest_match": true,
+      "python": {
+        "imports": [],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/__init__.py",
+      "sha256": "4611a85789fae8f06395702a2975592e66e16a8632487c5f9255c0ce68c700d1",
+      "bytes": 40,
+      "manifest_sha256": "4611a85789fae8f06395702a2975592e66e16a8632487c5f9255c0ce68c700d1",
+      "manifest_match": true,
+      "python": {
+        "imports": [],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/calibration.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/calibration.py",
+      "sha256": "71633a04533c7022e1606ed2734107f33839454c34c993fe16d80c8413d1c561",
+      "bytes": 11472,
+      "manifest_sha256": "71633a04533c7022e1606ed2734107f33839454c34c993fe16d80c8413d1c561",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".data",
+          "__future__",
+          "hashlib",
+          "json",
+          "math",
+          "pathlib",
+          "re",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/data.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/data.py",
+      "sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "bytes": 7172,
+      "manifest_sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "__future__",
+          "hashlib",
+          "json",
+          "math",
+          "pathlib",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/decision_model.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/decision_model.py",
+      "sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "bytes": 31910,
+      "manifest_sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".candidate_interaction_head",
+          ".data",
+          ".lora",
+          ".score_cardinality_head",
+          ".source",
+          ".type_separated_head",
+          "__future__",
+          "hashlib",
+          "json",
+          "math",
+          "pathlib",
+          "peft",
+          "safetensors.torch",
+          "torch",
+          "torch.nn.functional",
+          "transformers",
+          "transformers.models.qwen3_5.modeling_qwen3_5",
+          "typing"
+        ],
+        "classes": [
+          {
+            "name": "CandidateHead",
+            "line": 226,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 227,
+                "parameters": "self, hidden_size: int, head_dim: int=256"
+              },
+              {
+                "name": "forward",
+                "line": 239,
+                "parameters": "self, candidates: torch.Tensor, query: torch.Tensor"
+              }
+            ]
+          },
+          {
+            "name": "DecisionModel",
+            "line": 255,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 256,
+                "parameters": "self, backbone: nn.Module, head: nn.Module, metadata: dict[str, Any]"
+              },
+              {
+                "name": "from_base",
+                "line": 263,
+                "parameters": "cls, path: str | Path, revision: str, head_dim: int=256, *, source_stage: str='base', head_variant: str='shared', experts_implementation: str | None=None"
+              },
+              {
+                "name": "from_moe_base",
+                "line": 374,
+                "parameters": "cls, path: str | Path, revision: str, head_dim: int, *, source_stage: str, model_type: str, experts_implementation: str | None"
+              },
+              {
+                "name": "from_decision1",
+                "line": 436,
+                "parameters": "cls, path: str | Path, head_dim: int=256"
+              },
+              {
+                "name": "from_checkpoint",
+                "line": 485,
+                "parameters": "cls, path: str | Path, *, source_path: str | Path | None=None, trainable_adapter: bool=False"
+              },
+              {
+                "name": "forward",
+                "line": 659,
+                "parameters": "self, input_ids: torch.Tensor, attention_mask: torch.Tensor, candidate_positions: torch.Tensor, candidate_mask: torch.Tensor, query_positions: torch.Tensor, task_type_ids: torch.Tensor | None=None, score_level_indices: torch.Tensor | None=None, **unused: Any"
+              },
+              {
+                "name": "save",
+                "line": 697,
+                "parameters": "self, path: str | Path, tokenizer: Any"
+              },
+              {
+                "name": "merge_lora",
+                "line": 739,
+                "parameters": "self, identity: dict[str, Any]"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/infer.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/infer.py",
+      "sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "bytes": 28254,
+      "manifest_sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".calibration",
+          ".data",
+          ".decision_model",
+          ".lora",
+          ".score_bias",
+          ".source",
+          "__future__",
+          "argparse",
+          "collections.abc",
+          "hashlib",
+          "importlib.metadata",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "time",
+          "torch",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/lora.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/lora.py",
+      "sha256": "171cb0aaf4c71ba3cf69292b1f3efad8ec63db66bd2631e3b1445f08ff83ada4",
+      "bytes": 10902,
+      "manifest_sha256": "171cb0aaf4c71ba3cf69292b1f3efad8ec63db66bd2631e3b1445f08ff83ada4",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "__future__",
+          "collections.abc",
+          "importlib.metadata",
+          "json",
+          "pathlib",
+          "peft",
+          "torch",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/score_bias.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/score_bias.py",
+      "sha256": "837974bb8abb8c51c907e4f025e2632bd59bc2875eb55a4343d7bd4274622646",
+      "bytes": 3648,
+      "manifest_sha256": "837974bb8abb8c51c907e4f025e2632bd59bc2875eb55a4343d7bd4274622646",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".calibration",
+          ".data",
+          "__future__",
+          "json",
+          "math",
+          "pathlib",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/_vendor/dev2model/source.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/_vendor/dev2model/source.py",
+      "sha256": "ef7b30171c4befb26163ea4d3d6e5add9dc602228a476d6f0ead9d40b450c7e3",
+      "bytes": 1785,
+      "manifest_sha256": "ef7b30171c4befb26163ea4d3d6e5add9dc602228a476d6f0ead9d40b450c7e3",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".data",
+          "__future__",
+          "pathlib",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/api.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/api.py",
+      "sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "bytes": 9624,
+      "manifest_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".bf16z",
+          ".kai_native",
+          ".qwen",
+          "__future__",
+          "functools",
+          "hashlib",
+          "json",
+          "math",
+          "pathlib",
+          "re",
+          "struct",
+          "torch",
+          "transformers",
+          "typing"
+        ],
+        "classes": [
+          {
+            "name": "Decision2",
+            "line": 146,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 149,
+                "parameters": "self, backend: Any, manifest: dict[str, Any], root: Path"
+              },
+              {
+                "name": "from_pretrained",
+                "line": 158,
+                "parameters": "cls, path: str | Path, *, device: str | None=None, base_path: str | Path | None=None, threads: int | None=None, bf16_resident: bool=True, graphs: bool=True, kernels: bool=True, share_context: Any=False"
+              },
+              {
+                "name": "system_one",
+                "line": 225,
+                "parameters": "self, *, state: Any, questions: dict[str, Any], share_context: Any=None"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "decision2/fast.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/fast.py",
+      "sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "bytes": 32395,
+      "manifest_sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".",
+          "__future__",
+          "contextlib",
+          "importlib.util",
+          "inspect",
+          "math",
+          "os",
+          "peft.tuners.lora",
+          "transformers",
+          "transformers.integrations.sdpa_attention",
+          "types",
+          "typing",
+          "warnings"
+        ],
+        "classes": [
+          {
+            "name": "CastMemo",
+            "line": 70,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 73,
+                "parameters": "self, torch: Any"
+              },
+              {
+                "name": "bf16",
+                "line": 79,
+                "parameters": "self, x: Any"
+              },
+              {
+                "name": "clear",
+                "line": 90,
+                "parameters": "self"
+              }
+            ]
+          },
+          {
+            "name": "Masks",
+            "line": 542,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 553,
+                "parameters": "self, torch: Any, layer_types: set[str]"
+              },
+              {
+                "name": "build",
+                "line": 558,
+                "parameters": "self, attention_mask: Any, padded: bool"
+              }
+            ]
+          },
+          {
+            "name": "Graphs",
+            "line": 595,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 598,
+                "parameters": "self, backbone: Any, torch: Any, masks: Masks, *, capture_after: int=CAPTURE_AFTER, max_graphs: int=MAX_GRAPHS, max_tokens: int=MAX_GRAPH_TOKENS, max_output_bytes: int=MAX_GRAPH_OUTPUT_BYTES"
+              },
+              {
+                "name": "__call__",
+                "line": 631,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "_capture",
+                "line": 683,
+                "parameters": "self, key: tuple, kwargs: dict[str, Any], padded: bool"
+              }
+            ]
+          },
+          {
+            "name": "FastPath",
+            "line": 733,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 736,
+                "parameters": "self, memo: CastMemo, graphs: Graphs | None, summary: dict[str, Any], fallbacks: dict[str, Any] | None=None"
+              },
+              {
+                "name": "forward",
+                "line": 749,
+                "parameters": "self, lengths: list[int]"
+              },
+              {
+                "name": "receipt",
+                "line": 760,
+                "parameters": "self"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "decision2/fast_kernels.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/fast_kernels.py",
+      "sha256": "6a697c105df4770ac962304fd3e4c3e9a86db091715b99fca6ec08bb851bb0a5",
+      "bytes": 16737,
+      "manifest_sha256": "6a697c105df4770ac962304fd3e4c3e9a86db091715b99fca6ec08bb851bb0a5",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "__future__",
+          "numpy",
+          "torch",
+          "triton",
+          "triton.language",
+          "triton.language.extra",
+          "typing"
+        ],
+        "classes": []
+      }
+    },
+    {
+      "path": "decision2/qwen.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/qwen.py",
+      "sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "bytes": 16827,
+      "manifest_sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "._vendor.dev2model.calibration",
+          "._vendor.dev2model.data",
+          "._vendor.dev2model.dec_model",
+          "._vendor.dev2model.decision_model",
+          "._vendor.dev2model.infer",
+          "._vendor.dev2model.label_token",
+          "._vendor.dev2model.score_bias",
+          ".bf16z",
+          ".fast",
+          ".shared_ctx",
+          "__future__",
+          "contextlib",
+          "huggingface_hub",
+          "json",
+          "pathlib",
+          "torch",
+          "typing"
+        ],
+        "classes": [
+          {
+            "name": "QwenDecision",
+            "line": 159,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 160,
+                "parameters": "self, model: Any, tokenizer: Any, device: Any, temperatures: dict, cap: int, torch: Any, score_bias: dict[int, list[float]] | None=None, residency: dict[str, int] | None=None, encode_fn: Any=None, batch_tokens: int | None=None, fast: Any=None, share_context: Any=False"
+              },
+              {
+                "name": "load",
+                "line": 189,
+                "parameters": "cls, root: Path, manifest: dict[str, Any], *, device: str, base_path: str | Path | None, threads: int | None, bf16_resident: bool=True, graphs: bool=True, kernels: bool=True, share_context: Any=False"
+              },
+              {
+                "name": "parameter_count",
+                "line": 302,
+                "parameters": "self"
+              },
+              {
+                "name": "system_one",
+                "line": 305,
+                "parameters": "self, state: Any, questions: dict[str, Any], share_context: Any=None"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "decision2/shared_ctx.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision2/shared_ctx.py",
+      "sha256": "3ea492989258d460b28a5b568e388696a8d07c0b985f960e38d3c99d68620be9",
+      "bytes": 36730,
+      "manifest_sha256": "3ea492989258d460b28a5b568e388696a8d07c0b985f960e38d3c99d68620be9",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "._vendor.dev2model.decision_model",
+          "._vendor.dev2model.infer",
+          "._vendor.dev2model.score_bias",
+          ".qwen",
+          "__future__",
+          "contextlib",
+          "copy",
+          "dataclasses",
+          "functools",
+          "importlib",
+          "inspect",
+          "os",
+          "transformers",
+          "transformers.cache_utils",
+          "typing"
+        ],
+        "classes": [
+          {
+            "name": "SharePolicy",
+            "line": 51,
+            "methods": [
+              {
+                "name": "__post_init__",
+                "line": 71,
+                "parameters": "self"
+              }
+            ]
+          },
+          {
+            "name": "PrefixTokenizer",
+            "line": 119,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 133,
+                "parameters": "self, tokenizer: Any"
+              },
+              {
+                "name": "__getattr__",
+                "line": 143,
+                "parameters": "self, name: str"
+              },
+              {
+                "name": "_near_added",
+                "line": 146,
+                "parameters": "self, text: str, b: int"
+              },
+              {
+                "name": "_start",
+                "line": 150,
+                "parameters": "self, text: str"
+              },
+              {
+                "name": "_cut",
+                "line": 166,
+                "parameters": "self, common: int"
+              },
+              {
+                "name": "encode",
+                "line": 179,
+                "parameters": "self, text: str, add_special_tokens: bool=False, **kwargs: Any"
+              }
+            ]
+          },
+          {
+            "name": "Tree",
+            "line": 393,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 402,
+                "parameters": "self, prefix: int, lengths: list[int], width: int, device, torch"
+              },
+              {
+                "name": "rows",
+                "line": 428,
+                "parameters": "self, packed: Any"
+              },
+              {
+                "name": "packed",
+                "line": 432,
+                "parameters": "self, rows: Any"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "decision_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/decision_config.json",
+      "sha256": "bdb6cf18658edf1a8945bc1b04e9c7cdd944d68a7064c5311d711c812a2f6075",
+      "bytes": 2614,
+      "manifest_sha256": "bdb6cf18658edf1a8945bc1b04e9c7cdd944d68a7064c5311d711c812a2f6075",
+      "manifest_match": true
+    },
+    {
+      "path": "modeling_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/modeling_decision2.py",
+      "sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "bytes": 19865,
+      "manifest_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          ".configuration_decision2",
+          "__future__",
+          "functools",
+          "hashlib",
+          "huggingface_hub",
+          "importlib",
+          "inspect",
+          "json",
+          "os",
+          "pathlib",
+          "shutil",
+          "sys",
+          "tempfile",
+          "threading",
+          "torch",
+          "transformers",
+          "types",
+          "typing"
+        ],
+        "classes": [
+          {
+            "name": "Decision2Model",
+            "line": 304,
+            "methods": [
+              {
+                "name": "__init__",
+                "line": 313,
+                "parameters": "self, config: Decision2Config"
+              },
+              {
+                "name": "_init_weights",
+                "line": 323,
+                "parameters": "self, module: Any"
+              },
+              {
+                "name": "from_pretrained",
+                "line": 327,
+                "parameters": "cls, pretrained_model_name_or_path: str | os.PathLike, *model_args: Any, config: Decision2Config | None=None, **kwargs: Any"
+              },
+              {
+                "name": "_load",
+                "line": 385,
+                "parameters": "self, options: dict[str, Any]"
+              },
+              {
+                "name": "_require",
+                "line": 420,
+                "parameters": "self"
+              },
+              {
+                "name": "_runtime_device",
+                "line": 425,
+                "parameters": "self"
+              },
+              {
+                "name": "model_name",
+                "line": 429,
+                "parameters": "self"
+              },
+              {
+                "name": "max_input_tokens",
+                "line": 433,
+                "parameters": "self"
+              },
+              {
+                "name": "manifest",
+                "line": 437,
+                "parameters": "self"
+              },
+              {
+                "name": "system_one",
+                "line": 440,
+                "parameters": "self, *, state: Any, questions: dict[str, Any]"
+              },
+              {
+                "name": "forward",
+                "line": 448,
+                "parameters": "self, state: Any=None, questions: dict[str, Any] | None=None"
+              },
+              {
+                "name": "to",
+                "line": 453,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "cuda",
+                "line": 467,
+                "parameters": "self, device: Any=None"
+              },
+              {
+                "name": "cpu",
+                "line": 472,
+                "parameters": "self"
+              },
+              {
+                "name": "_cast",
+                "line": 475,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "half",
+                "line": 480,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "float",
+                "line": 483,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "bfloat16",
+                "line": 486,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "double",
+                "line": 489,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "train",
+                "line": 492,
+                "parameters": "self, mode: bool=True"
+              },
+              {
+                "name": "save_pretrained",
+                "line": 497,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              },
+              {
+                "name": "push_to_hub",
+                "line": 503,
+                "parameters": "self, *args: Any, **kwargs: Any"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "pipeline_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/pipeline_decision2.py",
+      "sha256": "3393faec770ddaa9045a7e41092ad17cee5310fe74187deb6f58bbe718b0c1c3",
+      "bytes": 2094,
+      "manifest_sha256": "3393faec770ddaa9045a7e41092ad17cee5310fe74187deb6f58bbe718b0c1c3",
+      "manifest_match": true,
+      "python": {
+        "imports": [
+          "transformers"
+        ],
+        "classes": [
+          {
+            "name": "Decision2Pipeline",
+            "line": 13,
+            "methods": [
+              {
+                "name": "_sanitize_parameters",
+                "line": 20,
+                "parameters": "self, **kwargs"
+              },
+              {
+                "name": "__call__",
+                "line": 27,
+                "parameters": "self, inputs=None, *, state=_UNSET, questions=_UNSET, **kwargs"
+              },
+              {
+                "name": "preprocess",
+                "line": 41,
+                "parameters": "self, inputs"
+              },
+              {
+                "name": "_forward",
+                "line": 48,
+                "parameters": "self, model_inputs"
+              },
+              {
+                "name": "postprocess",
+                "line": 53,
+                "parameters": "self, model_outputs"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "tokenizer_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Eos-0.8B/resolve/3594047d69f476f1d01cf84c593e213fc3a4dfe0/tokenizer_config.json",
+      "sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "bytes": 1123,
+      "manifest_sha256": "bee8eba30f0eb4af73c0fe2cd06d0f89b657d7819941c438157ec42f7c80ea87",
+      "manifest_match": true
+    }
+  ],
+  "privacy": {
+    "authenticated_requests": false,
+    "weights_downloaded": false,
+    "credentials_included": false,
+    "session_identifiers_included": false
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "schema": "vector-run-model-source-audit/1",
+  "audited_at_utc": "2026-10-04T14:05:13.742700+00:00",
+  "model": {
+    "id": "vllm-sr/Decision-2.0-Nox-4B",
+    "revision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+    "api_url": "https://huggingface.co/api/models/vllm-sr/Decision-2.0-Nox-4B/revision/25e8f67d1b486c647222df3aac640d2d5d736bbe",
+    "profile": "qwen-full",
+    "loaded_parameters": 4208383488,
+    "max_input_tokens_per_question": 16384
+  },
+  "base": {
+    "id": "Qwen/Qwen3.5-4B-Base",
+    "revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+    "api_url": "https://huggingface.co/api/models/Qwen/Qwen3.5-4B-Base/revision/1001bb4d826a52d1f399e183466143f4da7b741b",
+    "role": "training provenance; full checkpoint already packaged, not a runtime external base download"
+  },
+  "runtime_provenance": {
+    "runtime_source": {
+      "commit": "fbedfded8ce33c7c25a99b8fb1f71f733b2c2c44",
+      "content_manifest_sha256": "444be5356ec8370d568edd8ed5234e91f386242be845b39887b77a864c9bbc8c",
+      "tree": "131bdbb11af430dec93ee0a7f4770a25a6276ea7"
+    },
+    "vendor_source": {
+      "commit": "95cc6e548ceece6ca852eee729c99da68057e078",
+      "content_manifest_sha256": "a9641735e30d934d4f41d5e07172d29e0b8decdc286619ef4d18f8f247cb027a",
+      "tree": "d5289b69180f7e6af11ce50fccce6e24e57fe5fd"
+    },
+    "publisher_verified_requirements": {
+      "causal-conv1d": "1.7.0 (GPU convolution kernels)",
+      "flash-linear-attention": "0.5.2 (GPU gated-delta kernels)",
+      "python": "3.12.13",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "torch": "2.12.0+git6bbd260 (ROCm 7.2 build; one ROCm GPU tested)",
+      "transformers": "5.17.0",
+      "triton": "3.7.1 (persisted autotune cache)"
+    },
+    "publisher_claim_only": "Manifest equivalence/parity and ROCm speedup claims were read, not re-measured by this audit."
+  },
+  "loader": {
+    "entrypoint": "transformers.AutoModel.from_pretrained(repo, revision=revision, trust_remote_code=True, device=\"cuda:0\", bf16_resident=True)",
+    "accepted_dtype_values": [
+      null,
+      "auto"
+    ],
+    "explicit_dtype_casts_supported": false,
+    "quantization_kwargs_supported": false,
+    "single_device_only": true,
+    "allowed_runtime_kwargs": [
+      "device",
+      "base_path",
+      "threads",
+      "bf16_resident"
+    ],
+    "resident_dtype": "mixed BF16/FP32: BF16-exact backbone Linear parameters BF16; embeddings, norms, gated-delta tensors, non-exact Linear parameters and head FP32",
+    "execution_dtype": "CUDA BF16 autocast plus FP32 head",
+    "share_context_default": false,
+    "full_bundle_verification": "Every package file/hash and safetensors header tensor count verified by native loader before model load; this source audit checks downloaded nonweight files only.",
+    "NVIDIA_A100_runtime_verified": false,
+    "NVIDIA_fast_path": "ROCm-only verified fast path; NVIDIA A100 uses eager forward.",
+    "GPU_requires_bf16_support": true
+  },
+  "system_one": {
+    "state_types": [
+      "string",
+      "object",
+      "array"
+    ],
+    "string_state_preservation": "String is inserted verbatim after Context:\n; structured state uses canonical JSON with ensure_ascii=False. Japanese strings are accepted.",
+    "prompt_version": "decision2-segmented-options-global-query-v1",
+    "chat_template_used_for_decision_encoding": false,
+    "supported_question_types": [
+      "choice",
+      "noul",
+      "score"
+    ],
+    "Choice_criteria": "mapping with 2..255 nonempty string keys; all supplied action candidates retained",
+    "response_shape": {
+      "model": "string",
+      "answers": "qid -> typed answer or error",
+      "usage": {
+        "input_tokens": "sum of encoded question lengths",
+        "output_tokens": 0
+      }
+    },
+    "Choice_answer_fields": [
+      "type",
+      "choice",
+      "probabilities",
+      "confidence"
+    ],
+    "Score_answer_fields": [
+      "type",
+      "score",
+      "probabilities",
+      "confidence",
+      "legend"
+    ],
+    "Noul_answer_fields": [
+      "type",
+      "noul"
+    ],
+    "raw_probabilities": "Choice/Score probabilities map is normalized softmax of candidate logits at per-task temperature; Nox calibration=null so temperatures=1. Preserve exactly from remote result without recomputation. Raw logits not exposed. Noul gives p(true) only.",
+    "single_forward_contract": "One system_one call batches all valid questions only when padded_question_length * question_count <= 262143. Larger batches are split into multiple backbone forwards; record actual forward count and token lengths in GPU trace.",
+    "forward_budget_padded_tokens": 262143,
+    "one_forward_64_question_max_padded_length": 4088,
+    "overlong_handling": "max_length_exceeded without truncation; invalid questions return invalid_question",
+    "trace_requirements": [
+      "exact remote API state string",
+      "exact Japanese state prompt and question instructions/criteria",
+      "complete answers and usage including original probability mappings",
+      "actual forward count plus encoded and padded token lengths",
+      "revision/base revision, actual GPU, mixed residency, quantization=none, dependency versions, first/warm timing and peak VRAM"
+    ]
+  },
+  "checks": [
+    {
+      "name": "pinned_model_api_sha",
+      "passed": true
+    },
+    {
+      "name": "pinned_base_api_sha",
+      "passed": true
+    },
+    {
+      "name": "downloaded_nonweight_manifest_hashes",
+      "passed": true,
+      "count": 26
+    },
+    {
+      "name": "Japanese_state_and_instructions_preserved_without_extra_JSON_quoting",
+      "passed": true
+    },
+    {
+      "name": "four_unrestricted_Choice_candidates_and_probability_schema",
+      "passed": true
+    },
+    {
+      "name": "Score_probability_schema_and_Noul_probability_scalar",
+      "passed": true
+    },
+    {
+      "name": "Nox_forward_budget_and_3_64_question_microbatch_boundaries",
+      "passed": true,
+      "budget_padded_tokens": 262143,
+      "one_forward_64_question_max_padded_length": 4088
+    }
+  ],
+  "sources": [
+    {
+      "path": "LICENSE",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/LICENSE",
+      "sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "bytes": 11544,
+      "manifest_sha256": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+      "manifest_match": true
+    },
+    {
+      "path": "MODEL_MANIFEST.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/MODEL_MANIFEST.json",
+      "sha256": "49771ea33a451274687ad2a246ce5fb78f8f42ec904fc91a467477179975bb16",
+      "bytes": 19787,
+      "manifest_sha256": null,
+      "manifest_match": null
+    },
+    {
+      "path": "README.md",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/README.md",
+      "sha256": "f02f529076de2b0bc7f60bd603d7e7a0abace008056a5c5a566979b75e5298c5",
+      "bytes": 4107,
+      "manifest_sha256": "f02f529076de2b0bc7f60bd603d7e7a0abace008056a5c5a566979b75e5298c5",
+      "manifest_match": true
+    },
+    {
+      "path": "backbone/config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/backbone/config.json",
+      "sha256": "a5ed4156fda05f0f9149c66964d6165916754e7355488a8a07d9b0398acdbdb9",
+      "bytes": 1977,
+      "manifest_sha256": "a5ed4156fda05f0f9149c66964d6165916754e7355488a8a07d9b0398acdbdb9",
+      "manifest_match": true
+    },
+    {
+      "path": "backbone/model.safetensors.index.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/backbone/model.safetensors.index.json",
+      "sha256": "95c2e31bef33db650f78ca48ea4f7324299608ad0b9085d7c8a20a321940f48a",
+      "bytes": 33047,
+      "manifest_sha256": "95c2e31bef33db650f78ca48ea4f7324299608ad0b9085d7c8a20a321940f48a",
+      "manifest_match": true
+    },
+    {
+      "path": "chat_template.jinja",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/chat_template.jinja",
+      "sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "bytes": 7756,
+      "manifest_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+      "manifest_match": true
+    },
+    {
+      "path": "config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/config.json",
+      "sha256": "725dccc10b7a526a739f54a340e8ba7a7b9d5237289f82b3b0840fa07613441d",
+      "bytes": 1408,
+      "manifest_sha256": "725dccc10b7a526a739f54a340e8ba7a7b9d5237289f82b3b0840fa07613441d",
+      "manifest_match": true
+    },
+    {
+      "path": "configuration_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/configuration_decision2.py",
+      "sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "bytes": 692,
+      "manifest_sha256": "b88ce8380cb0f210776f3f3ccc06219489b96502c520317790f3f4253e2a9367",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/__init__.py",
+      "sha256": "10fea99a87686a8f5d99e9a8a91573ce1ddb7bc702f22b1fa21d3de258a4054a",
+      "bytes": 164,
+      "manifest_sha256": "10fea99a87686a8f5d99e9a8a91573ce1ddb7bc702f22b1fa21d3de258a4054a",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/__init__.py",
+      "sha256": "fe3babbdd871fa7c0cf919320a66efd1249253abe6bd7cdc5e33352dc46adeef",
+      "bytes": 40,
+      "manifest_sha256": "fe3babbdd871fa7c0cf919320a66efd1249253abe6bd7cdc5e33352dc46adeef",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/__init__.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/__init__.py",
+      "sha256": "4611a85789fae8f06395702a2975592e66e16a8632487c5f9255c0ce68c700d1",
+      "bytes": 40,
+      "manifest_sha256": "4611a85789fae8f06395702a2975592e66e16a8632487c5f9255c0ce68c700d1",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/calibration.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/calibration.py",
+      "sha256": "71633a04533c7022e1606ed2734107f33839454c34c993fe16d80c8413d1c561",
+      "bytes": 11472,
+      "manifest_sha256": "71633a04533c7022e1606ed2734107f33839454c34c993fe16d80c8413d1c561",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/data.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/data.py",
+      "sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "bytes": 7172,
+      "manifest_sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/decision_model.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/decision_model.py",
+      "sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "bytes": 31910,
+      "manifest_sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/infer.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/infer.py",
+      "sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "bytes": 28254,
+      "manifest_sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/lora.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/lora.py",
+      "sha256": "171cb0aaf4c71ba3cf69292b1f3efad8ec63db66bd2631e3b1445f08ff83ada4",
+      "bytes": 10902,
+      "manifest_sha256": "171cb0aaf4c71ba3cf69292b1f3efad8ec63db66bd2631e3b1445f08ff83ada4",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/score_bias.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/score_bias.py",
+      "sha256": "837974bb8abb8c51c907e4f025e2632bd59bc2875eb55a4343d7bd4274622646",
+      "bytes": 3648,
+      "manifest_sha256": "837974bb8abb8c51c907e4f025e2632bd59bc2875eb55a4343d7bd4274622646",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/_vendor/dev2model/source.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/_vendor/dev2model/source.py",
+      "sha256": "ef7b30171c4befb26163ea4d3d6e5add9dc602228a476d6f0ead9d40b450c7e3",
+      "bytes": 1785,
+      "manifest_sha256": "ef7b30171c4befb26163ea4d3d6e5add9dc602228a476d6f0ead9d40b450c7e3",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/api.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/api.py",
+      "sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "bytes": 9624,
+      "manifest_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/fast.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/fast.py",
+      "sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "bytes": 32395,
+      "manifest_sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/fast_kernels.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/fast_kernels.py",
+      "sha256": "6a697c105df4770ac962304fd3e4c3e9a86db091715b99fca6ec08bb851bb0a5",
+      "bytes": 16737,
+      "manifest_sha256": "6a697c105df4770ac962304fd3e4c3e9a86db091715b99fca6ec08bb851bb0a5",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/qwen.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/qwen.py",
+      "sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "bytes": 16827,
+      "manifest_sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "manifest_match": true
+    },
+    {
+      "path": "decision2/shared_ctx.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision2/shared_ctx.py",
+      "sha256": "3ea492989258d460b28a5b568e388696a8d07c0b985f960e38d3c99d68620be9",
+      "bytes": 36730,
+      "manifest_sha256": "3ea492989258d460b28a5b568e388696a8d07c0b985f960e38d3c99d68620be9",
+      "manifest_match": true
+    },
+    {
+      "path": "decision_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/decision_config.json",
+      "sha256": "83372a89e76cef457bed103f24e4e3f71b234960530acb840d7e7b330b32d70b",
+      "bytes": 37759,
+      "manifest_sha256": "83372a89e76cef457bed103f24e4e3f71b234960530acb840d7e7b330b32d70b",
+      "manifest_match": true
+    },
+    {
+      "path": "modeling_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/modeling_decision2.py",
+      "sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "bytes": 19865,
+      "manifest_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "manifest_match": true
+    },
+    {
+      "path": "pipeline_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/pipeline_decision2.py",
+      "sha256": "3393faec770ddaa9045a7e41092ad17cee5310fe74187deb6f58bbe718b0c1c3",
+      "bytes": 2094,
+      "manifest_sha256": "3393faec770ddaa9045a7e41092ad17cee5310fe74187deb6f58bbe718b0c1c3",
+      "manifest_match": true
+    },
+    {
+      "path": "tokenizer_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Nox-4B/resolve/25e8f67d1b486c647222df3aac640d2d5d736bbe/tokenizer_config.json",
+      "sha256": "353c083805d863719e54973335a38e252a92e1ac64d32b83bb0b333cc1644ef2",
+      "bytes": 1126,
+      "manifest_sha256": "353c083805d863719e54973335a38e252a92e1ac64d32b83bb0b333cc1644ef2",
+      "manifest_match": true
+    }
+  ],
+  "limitations": [
+    "No model weights downloaded.",
+    "No model runtime import, GPU inference, CUDA dependency validation, forward timing or VRAM measurements performed.",
+    "Pure-function checks validate API/prompt/probability/batch logic only.",
+    "A100 compatibility and actual one-forward execution remain for the shared loader/harness runtime."
+  ],
+  "source_evidence": [
+    {
+      "path": "modeling_decision2.py",
+      "lines": [
+        89,
+        102
+      ],
+      "finding": "single device only"
+    },
+    {
+      "path": "modeling_decision2.py",
+      "lines": [
+        327,
+        370
+      ],
+      "finding": "runtime options, fixed dtype and unsupported kwargs"
+    },
+    {
+      "path": "decision2/qwen.py",
+      "lines": [
+        75,
+        109
+      ],
+      "finding": "mixed BF16 exact Linear residency"
+    },
+    {
+      "path": "decision2/qwen.py",
+      "lines": [
+        115,
+        155
+      ],
+      "finding": "forward token budget and microbatch splitting"
+    },
+    {
+      "path": "decision2/qwen.py",
+      "lines": [
+        235,
+        252
+      ],
+      "finding": "temperature=1 with null calibration and GPU BF16 requirement"
+    },
+    {
+      "path": "decision2/qwen.py",
+      "lines": [
+        305,
+        413
+      ],
+      "finding": "state validation, encoding, forwards and original answer maps"
+    },
+    {
+      "path": "decision2/_vendor/dev2model/decision_model.py",
+      "lines": [
+        52,
+        110
+      ],
+      "finding": "verbatim string state and segmented prompt"
+    },
+    {
+      "path": "decision2/_vendor/dev2model/decision_model.py",
+      "lines": [
+        239,
+        251
+      ],
+      "finding": "FP32 head under disabled autocast"
+    },
+    {
+      "path": "decision2/_vendor/dev2model/infer.py",
+      "lines": [
+        180,
+        250
+      ],
+      "finding": "probability schema and product answer"
+    },
+    {
+      "path": "decision2/fast.py",
+      "lines": [
+        1,
+        50
+      ],
+      "finding": "verified fast path limited to ROCm and Transformers 5.17"
+    }
+  ]
+}

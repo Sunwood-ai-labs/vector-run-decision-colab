@@ -1,0 +1,941 @@
+{
+  "schema": "vector-run-vega-source-audit/1",
+  "audited_at_utc": "2026-10-04T14:06:09.736413+00:00",
+  "scope": "Public HF API, pinned source bytes, and safetensors headers only; no tensor payload downloaded or model inference performed.",
+  "model": {
+    "repo": "vllm-sr/Decision-2.0-Vega-27B",
+    "revision": "7aec49ae11a18741706da549ab626b9052795fe7",
+    "api_url": "https://huggingface.co/api/models/vllm-sr/Decision-2.0-Vega-27B?blobs=true",
+    "config_backbone": {
+      "repository": "Qwen/Qwen3.8-27B",
+      "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0"
+    },
+    "profile": "qwen-adapter",
+    "model_identity_sha256": "584697310502cd20e91728e69f724c028b47b95daf3790256dea3e434c48be82",
+    "parameters": {
+      "external_base_text": 25624600064,
+      "loaded": 29365153792,
+      "packaged": {
+        "adapter": 3735289856,
+        "head": 5263872,
+        "residual": 0
+      },
+      "packaged_files": {
+        "adapter": [
+          "adapter/adapter_model.safetensors"
+        ],
+        "head": [
+          "decision_head.safetensors"
+        ],
+        "residual": []
+      },
+      "source": "safetensors header element counts; the runtime asserts the loaded count"
+    },
+    "licence": "apache-2.0"
+  },
+  "base": {
+    "repo": "Qwen/Qwen3.8-27B",
+    "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "api_url": "https://huggingface.co/api/models/Qwen/Qwen3.8-27B?blobs=true",
+    "config_url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/config.json",
+    "architectures": [
+      "Qwen3_5ForConditionalGeneration"
+    ],
+    "text_model_type": "qwen3_5_text",
+    "text_dtype": "bfloat16",
+    "safetensors_shard_count": 18,
+    "safetensors_files_bytes": 55563006776,
+    "all_elements": 27781427952,
+    "loaded_text_elements": 25624600064,
+    "loaded_text_tensor_count": 850,
+    "excluded_prefixes": [
+      "lm_head.",
+      "model.visual.",
+      "mtp."
+    ]
+  },
+  "adapter": {
+    "config_url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/adapter/adapter_config.json",
+    "peft_type": "LORA",
+    "rank": 512,
+    "alpha": 1024,
+    "target_modules": [
+      "down_proj",
+      "gate_proj",
+      "in_proj_a",
+      "in_proj_b",
+      "in_proj_qkv",
+      "in_proj_z",
+      "k_proj",
+      "o_proj",
+      "out_proj",
+      "q_proj",
+      "up_proj",
+      "v_proj"
+    ],
+    "merged": false,
+    "stored_dtype": "F32",
+    "tensor_count": 992,
+    "elements": 3735289856,
+    "file_bytes": 14941293880,
+    "payload_bytes": 14941159424
+  },
+  "memory": {
+    "method": "Count pinned safetensors header shapes. Strict lower bound treats all base text tensors as BF16 and adapter/head as FP32; official expected residency retains all non-Linear text tensors in FP32 and casts only the 496 BF16-exact base Linears. No activations, allocator, transient casts, kernels, graphs, cache, or framework overhead included.",
+    "strict_weight_lower_bound_bytes": 66211415040,
+    "strict_weight_lower_bound_gib": 61.664185523986816,
+    "official_expected_weight_residency_bytes": 68759502848,
+    "official_expected_weight_residency_gib": 64.03727722167969,
+    "base_linear_tensor_count": 496,
+    "base_linear_elements": 24350556160,
+    "base_non_linear_elements": 1274043904,
+    "base_non_linear_examples": [
+      "embed_tokens.weight",
+      "layer norms",
+      "linear_attn.A_log",
+      "linear_attn.dt_bias",
+      "linear_attn.conv1d.weight"
+    ],
+    "actual_gpu_peak_vram_measured": false,
+    "capacity_40gib": "insufficient even for strict parameter-only lower bound",
+    "capacity_80gib": "parameter capacity plausible; full load and inference peak must be measured"
+  },
+  "numerical_contract": {
+    "source_url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/modeling_decision2.py",
+    "loader_dtype_only": [
+      null,
+      "auto"
+    ],
+    "dtype_cast_supported": false,
+    "quantization_override_supported": false,
+    "bf16_resident_default": true,
+    "gpu_requires_cuda_or_rocm_bf16": true,
+    "gpu_backbone_compute": "BF16 autocast",
+    "head_compute": "FP32",
+    "fp32_adapter_unmerged": true,
+    "cpu_compute": "FP32",
+    "share_context_default": false,
+    "temperature": {
+      "choice": 1.0,
+      "noul": 1.0,
+      "score": 1.0
+    },
+    "calibration": null
+  },
+  "system_one_contract": {
+    "state_types": [
+      "string",
+      "JSON object",
+      "JSON array"
+    ],
+    "response_fields": [
+      "model",
+      "answers",
+      "usage"
+    ],
+    "output_tokens": 0,
+    "decision_types": [
+      "choice",
+      "noul",
+      "score"
+    ],
+    "choice_and_score_probabilities": "Softmax of finite candidate logits at temperature 1; map contains every supplied option. Noul returns P(true) scalar.",
+    "raw_probabilities": true,
+    "max_input_tokens_per_question": 32768,
+    "over_budget": "max_length_exceeded; never truncated",
+    "question_batching": "All valid questions collated to one padded batch unless GPU forward token budget is exceeded.",
+    "padded_tokens_per_forward_budget": 174762,
+    "single_forward_requirement": "ceil(max encoded question tokens / 8) * 8 * valid_question_count <= padded_tokens_per_forward_budget; share_context=False",
+    "64_question_max_padded_tokens_for_one_forward": 2728,
+    "forward_execution_source_lines": {
+      "file": "decision2/qwen.py",
+      "budget": [
+        115,
+        156
+      ],
+      "forward": [
+        305,
+        413
+      ]
+    },
+    "normalization_source_lines": {
+      "file": "decision2/_vendor/dev2model/infer.py",
+      "lines": [
+        180,
+        217
+      ]
+    },
+    "kernel_fallback_static_reference": {
+      "file": "modeling_decision2.py",
+      "lines": [
+        272,
+        301
+      ],
+      "claim": "Remote source documents Transformers reference functions when flash-linear-attention/causal-conv1d kernels are absent. GPU execution and performance without kernels unverified."
+    }
+  },
+  "published_tested_dependencies": {
+    "causal-conv1d": "1.7.0 (GPU convolution kernels)",
+    "flash-linear-attention": "0.5.2 (GPU gated-delta kernels)",
+    "huggingface_hub": "1.31.0 (pinned base download)",
+    "peft": "0.21.0",
+    "python": "3.12.13",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.23.2",
+    "torch": "2.12.0+git6bbd260 (ROCm 7.2 build; one ROCm GPU tested)",
+    "transformers": "5.17.0",
+    "triton": "3.7.1 (persisted autotune cache)"
+  },
+  "published_parity_hardware": "One ROCm GPU in release image; NVIDIA/Blackwell inference is not established by this audit.",
+  "source_line_references": [
+    {
+      "file": "modeling_decision2.py",
+      "lines": [
+        327,
+        362
+      ],
+      "claim": "Pinned trusted remote loader, bf16_resident runtime option, rejected dtype/unknown keyword overrides."
+    },
+    {
+      "file": "decision2/api.py",
+      "lines": [
+        158,
+        190
+      ],
+      "claim": "BF16 residency default; same answer contract; opt-in shared context can differ."
+    },
+    {
+      "file": "decision2/qwen.py",
+      "lines": [
+        75,
+        108
+      ],
+      "claim": "Only BF16-exact Linear tensors can be resident BF16; remaining tensors FP32."
+    },
+    {
+      "file": "decision2/qwen.py",
+      "lines": [
+        246,
+        274
+      ],
+      "claim": "Temperature 1, BF16 GPU support check, FP32 initial model, residency applied before GPU transfer."
+    },
+    {
+      "file": "decision2/_vendor/dev2model/decision_model.py",
+      "lines": [
+        593,
+        600
+      ],
+      "claim": "PEFT adapter loaded without merge."
+    }
+  ],
+  "sources": [
+    {
+      "file": "README.md",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/README.md",
+      "bytes": 4146,
+      "sha256": "13015618463f5d79c06147e07c2b72499780450f385c6f54bb8dcd90c8d54125",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/config.json",
+      "bytes": 1271,
+      "sha256": "c445903db38e4208c2872f94133585449721423a6f3738615b605c1cb446307e",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "MODEL_MANIFEST.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/MODEL_MANIFEST.json",
+      "bytes": 26506,
+      "sha256": "24dcf251f5b50a2259201cc5e11889b6d2545afd4ccecabb0e2344549542bdd3",
+      "manifest_sha256_match": null
+    },
+    {
+      "file": "adapter/adapter_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/adapter/adapter_config.json",
+      "bytes": 1355,
+      "sha256": "c2bb24361a5b318668ffd3998170f14b78851ca5e5f8e7bb586921366bc9029b",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision_config.json",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision_config.json",
+      "bytes": 60101,
+      "sha256": "3ae51f093f07f8eead0649a33728a03dfcff5950308edbf86655ebd69b724517",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "modeling_decision2.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/modeling_decision2.py",
+      "bytes": 19865,
+      "sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision2/api.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision2/api.py",
+      "bytes": 9624,
+      "sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision2/qwen.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision2/qwen.py",
+      "bytes": 16827,
+      "sha256": "62df8de050d38cd92dc68c12de7d9b65d041a14317feda02ff8ddafc3c69c779",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision2/fast.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision2/fast.py",
+      "bytes": 32395,
+      "sha256": "d125a98848089ad8be04ef1c799c1daee5ea7704e138c17a874692321a206b54",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision2/_vendor/dev2model/decision_model.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision2/_vendor/dev2model/decision_model.py",
+      "bytes": 31910,
+      "sha256": "7195ce78e997bd1e1d5da8d6c3ebb28f54c45cfb40256142fde8c7a3964351e4",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision2/_vendor/dev2model/infer.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision2/_vendor/dev2model/infer.py",
+      "bytes": 28254,
+      "sha256": "e67515f1fc44aa9756aa8ce5a7cb26c8994c258255f73012aa85ac4989fc61ef",
+      "manifest_sha256_match": true
+    },
+    {
+      "file": "decision2/_vendor/dev2model/data.py",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision2/_vendor/dev2model/data.py",
+      "bytes": 7172,
+      "sha256": "632bd60555f63459ff08ffe82c8263ca6a96f75360bc8c06469fcb10f1e2e99c",
+      "manifest_sha256_match": true
+    }
+  ],
+  "safetensors_header_evidence": [
+    {
+      "file": "adapter/adapter_model.safetensors",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/adapter/adapter_model.safetensors",
+      "file_bytes": 14941293880,
+      "expected_full_file_sha256": "14c25f457edcdacbc1d9e8416b926b3421db9ba18c12f57febcf0adf8054accd",
+      "full_file_sha256_verified": false,
+      "header_sha256": "c7deac5434532bda8e2e31c4de775c97200e905734f8cb8f0bb52db283889bea",
+      "header_json_bytes": 134448,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/14941293880",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-134455",
+          "status": 206,
+          "content_range": "bytes 8-134455/14941293880",
+          "bytes_read": 134448
+        }
+      ],
+      "tensor_count": 992,
+      "tensor_dtype_counts": {
+        "F32": 992
+      },
+      "elements": 3735289856,
+      "tensor_payload_bytes": 14941159424,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "decision_head.safetensors",
+      "url": "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/resolve/7aec49ae11a18741706da549ab626b9052795fe7/decision_head.safetensors",
+      "file_bytes": 21056344,
+      "expected_full_file_sha256": "b53fd934baa16cf3f570c37640cd104200b70cf19a4ceb91c1edf05114b8c3a2",
+      "full_file_sha256_verified": false,
+      "header_sha256": "98e7f939699fbbe8cc86abaa8b779b04948bb29cf5a49c8efdb2f8c704cbee9f",
+      "header_json_bytes": 848,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/21056344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-855",
+          "status": 206,
+          "content_range": "bytes 8-855/21056344",
+          "bytes_read": 848
+        }
+      ],
+      "tensor_count": 10,
+      "tensor_dtype_counts": {
+        "F32": 10
+      },
+      "elements": 5263872,
+      "tensor_payload_bytes": 21055488,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00001-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00001-of-00018.safetensors",
+      "file_bytes": 3966730552,
+      "expected_full_file_sha256": "ba0ce20aae489ad196733da5064bcdf159a1fe84f53336648196e1ebb7751b1c",
+      "full_file_sha256_verified": false,
+      "header_sha256": "f4cbd9978d80810a0e91ff1b9eee98afb230fdc94ef59550954079df3752ca05",
+      "header_json_bytes": 45392,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3966730552",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-45399",
+          "status": 206,
+          "content_range": "bytes 8-45399/3966730552",
+          "bytes_read": 45392
+        }
+      ],
+      "tensor_count": 392,
+      "tensor_dtype_counts": {
+        "BF16": 392
+      },
+      "elements": 1983342576,
+      "tensor_payload_bytes": 3966685152,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00002-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00002-of-00018.safetensors",
+      "file_bytes": 3043080328,
+      "expected_full_file_sha256": "06a148c01bfbe3faa14a5f184a7ff29a706f7ae1c8b2705d2058e26d17a001fb",
+      "full_file_sha256_verified": false,
+      "header_sha256": "712e885527c27c46d257c9cc17858f38ea78c2b795501c2de511c77f0d21f5f7",
+      "header_json_bytes": 6144,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3043080328",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-6151",
+          "status": 206,
+          "content_range": "bytes 8-6151/3043080328",
+          "bytes_read": 6144
+        }
+      ],
+      "tensor_count": 47,
+      "tensor_dtype_counts": {
+        "BF16": 47
+      },
+      "elements": 1521537088,
+      "tensor_payload_bytes": 3043074176,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00003-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00003-of-00018.safetensors",
+      "file_bytes": 2542796952,
+      "expected_full_file_sha256": "2e1bf62cbcd406eaa64b60d10353e1f0ef4039d0976e56f05cabe953454f9968",
+      "full_file_sha256_verified": false,
+      "header_sha256": "b8f9a3cc0294c614390b5722494dcea8082f83c5cbf56da05b8c8f37c4bbe1fb",
+      "header_json_bytes": 144,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2542796952",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-151",
+          "status": 206,
+          "content_range": "bytes 8-151/2542796952",
+          "bytes_read": 144
+        }
+      ],
+      "tensor_count": 1,
+      "tensor_dtype_counts": {
+        "BF16": 1
+      },
+      "elements": 1271398400,
+      "tensor_payload_bytes": 2542796800,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00004-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00004-of-00018.safetensors",
+      "file_bytes": 3988973152,
+      "expected_full_file_sha256": "511e34063187882659753c4d93f3859f93c019fd438d8813071921c81d9a3f1a",
+      "full_file_sha256_verified": false,
+      "header_sha256": "ba99fbe75f726a370bae45f56c26b7cca9d4d04c2bc0b985f85a759f86f58e4a",
+      "header_json_bytes": 9048,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3988973152",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-9055",
+          "status": 206,
+          "content_range": "bytes 8-9055/3988973152",
+          "bytes_read": 9048
+        }
+      ],
+      "tensor_count": 69,
+      "tensor_dtype_counts": {
+        "BF16": 69
+      },
+      "elements": 1994482048,
+      "tensor_payload_bytes": 3988964096,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00005-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00005-of-00018.safetensors",
+      "file_bytes": 2099339864,
+      "expected_full_file_sha256": "635cb53446dc74f219740fc59e18b774f877b803b9722e289ca62575a6efa701",
+      "full_file_sha256_verified": false,
+      "header_sha256": "014a358848b7d5f734988922825b025a73be7d9ac1256bd7cc194fcbfd247cb9",
+      "header_json_bytes": 4816,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2099339864",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-4823",
+          "status": 206,
+          "content_range": "bytes 8-4823/2099339864",
+          "bytes_read": 4816
+        }
+      ],
+      "tensor_count": 37,
+      "tensor_dtype_counts": {
+        "BF16": 37
+      },
+      "elements": 1049667520,
+      "tensor_payload_bytes": 2099335040,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00006-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00006-of-00018.safetensors",
+      "file_bytes": 3979553696,
+      "expected_full_file_sha256": "0bc5214fac607f0e6cc92eec3789d4b8559410ef9fce66621ba8158e8410dae0",
+      "full_file_sha256_verified": false,
+      "header_sha256": "fcca93799f009642c232f0b577dc5508771a5646f443c2c2e9ea3981b7101e98",
+      "header_json_bytes": 9944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3979553696",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-9951",
+          "status": 206,
+          "content_range": "bytes 8-9951/3979553696",
+          "bytes_read": 9944
+        }
+      ],
+      "tensor_count": 76,
+      "tensor_dtype_counts": {
+        "BF16": 76
+      },
+      "elements": 1989771872,
+      "tensor_payload_bytes": 3979543744,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00007-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00007-of-00018.safetensors",
+      "file_bytes": 2108759344,
+      "expected_full_file_sha256": "80b0c49033e9a0d5762562aa12f4acdb7f54da586f3d0110f28c48d91cf07892",
+      "full_file_sha256_verified": false,
+      "header_sha256": "53aae8c12ad2498d212fd3e85c167f80338b0e4b8a9239cce43c675e89fb9c8a",
+      "header_json_bytes": 3944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2108759344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-3951",
+          "status": 206,
+          "content_range": "bytes 8-3951/2108759344",
+          "bytes_read": 3944
+        }
+      ],
+      "tensor_count": 30,
+      "tensor_dtype_counts": {
+        "BF16": 30
+      },
+      "elements": 1054377696,
+      "tensor_payload_bytes": 2108755392,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00008-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00008-of-00018.safetensors",
+      "file_bytes": 3979553696,
+      "expected_full_file_sha256": "7192c5b66185d3592927daabee1cc19e6f6e0ce75988ee20e824b624765fda79",
+      "full_file_sha256_verified": false,
+      "header_sha256": "6fca806f2ec923543cb9d256b62a97e61efaaa91ae55ac76dd770ede89626f99",
+      "header_json_bytes": 9944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3979553696",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-9951",
+          "status": 206,
+          "content_range": "bytes 8-9951/3979553696",
+          "bytes_read": 9944
+        }
+      ],
+      "tensor_count": 76,
+      "tensor_dtype_counts": {
+        "BF16": 76
+      },
+      "elements": 1989771872,
+      "tensor_payload_bytes": 3979543744,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00009-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00009-of-00018.safetensors",
+      "file_bytes": 2108759344,
+      "expected_full_file_sha256": "af3c48cc37af44f3db6ae0579baf019180d48d9c527caa0a1f03ff85813a56d8",
+      "full_file_sha256_verified": false,
+      "header_sha256": "85728ac217f564d40921ad9fbc3115d7b4dd974fdddecb119c6131ae02dc6356",
+      "header_json_bytes": 3944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2108759344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-3951",
+          "status": 206,
+          "content_range": "bytes 8-3951/2108759344",
+          "bytes_read": 3944
+        }
+      ],
+      "tensor_count": 30,
+      "tensor_dtype_counts": {
+        "BF16": 30
+      },
+      "elements": 1054377696,
+      "tensor_payload_bytes": 2108755392,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00010-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00010-of-00018.safetensors",
+      "file_bytes": 3979553696,
+      "expected_full_file_sha256": "163490a76f3bea3a40855b7efc04ce6d27afaf1a34f0bbde495b9491f76457c9",
+      "full_file_sha256_verified": false,
+      "header_sha256": "90f7d04c3c049625f3b87aabe684e9dc41e1338edcf3a52c8691a3fedb4def35",
+      "header_json_bytes": 9944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3979553696",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-9951",
+          "status": 206,
+          "content_range": "bytes 8-9951/3979553696",
+          "bytes_read": 9944
+        }
+      ],
+      "tensor_count": 76,
+      "tensor_dtype_counts": {
+        "BF16": 76
+      },
+      "elements": 1989771872,
+      "tensor_payload_bytes": 3979543744,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00011-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00011-of-00018.safetensors",
+      "file_bytes": 2108759344,
+      "expected_full_file_sha256": "5f3ae1b948aeee39da77aec558e8236cd65fe4d7cb7686a76bb007acc563c6d8",
+      "full_file_sha256_verified": false,
+      "header_sha256": "76511c9f8694b89ab67b257754313d166f6cc1f8f65b1d8245d63d1a17e8fa72",
+      "header_json_bytes": 3944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2108759344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-3951",
+          "status": 206,
+          "content_range": "bytes 8-3951/2108759344",
+          "bytes_read": 3944
+        }
+      ],
+      "tensor_count": 30,
+      "tensor_dtype_counts": {
+        "BF16": 30
+      },
+      "elements": 1054377696,
+      "tensor_payload_bytes": 2108755392,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00012-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00012-of-00018.safetensors",
+      "file_bytes": 3979553696,
+      "expected_full_file_sha256": "a3de1c7114677a8f5ac5c4892c90e8238ea5c1e2038c80e757dfc87c3902ca55",
+      "full_file_sha256_verified": false,
+      "header_sha256": "b3c2a0a542f840a5fb81b0a595a3e76c47ad9d8dcb75b4146ba034bec48c6624",
+      "header_json_bytes": 9944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3979553696",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-9951",
+          "status": 206,
+          "content_range": "bytes 8-9951/3979553696",
+          "bytes_read": 9944
+        }
+      ],
+      "tensor_count": 76,
+      "tensor_dtype_counts": {
+        "BF16": 76
+      },
+      "elements": 1989771872,
+      "tensor_payload_bytes": 3979543744,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00013-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00013-of-00018.safetensors",
+      "file_bytes": 2108759344,
+      "expected_full_file_sha256": "06ab79a41f74c9c5cb734816feb0c7fc364104b227165ee7391231e1155aa02a",
+      "full_file_sha256_verified": false,
+      "header_sha256": "fda125bcd2add706130665454e60ff215c02008d502690222bc91d007d809b3d",
+      "header_json_bytes": 3944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2108759344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-3951",
+          "status": 206,
+          "content_range": "bytes 8-3951/2108759344",
+          "bytes_read": 3944
+        }
+      ],
+      "tensor_count": 30,
+      "tensor_dtype_counts": {
+        "BF16": 30
+      },
+      "elements": 1054377696,
+      "tensor_payload_bytes": 2108755392,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00014-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00014-of-00018.safetensors",
+      "file_bytes": 3979553696,
+      "expected_full_file_sha256": "4138ed94603065ba884bbcadedb04d7718bb40117e85e6f5c6fc5b9c05b7a85b",
+      "full_file_sha256_verified": false,
+      "header_sha256": "a4fb86312f6d19b2c875397cb1332eb0d0509ee87ac7d071ab8136ad39900a35",
+      "header_json_bytes": 9944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3979553696",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-9951",
+          "status": 206,
+          "content_range": "bytes 8-9951/3979553696",
+          "bytes_read": 9944
+        }
+      ],
+      "tensor_count": 76,
+      "tensor_dtype_counts": {
+        "BF16": 76
+      },
+      "elements": 1989771872,
+      "tensor_payload_bytes": 3979543744,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00015-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00015-of-00018.safetensors",
+      "file_bytes": 2108759344,
+      "expected_full_file_sha256": "69224e27b9de4e7dbf6fc936c6eaae08447bda3b80a6c31a871ab451173afd22",
+      "full_file_sha256_verified": false,
+      "header_sha256": "fbfcdbe24b153a09d21fb4a01af24db550cb3d5be61aa83de16ff1bb278932f1",
+      "header_json_bytes": 3944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2108759344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-3951",
+          "status": 206,
+          "content_range": "bytes 8-3951/2108759344",
+          "bytes_read": 3944
+        }
+      ],
+      "tensor_count": 30,
+      "tensor_dtype_counts": {
+        "BF16": 30
+      },
+      "elements": 1054377696,
+      "tensor_payload_bytes": 2108755392,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00016-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00016-of-00018.safetensors",
+      "file_bytes": 3979564040,
+      "expected_full_file_sha256": "73cb9a1089fb6155cb648609478d6633be8a5c7d9ca5a05bc8925ce8a553cefe",
+      "full_file_sha256_verified": false,
+      "header_sha256": "8e34d4718e9757344063700d85ee3ee62222b97dbacc11864d8de862a835d38d",
+      "header_json_bytes": 10048,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3979564040",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-10055",
+          "status": 206,
+          "content_range": "bytes 8-10055/3979564040",
+          "bytes_read": 10048
+        }
+      ],
+      "tensor_count": 77,
+      "tensor_dtype_counts": {
+        "BF16": 77
+      },
+      "elements": 1989776992,
+      "tensor_payload_bytes": 3979553984,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00017-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00017-of-00018.safetensors",
+      "file_bytes": 2108759344,
+      "expected_full_file_sha256": "beb51f01056142ac4984bd800507b0dd0fd18de57f8e9ef6ea41d1a3598983a8",
+      "full_file_sha256_verified": false,
+      "header_sha256": "4d3fbaeb838aed16121dcc01fe50b3721b30bdb303be13b03b05aecd4b2dc637",
+      "header_json_bytes": 3944,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/2108759344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-3951",
+          "status": 206,
+          "content_range": "bytes 8-3951/2108759344",
+          "bytes_read": 3944
+        }
+      ],
+      "tensor_count": 30,
+      "tensor_dtype_counts": {
+        "BF16": 30
+      },
+      "elements": 1054377696,
+      "tensor_payload_bytes": 2108755392,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    },
+    {
+      "file": "model-00018-of-00018.safetensors",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model-00018-of-00018.safetensors",
+      "file_bytes": 3392197344,
+      "expected_full_file_sha256": "1d3479509e21494658f9b64d317f5ea8e55c4025d28c702d6c4d0b356ce8ea06",
+      "full_file_sha256_verified": false,
+      "header_sha256": "175ef82a06309dc2f737c914fcd2e5d10255814f38a7aa09fe631d6f7ae34556",
+      "header_json_bytes": 1752,
+      "http_range_reads": [
+        {
+          "requested_range": "bytes=0-7",
+          "status": 206,
+          "content_range": "bytes 0-7/3392197344",
+          "bytes_read": 8
+        },
+        {
+          "requested_range": "bytes=8-1759",
+          "status": 206,
+          "content_range": "bytes 8-1759/3392197344",
+          "bytes_read": 1752
+        }
+      ],
+      "tensor_count": 16,
+      "tensor_dtype_counts": {
+        "BF16": 16
+      },
+      "elements": 1696097792,
+      "tensor_payload_bytes": 3392195584,
+      "manifest_expected_sha256_matches_hf_lfs": true
+    }
+  ],
+  "limitations": [
+    "Full weight SHA-256 values are published HF LFS / manifest identities, not independently hashed tensor payloads.",
+    "Header audit establishes shapes/dtypes and static weight capacity only; no actual inference, performance, or GPU peak memory is asserted.",
+    "Base Linear mapping derived from exact adapter projection targets; all 496 match base header keys."
+  ],
+  "base_sources": [
+    {
+      "file": "config.json",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/config.json",
+      "bytes": 4312,
+      "sha256": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
+      "manifest_base_sha256_match": true
+    },
+    {
+      "file": "model.safetensors.index.json",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/resolve/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/model.safetensors.index.json",
+      "bytes": 112216,
+      "sha256": "77042094076611b69791a610065f28b7013b8c621795fa86ddccc8bac7d1b9df",
+      "manifest_base_sha256_match": true
+    }
+  ]
+}
