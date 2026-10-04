@@ -1,6 +1,6 @@
 # VECTOR RUN 正式ベンチマーク結果
 
-game `717f02dc9852b88c253ace32f42fcb6d780ed0d3` / benchmark `b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0`。60 FPS、1x共通時計、推論中も物理を進めるrealtime計測です。
+game `717f02dc9852b88c253ace32f42fcb6d780ed0d3` / benchmark `b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0`。物理120 Hz、1x共通時計で推論中も物理を進めるrealtime計測です。
 
 GPU機種が異なるため、system_one_msのモデル間速度順位は付けません。system_one_msはtokenization/wrapperを含むAPI同期時間で、純forward時間ではありません。q3の最初のAPI呼び出しと後続呼び出しを分け、q64は同一プロセスでq3後に実行した記録だけを示します。
 

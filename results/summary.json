@@ -4,8 +4,8 @@
     "name": "VECTOR RUN",
     "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
     "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
-    "physicsFps": 60,
-    "decisionEveryFrames": 8,
+    "physicsHz": 120,
+    "decisionEveryTicks": 16,
     "actionTiming": "realtime; physics continues during inference"
   },
   "targets": [
