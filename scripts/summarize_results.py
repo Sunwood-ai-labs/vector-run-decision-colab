@@ -863,8 +863,58 @@ def _safe_inventory_path(results_root: Path, value: Any) -> Path:
     return path
 
 
+def _safe_discovery_path(results_root: Path, candidate: Path) -> Path | None:
+    if candidate.is_symlink() or not candidate.is_file():
+        return None
+    try:
+        path = candidate.resolve(strict=True)
+        relative = path.relative_to(results_root)
+    except (OSError, ValueError):
+        return None
+    if any(word in part.lower() for word in FORBIDDEN_PATH_WORDS for part in relative.parts):
+        return None
+    return path
+
+
+def _discover_official_inputs(results_root: Path) -> tuple[dict[str, list[Path]], dict[str, Path]]:
+    q3_paths: dict[str, list[Path]] = {}
+    availability_paths: dict[str, Path] = {}
+    measured_slugs = (item[0] for item in TARGETS if item[0] not in ("rule", "idle", "sol-reasoning"))
+    for slug in measured_slugs:
+        found: set[Path] = set()
+        for run_dir in _candidate_run_dirs(results_root, slug):
+            for candidate in run_dir.glob("*-q3.game.json"):
+                path = _safe_discovery_path(results_root, candidate)
+                if path is not None:
+                    found.add(path)
+        q3_paths[slug] = sorted(found)
+
+    baseline_dir = results_root / "baselines"
+    if baseline_dir.is_dir() and not baseline_dir.is_symlink():
+        for slug in ("rule", "idle"):
+            path = _safe_discovery_path(results_root, baseline_dir / f"{slug}-q3.game.json")
+            q3_paths[slug] = [path] if path is not None else []
+
+    availability_candidates: list[Path] = []
+    for run_dir in _candidate_run_dirs(results_root, "sol-reasoning"):
+        try:
+            candidate = _verification_path(run_dir, "sol-reasoning", run_dir.name)
+        except RejectedInput:
+            continue
+        path = _safe_discovery_path(results_root, candidate)
+        if path is not None:
+            availability_candidates.append(path)
+    if len(availability_candidates) > 1:
+        raise RejectedInput("multiple Sol-Reasoning availability proofs found")
+    if availability_candidates:
+        availability_paths["sol-reasoning"] = availability_candidates[0]
+    return q3_paths, availability_paths
+
+
 def _load_inventory(results_root: Path) -> tuple[dict[str, list[Path]], dict[str, Path]]:
     inventory_path = results_root.parent / "handoffs" / "formal-results.json"
+    if not inventory_path.is_file():
+        return _discover_official_inputs(results_root)
     inventory = _read_json(inventory_path)
     _require_commit(inventory.get("gameCommit"), GAME_COMMIT, "inventory game")
     _require_commit(inventory.get("benchmarkCommit"), BENCHMARK_COMMIT, "inventory benchmark")
@@ -1202,7 +1252,10 @@ def _self_test(results_root: Path) -> None:
         raise RejectedInput("self-test failed to retain both Kai hashes as pending verification")
     kai_series = {item["series"] for item in series.get("kai", [])}
     if not kai_pending and kai_series != {"q3", "q64"}:
-        inventory = _read_json(results_root.parent / "handoffs" / "formal-results.json")
+        inventory_path = results_root.parent / "handoffs" / "formal-results.json"
+        if not inventory_path.is_file():
+            raise RejectedInput("self-test requires Kai proof or explicit pending inventory status")
+        inventory = _read_json(inventory_path)
         kai_inventory = (inventory.get("targets") or {}).get("kai")
         if (
             kai_series
