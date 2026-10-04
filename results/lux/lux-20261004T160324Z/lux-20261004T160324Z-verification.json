@@ -1,0 +1,112 @@
+{
+  "schema": "vector-run-lux-verification/v1",
+  "runId": "lux-20261004T160324Z",
+  "model": "vllm-sr/Decision-2.0-Lux-9B",
+  "modelRevision": "78bf3c03d9147aeb30b641edfe0e30ed04887ca5",
+  "gameRepository": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkRepository": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "sourceCheckout": {
+    "bothPublicGitClones": true,
+    "originsVerified": true,
+    "pinnedHeadsVerified": true,
+    "cleanBeforeRun": true,
+    "commonBootstrapExitCode": 0
+  },
+  "runtime": {
+    "freshDedicatedRuntime": true,
+    "runtimeHistory": {
+      "runtimeReused": false,
+      "weightsCached": false,
+      "priorModelLoaded": false,
+      "priorSystemOneCall": false,
+      "priorInference": false,
+      "priorPrototypeGameRun": false,
+      "evidence": {
+        "runtimeReused": "Dedicated G4 runtime was created and ready immediately before the one-shot benchmark.",
+        "weightsCached": "The pinned revision snapshot was absent before the benchmark process after bootstrap.",
+        "priorModelLoaded": "Only a small BF16 matmul ran before benchmark; DecisionModel was not constructed.",
+        "priorSystemOneCall": "No system_one or remote model API request ran before benchmark.",
+        "priorInference": "No model inference ran before benchmark.",
+        "priorPrototypeGameRun": "No game CLI or prototype run ran in this fresh runtime before benchmark."
+      }
+    },
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "vramTotalGiB": 94.97,
+    "vramFreeBeforeModelLoadGiB": 94.43,
+    "computeCapability": "12.0",
+    "bf16Supported": true,
+    "bf16MatmulPreflight": "passed",
+    "weightMode": "resident mixed BF16/FP32; no quantization; no offload",
+    "cudaTritonCache": "unknown"
+  },
+  "validation": {
+    "q3": {
+      "validator": "scripts/verify-decision-trace.mjs at gameCommit",
+      "valid": true,
+      "questionCount": 3,
+      "seeds": [101, 202, 303, 404, 505],
+      "validRuns": 5,
+      "runtimeGameInvalidErrors": []
+    },
+    "q64": {
+      "validator": "scripts/verify-decision-trace.mjs at gameCommit",
+      "valid": true,
+      "questionCount": 64,
+      "seeds": [101],
+      "validRuns": 1,
+      "runtimeGameInvalidErrors": []
+    },
+    "rawTraceChecks": {
+      "requestResponseBodiesMatched": true,
+      "actionsAndProbabilitiesMatchedRawReplies": true,
+      "lateRawReplyRetained": true,
+      "lateReplyAppliedToGame": false,
+      "replayInputTicksAndFinalHashVerified": true,
+      "credentialOrRuntimeIdPatternScan": "no matches"
+    }
+  },
+  "outcome": {
+    "classification": "valid_negative_collision_measurement",
+    "gameTimeCapSeconds": 30,
+    "q3": {
+      "terminal": "collision",
+      "allFiveSeedsCollided": true,
+      "finalTicks": [346, 346, 343, 345, 346],
+      "answered": 66,
+      "skippedOutstanding": 39,
+      "lateReplies": 0,
+      "responseErrors": 0
+    },
+    "q64": {
+      "terminal": "collision",
+      "finalTick": 346,
+      "answered": 1,
+      "skippedOutstanding": 19,
+      "lateReplies": 1,
+      "responseErrors": 0
+    }
+  },
+  "inference": {
+    "modelLoadsInRunnerProcess": 1,
+    "neuralForwardCalls": {"q3": 66, "q64": 2},
+    "batchShapes": {
+      "q3": "one padded batch per forward; state-dependent question widths",
+      "q64": [[64, 392], [64, 424]]
+    },
+    "systemOneTimingMilliseconds": {
+      "scope": "system_one_ms; tokenization plus model wrapper included, not pure neural-forward time",
+      "q3": {"count": 66, "mean": 115.698418364, "p50": 95.196388, "p95": 97.391888},
+      "q64": {"count": 2, "mean": 2413.420459, "p50": 2342.548535, "p95": 2484.292383},
+      "pureNeuralForwardTime": null
+    },
+    "peakAllocatedVramGiB": {"q3": 17.03, "q64": 24.59},
+    "modelLoadMilliseconds": 80797.789076
+  },
+  "traceFiles": {
+    "q3Seed101": "lux-q3.game.json runs[0]",
+    "q64Seed101": "lux-q64.game.json runs[0]"
+  },
+  "runnerExitCodes": {"q3": 0, "q64": 0}
+}
