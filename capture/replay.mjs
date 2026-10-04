@@ -32,6 +32,7 @@ export function loadMeasuredTrace(report, tile, manifest) {
   invariant(baseline ? report.model.id === tile.id : report.model.id === tile.modelId, 'model / tile identity mismatch');
   const episode = report.episodes?.find(row => row.seed === manifest.seed && row.questions === manifest.questions);
   invariant(episode?.initialWorld && Array.isArray(episode.frames) && episode.frames.length > 0, 'seed 1 / questions 3 measured trace required');
+  invariant(['measured', 'partial'].includes(episode.status), '未測定: episode unavailable / no_response');
   invariant(episode.initialWorld.seed === 1 && episode.initialWorld.frame === 0 && !episode.initialWorld.done, 'initialWorld must start at frame 0 / seed 1');
   compare(createWorld(1), episode.initialWorld, 'initialWorld');
   invariant(episode.frameCount === episode.frames.length, 'frameCount mismatch');
@@ -47,8 +48,10 @@ export function loadMeasuredTrace(report, tile, manifest) {
     compare(state, frame.state, `frame ${frame.frame}`);
   }
   invariant(world.done && episode.result, 'completed episode result required');
+  invariant(episode.finalState, 'finalState required');
+  compare({ frame: world.frame, player: world.player, done: world.done, cleared: world.cleared, failed: world.failed, lastAction: world.lastAction, lastHit: world.lastHit, hazards: world.level.hazards, chips: world.level.chips }, episode.finalState, 'finalState');
   invariant(Array.isArray(episode.decisions), 'measured decisions required');
-  invariant(baseline || episode.decisions.some(decision => ['applied', 'completed'].includes(decision.status)), '実モデル推論成功なし / 未測定');
+  invariant(baseline || episode.decisions.some(decision => ['applied', 'completed'].includes(decision.status) && decision.response?.parsed === true), '実モデル推論成功なし / 未測定');
   return { report, episode, initialWorld: clone(episode.initialWorld), finalWorld: clone(world) };
 }
 

@@ -7,7 +7,7 @@ import { loadMeasuredTrace, validateManifest } from '../capture/replay.mjs';
 
 const args = process.argv.slice(2);
 if (args.includes('--help')) {
-  console.log('node scripts/capture-prepare.mjs --results results --output capture/manifest.measured.json [--template capture/manifest.json]\nValidates existing <tile-id>-q3.json through the game replay verifier. Missing/blocked/invalid results remain unmeasured; no source trace is modified.');
+  console.log('node scripts/capture-prepare.mjs --results results --output capture/manifest.measured.json [--template capture/manifest.json]\nValidates existing <tile-id>/<tile-id>-q3.json through the game replay verifier. Capture requires all seven GPU model traces plus rule/idle. Missing/blocked/invalid results remain unmeasured; no source trace is modified.');
   process.exit(0);
 }
 const options = {};
@@ -23,12 +23,12 @@ const templatePath = resolve(options.template || resolve(root, 'capture/manifest
 if (output === templatePath) throw new Error('Output must differ from the unmeasured template.');
 const manifest = validateManifest(JSON.parse(await readFile(templatePath, 'utf8')));
 const summary = { measuredRemote: [], measuredBaselines: [], unmeasured: [], gpuRemote: [], gpuUnverifiedRemote: [], readyForCapture: false, baselinesReady: false };
-const failureStatuses = new Set(['blocked', 'failure', 'failed', 'error', 'unavailable', 'unmeasured']);
+const failureStatuses = new Set(['blocked', 'capacity_blocked', 'load_failed', 'auth_required', 'failure', 'failed', 'error', 'unavailable', 'unmeasured']);
 for (const tile of manifest.tiles) {
   tile.result = null;
   delete tile.sourceSha256;
   tile.note = '未測定';
-  const resultPath = resolve(resultDirectory, `${tile.id}-q3.json`);
+  const resultPath = resolve(resultDirectory, ['rule', 'idle'].includes(tile.id) ? 'baselines' : tile.id, `${tile.id}-q3.json`);
   let bytes;
   try {
     bytes = await readFile(resultPath);
@@ -66,7 +66,7 @@ for (const tile of manifest.tiles) {
   }
 }
 summary.baselinesReady = ['rule', 'idle'].every(id => summary.measuredBaselines.includes(id));
-summary.readyForCapture = summary.gpuRemote.length > 0;
+summary.readyForCapture = summary.gpuRemote.length === 7 && summary.baselinesReady;
 await mkdir(dirname(output), { recursive: true });
 await writeFile(output, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(JSON.stringify({ output: options.output, ...summary }));
