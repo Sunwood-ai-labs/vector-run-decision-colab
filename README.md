@@ -1,66 +1,60 @@
-# 決断レーン
+# VECTOR RUN × Decision 2.0 × Google Colab
 
-Decision 2.0 を測るための、自作の横スクロールゲームです。走者は文章を生成しません。1回の判断で、コースの状態に対する **action（4択）**、**commit（今動くか）**、**danger（0〜2）** を返します。問数を 64 にすると、同じ状態へプローブを足して「1回の往復で 64 問」を測れます。
+横スクロールゲームをDecision 2.0の7モデルで走らせ、クリア・被弾・行動・推論遅延を測る実験です。**推論中もゲームの時間を進めます。** モデルごとに専用Colabランタイムで実行し、7モデルと2つの対照走者を3×3の動画で比較します。
 
-モデルが無くても遊べます。ルール走者は、画面とプロンプトに書いてある閾値どおりに動く上限です。停止走者は何もしない下限です。
+[![Code verification](https://github.com/Sunwood-ai-labs/vector-run-decision-colab/actions/workflows/verify.yml/badge.svg)](https://github.com/Sunwood-ai-labs/vector-run-decision-colab/actions/workflows/verify.yml)
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Sunwood-ai-labs/vector-run-decision-colab/blob/main/notebooks/vector_run_decision_colab.ipynb)
 
-## 遊び方
+## 比較条件
 
-`play.bat` を起動して、ブラウザで http://127.0.0.1:8734/ を開きます。ファイルを直接開くとモジュールが読めません。
+Kai-0.6B、Eos-0.8B、Sol-2B、Sol-2B-Reasoning、Nox-4B、Lux-9B、Vega-27Bを対象にします。重みはリポジトリに含めません。
+
+同じ状態と`hold / jump / slide / strike`の4候補を渡します。主測定は`action / commit / danger`の3問、シード1・2・3。64問の測定はシード1の別系列です。ルール走者とholdのみの走者は、モデルとは別の対照です。
+
+GPU、モデルrevision、dtype、量子化、依存版を記録します。GPUの同時起動枠に達した場合は制限を記録し、空いた枠を使います。詳しくは[計測方法](docs/benchmark-method.md)を参照してください。
+
+## 遊ぶ
+
+Windowsでは`play.bat`を起動して、<http://127.0.0.1:8734/>を開きます。Pythonとuvがある環境では次でも起動できます。
+
+```sh
+uv run --no-project --python 3.12 -m http.server 8734 --bind 127.0.0.1
+```
 
 | キー | 動作 |
 | --- | --- |
-| Space / ↑ / W | ジャンプ（箱と欠線） |
-| ↓ / S | スライディング（梁） |
-| J / K | ストライク（ドローン） |
-| P | 一時停止 |
-| R | 同じシードでもう一度 |
+| Space / ↑ / W | ジャンプ：箱、欠線 |
+| ↓ / S | スライディング：梁 |
+| J / K | ストライク：ドローン |
+| R | 同じシードで再走 |
 
-最初はルール走者が走っています。キーを押すとそのシードを自分で走り直せます。黄緑の縦線は、いちばん近い障害に対する作動距離です。
+ルール走者はモデルの推論結果ではありません。モデルで遊ぶにはColabのノートブックまたは推論サーバーを使います。
 
-## ベンチ
+## リアルタイムで測る
 
-画面の **12シードを測る** は、ルールと停止を必ず測ります。`serve-decision.bat` が http://127.0.0.1:8780 で応答していれば、モデル列も足します。
+Node.js 24とPythonを使います。物理は60FPS、判断機会は8フレームごと。推論中も物理を進め、返ってきた行動を1回だけ適用します。反射ルールによる介入や候補削減は行いません。
 
-ヘッドレスでも同じ集計が出ます。
-
-```powershell
-node bench.mjs --seeds 12
-node bench.mjs --agent remote --questions 64 --url http://127.0.0.1:8780/v1/systemone
+```sh
+node bench.mjs --agent rule --timing realtime --seeds 3 --questions 3 --trace --output results/rule-q3.json
+node bench.mjs --agent idle --timing realtime --seeds 3 --questions 3 --trace --output results/idle-q3.json
+node bench.mjs --agent remote --timing realtime --seeds 3 --questions 3 --trace --model vllm-sr/Decision-2.0-Kai-0.6B --url http://127.0.0.1:8780/v1/systemone --output results/kai-q3.json
 ```
 
-見る数字:
+64問は`--questions 64 --seeds 1`を指定し、別ファイルに保存します。
 
-- **クリア / 距離 / 被弾** — コースを最後まで走れたか
-- **行動一致** — 書いたルールと同じ行動を選んだか
-- **commit / 危険MAE** — 残りの2問がルールと合うか
-- **一貫性** — 「commit が true」と「action が hold 以外」が矛盾していないか
-- **p95** — 判断1回のミリ秒。ゲームは 8 フレーム（約 133ms）ごとに1回しか聞きません
-- **プローブ** — 64問モードだけ。状態に埋め込んだ真偽を読めているか
+## 3×3動画
 
-判断まで止めるモードは品質向けです。走ったままのモードは、133ms に間に合うかを見ます。公開カードの中央値は Kai 4.9ms から Vega 71.4ms ですが、あれは公開元の GPU です。
+9枠は7モデル・ルール走者・hold走者です。共通シードを等速で再生し、終了した枠は結果を表示したまま全体の時計を進めます。
 
-## Decision 2.0 を繋ぐ
+動画は**保存した実測traceの等速再生をブラウザでキャプチャしたもの**です。9モデルの同期した同時推論を撮影したものではありません。失敗や未測定の枠はその状態を表示し、ルール走者で置き換えません。
 
-モック（ルールそのもの。重みは要りません）:
+## コードの確認
 
-```powershell
-py -3 server\decision_server.py --mock --port 8780
+```sh
+node --test tests/*.test.mjs
+uv run --no-project --python 3.12 server/decision_server.py --self-test
 ```
 
-公開モデル。`transformers>=5.17` と、読み込む大きさに足る GPU かメモリが要ります。Vega-27B はアダプタなので `peft` も要ります。
+CIはゲームと接続コードを検証します。CIの成功だけでGPU推論やモデルのクリアを確認したとは扱いません。
 
-```powershell
-py -3 server\decision_server.py --model vllm-sr/Decision-2.0-Kai-0.6B --port 8780
-```
-
-エンドポイントは `POST /v1/systemone` です。`state` と `questions` を渡すと、`answers.action.choice` と各選択肢の `probabilities` が返ります。
-
-## テスト
-
-```powershell
-node --test tests/engine.test.mjs
-py -3 server\decision_server.py --self-test
-```
-
-ルール走者はシード 1〜24 を被弾ゼロでクリアします。モックサーバは同じ閾値で答えます。
+このゲームは明示したルールへの追従とリアルタイム制御の小さな実験です。JevArenaやDecision Indexの再現ではありません。[ライセンス](LICENSE)・[モデルの出典](NOTICE.md)を参照してください。
