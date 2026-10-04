@@ -1,0 +1,671 @@
+{
+  "schemaVersion": "vector-run-sol-official-measurement-v1",
+  "runId": "sol-20261004T160248Z",
+  "model": "vllm-sr/Decision-2.0-Sol-2B",
+  "hfRevision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+  "gameRepository": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkRepository": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "bootstrap": {
+    "firstAttempt": "failed at bootstrap cd because its default /content/vector-run did not match the benchmark checkout",
+    "status": "passed",
+    "rootBootstrapCommit": "b19183c20548d66927674fc2d9744a52893e8712",
+    "repair": "set VECTOR_RUN_ROOT to the exact benchmark checkout; pinned repositories stayed clean"
+  },
+  "modelLoadCount": 1,
+  "quantization": "none",
+  "offload": "none",
+  "pureNeuralForwardMs": null,
+  "loadWarnings": [
+    "causal-conv1d is absent; reference PyTorch convolution fallback used",
+    "flash-linear-attention is absent; reference PyTorch gated-delta fallback used",
+    "Transformers emitted a tokenizer regex warning; no tokenizer or model code was changed"
+  ],
+  "runtimeProbe": {
+    "torch": "2.11.0+cu130",
+    "noWarmOrInferenceBeforeRunner": true,
+    "bf16Supported": true,
+    "weightsCachedBeforeRunner": false,
+    "python": "3.13.15",
+    "triton": "3.6.0",
+    "cuda": "13.0",
+    "computeCapability": "8.0",
+    "gpu": "NVIDIA A100-SXM4-40GB"
+  },
+  "series": [
+    {
+      "hardware": {
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+        "quantization": "none",
+        "dependencies": {
+          "torch": "2.11.0+cu130",
+          "transformers": "5.17.0",
+          "accelerate": "1.15.0",
+          "peft": "0.21.0",
+          "bitsandbytes": "0.50.2",
+          "sentencepiece": "0.2.2",
+          "protobuf": "5.29.6",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.31.0",
+          "triton": "3.6.0",
+          "causal-conv1d": null,
+          "flash-linear-attention": null
+        }
+      },
+      "series": "q3",
+      "validatorSha256": "0aa66c36fdac61508777be98d060b30a24a727a2f15a3ac4ffa8625294ecaab4",
+      "lateReplyCount": 1,
+      "neuralForwardCalls": 75,
+      "neuralForwardMs": null,
+      "lateRepliesWithRawResponse": 1,
+      "questionCount": 3,
+      "gameStatus": "vector-run-decision-bench/v1",
+      "systemOneMs": {
+        "scope": "synchronized system_one including tokenization and wrapper",
+        "count": 75,
+        "meanMs": 118.162,
+        "p95Ms": 108.891,
+        "p50Ms": 96.168,
+        "phases": [
+          {
+            "count": 1,
+            "meanMs": 1616.551,
+            "p50Ms": 1616.551,
+            "phase": "first",
+            "p95Ms": 1616.551
+          },
+          {
+            "count": 1,
+            "meanMs": 107.582,
+            "p50Ms": 107.582,
+            "phase": "warm",
+            "p95Ms": 107.582
+          },
+          {
+            "count": 73,
+            "meanMs": 97.781,
+            "p50Ms": 96.133,
+            "phase": "steady",
+            "p95Ms": 105.88
+          }
+        ]
+      },
+      "runs": [
+        {
+          "rawResponses": 19,
+          "lateWithRaw": 1,
+          "decisionCount": 39,
+          "finalHash": "0af9349c",
+          "outcome": "collision",
+          "seed": 101,
+          "distanceWorld": 1362.441,
+          "finalTick": 639,
+          "lateReplies": 1
+        },
+        {
+          "rawResponses": 14,
+          "lateWithRaw": 0,
+          "decisionCount": 21,
+          "finalHash": "e15af79e",
+          "outcome": "collision",
+          "seed": 202,
+          "distanceWorld": 729.978,
+          "finalTick": 346,
+          "lateReplies": 0
+        },
+        {
+          "rawResponses": 14,
+          "lateWithRaw": 0,
+          "decisionCount": 21,
+          "finalHash": "99b0b6f5",
+          "outcome": "collision",
+          "seed": 303,
+          "distanceWorld": 723.57,
+          "finalTick": 343,
+          "lateReplies": 0
+        },
+        {
+          "rawResponses": 14,
+          "lateWithRaw": 0,
+          "decisionCount": 21,
+          "finalHash": "05bc8afb",
+          "outcome": "collision",
+          "seed": 404,
+          "distanceWorld": 727.842,
+          "finalTick": 345,
+          "lateReplies": 0
+        },
+        {
+          "rawResponses": 14,
+          "lateWithRaw": 0,
+          "decisionCount": 21,
+          "finalHash": "7491f13d",
+          "outcome": "collision",
+          "seed": 505,
+          "distanceWorld": 729.978,
+          "finalTick": 346,
+          "lateReplies": 0
+        }
+      ],
+      "inferenceDrained": true,
+      "requestErrors": 0,
+      "validator": {
+        "inputTicksReplayAndFinalHash": true,
+        "passed": true,
+        "separatePinnedGameInvocation": true
+      },
+      "runtimeHistory": {
+        "model": "sol",
+        "runtimeReused": false,
+        "weightsCached": false,
+        "priorModelLoaded": false,
+        "priorSystemOneCall": false,
+        "priorInference": false,
+        "priorPrototypeGameRun": false,
+        "evidence": {
+          "runtimeReused": "A new dedicated Colab A100 session was allocated after the previous dedicated session returned not found; no old VM state was carried over.",
+          "weightsCached": "Exact Sol pinned snapshot directory is absent before the official runner.",
+          "priorModelLoaded": "Before the official runner, the new session cloned the two pinned repos and ran dependency bootstrap only; the Decision loader was not invoked.",
+          "priorSystemOneCall": "No system_one request was made before the official runner.",
+          "priorInference": "No model inference or smoke test was made before the official runner.",
+          "priorPrototypeGameRun": "Only the canonical external game repository was cloned; the local prototype was not present or run in this VM."
+        }
+      },
+      "gameDecisionCount": 123,
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ],
+      "peakReservedBytes": 5163188224,
+      "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+      "runtimeCondition": {
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+        "quantization": "none",
+        "offload": "none",
+        "singleModelPerRuntime": true
+      },
+      "modelLoadMs": 61161.128,
+      "runnerStatus": "cli_process_exited_zero",
+      "runnerExitCode": 0,
+      "rawResponseCount": 75,
+      "allRunsCollision": true,
+      "downloadedSha256": "0aa66c36fdac61508777be98d060b30a24a727a2f15a3ac4ffa8625294ecaab4",
+      "peakAllocatedBytes": 4995116032,
+      "observedBatchShapes": [
+        {
+          "inputIdsShape": "3x328",
+          "calls": 10
+        },
+        {
+          "inputIdsShape": "3x344",
+          "calls": 6
+        },
+        {
+          "inputIdsShape": "3x352",
+          "calls": 26
+        },
+        {
+          "inputIdsShape": "3x360",
+          "calls": 14
+        },
+        {
+          "inputIdsShape": "3x376",
+          "calls": 4
+        },
+        {
+          "inputIdsShape": "3x384",
+          "calls": 6
+        },
+        {
+          "inputIdsShape": "3x392",
+          "calls": 7
+        },
+        {
+          "inputIdsShape": "3x400",
+          "calls": 1
+        },
+        {
+          "inputIdsShape": "3x408",
+          "calls": 1
+        }
+      ],
+      "downloadedBytes": 1713544,
+      "gameVariant": {
+        "id": "decision-realtime-censored-v1",
+        "physicsHz": 120,
+        "playbackRate": "1x realtime",
+        "questionCount": 3,
+        "questionCountMeaning": "number of questions in one SystemOne request",
+        "systemOneQuestionCount": 3,
+        "dispatchEveryTicks": 16,
+        "dispatchCadenceMs": 133.33333333333334,
+        "oneOutstanding": true,
+        "maxSeconds": 30,
+        "terminationCap": "time_limit_censored",
+        "maxJumps": 2,
+        "frameGapPolicy": "gap over 100ms invalidates; no catch-up ticks discarded",
+        "trace": true
+      },
+      "runContract": {
+        "physicsHz": null,
+        "decisionEveryTicks": null,
+        "actions": null,
+        "observationPipeline": null,
+        "series": "q3",
+        "questions": 3,
+        "questionCountPerApiCall": 3,
+        "seeds": [
+          101,
+          202,
+          303,
+          404,
+          505
+        ],
+        "maxSeconds": 30,
+        "maxJumps": 2,
+        "runKind": "endless_time_capped",
+        "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+      },
+      "runtimeCacheObservations": {
+        "huggingFacePinnedSnapshot": {
+          "beforeModelLoad": {
+            "pinnedSnapshot": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+          },
+          "afterModelLoad": {
+            "pinnedSnapshot": {
+              "present": true,
+              "fileCount": 37,
+              "bytes": 4811380088,
+              "scanError": null
+            },
+            "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+          },
+          "after_q3": {
+            "pinnedSnapshot": {
+              "present": true,
+              "fileCount": 37,
+              "bytes": 4811380088,
+              "scanError": null
+            },
+            "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+          }
+        },
+        "runtimeCaches": {
+          "beforeModelLoad": {
+            "cudaCompiler": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "triton": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchExtensions": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchInductor": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+          },
+          "warmHistory": "unknown; snapshots show directory state only",
+          "afterModelLoad": {
+            "cudaCompiler": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "triton": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchExtensions": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchInductor": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+          },
+          "after_q3": {
+            "cudaCompiler": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "triton": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchExtensions": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchInductor": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+          }
+        }
+      }
+    },
+    {
+      "hardware": {
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+        "quantization": "none",
+        "dependencies": {
+          "torch": "2.11.0+cu130",
+          "transformers": "5.17.0",
+          "accelerate": "1.15.0",
+          "peft": "0.21.0",
+          "bitsandbytes": "0.50.2",
+          "sentencepiece": "0.2.2",
+          "protobuf": "5.29.6",
+          "safetensors": "0.8.0",
+          "tokenizers": "0.23.2",
+          "huggingface-hub": "1.31.0",
+          "triton": "3.6.0",
+          "causal-conv1d": null,
+          "flash-linear-attention": null
+        }
+      },
+      "series": "q64",
+      "validatorSha256": "99ba7974f8ca3e810c9dd8122762b74ffde51a8a7f62b32dd319f5bd756aac01",
+      "lateReplyCount": 1,
+      "neuralForwardCalls": 3,
+      "neuralForwardMs": null,
+      "lateRepliesWithRawResponse": 1,
+      "questionCount": 64,
+      "gameStatus": "vector-run-decision-bench/v1",
+      "systemOneMs": {
+        "scope": "synchronized system_one including tokenization and wrapper",
+        "count": 3,
+        "meanMs": 1124.863,
+        "p95Ms": 1134.468,
+        "p50Ms": 1134.07,
+        "phases": [
+          {
+            "count": 1,
+            "meanMs": 1106.05,
+            "p50Ms": 1106.05,
+            "phase": "first",
+            "p95Ms": 1106.05
+          },
+          {
+            "count": 1,
+            "meanMs": 1134.468,
+            "p50Ms": 1134.468,
+            "phase": "warm",
+            "p95Ms": 1134.468
+          },
+          {
+            "count": 1,
+            "meanMs": 1134.07,
+            "p50Ms": 1134.07,
+            "phase": "steady",
+            "p95Ms": 1134.07
+          }
+        ]
+      },
+      "runs": [
+        {
+          "rawResponses": 3,
+          "lateWithRaw": 1,
+          "decisionCount": 21,
+          "finalHash": "2f28e362",
+          "outcome": "collision",
+          "seed": 101,
+          "distanceWorld": 729.978,
+          "finalTick": 346,
+          "lateReplies": 1
+        }
+      ],
+      "inferenceDrained": true,
+      "requestErrors": 0,
+      "validator": {
+        "inputTicksReplayAndFinalHash": true,
+        "passed": true,
+        "separatePinnedGameInvocation": true
+      },
+      "runtimeHistory": {
+        "model": "sol",
+        "runtimeReused": false,
+        "weightsCached": false,
+        "priorModelLoaded": false,
+        "priorSystemOneCall": false,
+        "priorInference": false,
+        "priorPrototypeGameRun": false,
+        "evidence": {
+          "runtimeReused": "A new dedicated Colab A100 session was allocated after the previous dedicated session returned not found; no old VM state was carried over.",
+          "weightsCached": "Exact Sol pinned snapshot directory is absent before the official runner.",
+          "priorModelLoaded": "Before the official runner, the new session cloned the two pinned repos and ran dependency bootstrap only; the Decision loader was not invoked.",
+          "priorSystemOneCall": "No system_one request was made before the official runner.",
+          "priorInference": "No model inference or smoke test was made before the official runner.",
+          "priorPrototypeGameRun": "Only the canonical external game repository was cloned; the local prototype was not present or run in this VM."
+        }
+      },
+      "gameDecisionCount": 21,
+      "seeds": 101,
+      "peakReservedBytes": 11272192000,
+      "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+      "runtimeCondition": {
+        "gpu": "NVIDIA A100-SXM4-40GB",
+        "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+        "quantization": "none",
+        "offload": "none",
+        "singleModelPerRuntime": true
+      },
+      "modelLoadMs": 61161.128,
+      "runnerStatus": "cli_process_exited_zero",
+      "runnerExitCode": 0,
+      "rawResponseCount": 3,
+      "allRunsCollision": true,
+      "downloadedSha256": "99ba7974f8ca3e810c9dd8122762b74ffde51a8a7f62b32dd319f5bd756aac01",
+      "peakAllocatedBytes": 8941203456,
+      "observedBatchShapes": [
+        {
+          "inputIdsShape": "64x392",
+          "calls": 1
+        },
+        {
+          "inputIdsShape": "64x424",
+          "calls": 2
+        }
+      ],
+      "downloadedBytes": 354783,
+      "gameVariant": {
+        "id": "decision-realtime-censored-v1",
+        "physicsHz": 120,
+        "playbackRate": "1x realtime",
+        "questionCount": 64,
+        "questionCountMeaning": "number of questions in one SystemOne request",
+        "systemOneQuestionCount": 64,
+        "dispatchEveryTicks": 16,
+        "dispatchCadenceMs": 133.33333333333334,
+        "oneOutstanding": true,
+        "maxSeconds": 30,
+        "terminationCap": "time_limit_censored",
+        "maxJumps": 2,
+        "frameGapPolicy": "gap over 100ms invalidates; no catch-up ticks discarded",
+        "trace": true
+      },
+      "runContract": {
+        "physicsHz": null,
+        "decisionEveryTicks": null,
+        "actions": null,
+        "observationPipeline": null,
+        "series": "q64",
+        "questions": 64,
+        "questionCountPerApiCall": 64,
+        "seeds": [
+          101
+        ],
+        "maxSeconds": 30,
+        "maxJumps": 2,
+        "runKind": "endless_time_capped",
+        "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+      },
+      "runtimeCacheObservations": {
+        "huggingFacePinnedSnapshot": {
+          "beforeModelLoad": {
+            "pinnedSnapshot": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+          },
+          "afterModelLoad": {
+            "pinnedSnapshot": {
+              "present": true,
+              "fileCount": 37,
+              "bytes": 4811380088,
+              "scanError": null
+            },
+            "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+          },
+          "after_q64": {
+            "pinnedSnapshot": {
+              "present": true,
+              "fileCount": 37,
+              "bytes": 4811380088,
+              "scanError": null
+            },
+            "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+          }
+        },
+        "runtimeCaches": {
+          "beforeModelLoad": {
+            "cudaCompiler": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "triton": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchExtensions": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchInductor": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+          },
+          "warmHistory": "unknown; snapshots show directory state only",
+          "afterModelLoad": {
+            "cudaCompiler": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "triton": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchExtensions": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchInductor": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+          },
+          "after_q64": {
+            "cudaCompiler": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "triton": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchExtensions": {
+              "present": false,
+              "fileCount": null,
+              "bytes": null,
+              "scanError": null
+            },
+            "torchInductor": {
+              "present": true,
+              "fileCount": 0,
+              "bytes": 0,
+              "scanError": null
+            },
+            "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+          }
+        }
+      }
+    }
+  ],
+  "allRepositoriesAndModelPinsMatch": true,
+  "allDownloadedHashesMatchRemote": true,
+  "allSeriesValidated": true,
+  "sessionIdOrCredentialScan": "No session ID, credential, weight file, or raw authentication log was found in the committed result artifacts.",
+  "sanitization": "Only formal game/runner JSON plus this compact verification summary are intended for commit."
+}
