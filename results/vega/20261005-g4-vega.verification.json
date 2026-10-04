@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261005-g4-717f02d",
+  "model": "vllm-sr/Decision-2.0-Vega-27B",
+  "modelRevision": "7aec49ae11a18741706da549ab626b9052795fe7",
+  "baseRevision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "runtimeHistory": {
+    "model": "vega",
+    "recordedAtUtc": "2026-10-04T16:08:41.318793+00:00",
+    "runtimeReused": false,
+    "weightsCached": null,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false,
+    "evidence": {
+      "runtimeReused": "Official Colab CLI created a new dedicated G4 session for this run; setup and measurement use this VM only.",
+      "weightsCached": "No separate model-weight cache stage or cache scan was run; exact pre-existing HF cache status is unknown.",
+      "priorModelLoaded": "After the new session was created, work was limited to two pinned git clones, shared dependency bootstrap, GPU query and a small BF16 matrix check; no model loader was called.",
+      "priorSystemOneCall": "No System One request was issued before this benchmark process.",
+      "priorInference": "No neural model inference or model warmup occurred before this benchmark process.",
+      "priorPrototypeGameRun": "The new dedicated VM was created for this run; no prototype or other game runner was started in this VM."
+    },
+    "gameRepo": {
+      "origin": "https://github.com/Sunwood-ai-labs/vector-run-benchmark.git",
+      "commit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+      "clean": true
+    },
+    "benchmarkRepo": {
+      "origin": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab.git",
+      "commit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+      "clean": true
+    },
+    "gpuNvidiaSmi": "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 679 MiB, 96572 MiB, 580.82.07",
+    "dependencies": {
+      "torch": "2.11.0+cu130",
+      "transformers": "5.17.0",
+      "accelerate": "1.15.0",
+      "peft": "0.21.0",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "huggingface-hub": "1.31.0",
+      "triton": "3.6.0",
+      "causal-conv1d": null,
+      "flash-linear-attention": null
+    },
+    "bf16CudaMatmulVerified": true,
+    "cudaKernelCache": null,
+    "tritonKernelCache": null,
+    "cacheEvidence": {
+      "cudaKernelCache": "Not queried; no warmup kernel was run.",
+      "tritonKernelCache": "Not queried; no warmup model inference was run."
+    },
+    "officialModelRevision": "7aec49ae11a18741706da549ab626b9052795fe7",
+    "officialBaseRevision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+    "dtype": "official mixed BF16/FP32 resident",
+    "quantization": "none",
+    "offload": "none"
+  },
+  "hardware": {
+    "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+    "totalMemoryBytes": 101974081536,
+    "quantization": "none",
+    "offload": "none",
+    "bf16CudaMatmulVerified": true
+  },
+  "repositoryCheckoutGates": {
+    "gameOriginVerified": true,
+    "gameHeadVerified": true,
+    "gameTreeClean": true,
+    "benchmarkOriginVerified": true,
+    "benchmarkHeadVerified": true,
+    "benchmarkTreeClean": true
+  },
+  "series": {
+    "q3": {
+      "validator": {
+        "name": "scripts/verify-decision-trace.mjs",
+        "exitCode": 0,
+        "valid": true,
+        "downloadedGameSha256": "ea0b96fcd5b5b57bb21d8c4c4c45d9431a4fc699b3e676460781fa699c046608"
+      },
+      "gameJsonSha256": "ea0b96fcd5b5b57bb21d8c4c4c45d9431a4fc699b3e676460781fa699c046608",
+      "runnerJsonSha256": "d6eba8c3ad90fb672cbe066ea31aa876db8d3bb513111e7eaea3ffba31ae409d",
+      "questionsPerRequest": 3,
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ],
+      "terminalStatusCounts": {
+        "collision": 5
+      },
+      "decisionStatusCounts": {
+        "answered": 42,
+        "skipped_outstanding": 113,
+        "late_answer_not_applied": 3
+      },
+      "httpStatusFields": [
+        {
+          "path": "$.episodes[].terminalStatus",
+          "valueCounts": {
+            "collision": 5
+          }
+        },
+        {
+          "path": "$.runs[].decisions[].httpStatus",
+          "valueCounts": {
+            "200": 45
+          }
+        },
+        {
+          "path": "$.runs[].decisions[].status",
+          "valueCounts": {
+            "answered": 42,
+            "late_answer_not_applied": 3,
+            "skipped_outstanding": 113
+          }
+        },
+        {
+          "path": "$.runs[].terminalStatus",
+          "valueCounts": {
+            "collision": 5
+          }
+        }
+      ],
+      "apiRequests": 45,
+      "rawModelResponseRecords": 45,
+      "completeChoiceAndDangerProbabilities": 45,
+      "neuralForwardCallDistribution": {
+        "1": 45
+      },
+      "neuralForwardBatchShapes": {
+        "(3, 328)": 5,
+        "(3, 376)": 4,
+        "(3, 360)": 10,
+        "(3, 384)": 3,
+        "(3, 352)": 13,
+        "(3, 408)": 3,
+        "(3, 416)": 2,
+        "(3, 392)": 5
+      },
+      "apiSystemOneLatencyMs": {
+        "first": {
+          "count": 1,
+          "mean_ms": 2175.4336330000115,
+          "p50_ms": 2175.4336330000115,
+          "p95_ms": 2175.4336330000115
+        },
+        "warm": {
+          "count": 1,
+          "mean_ms": 378.06115200010026,
+          "p50_ms": 378.06115200010026,
+          "p95_ms": 378.06115200010026
+        },
+        "steady": {
+          "count": 43,
+          "mean_ms": 369.78689825579306,
+          "p50_ms": 358.90266800015524,
+          "p95_ms": 412.8338119999171
+        },
+        "all": {
+          "count": 45,
+          "mean_ms": 410.09625355553806,
+          "p50_ms": 359.18183800004044,
+          "p95_ms": 415.4937999996946
+        }
+      },
+      "gpuPeakAllocatedBytes": 69335009792,
+      "gpuPeakReservedBytes": 70049071104,
+      "inferenceDrained": true
+    },
+    "q64": {
+      "validator": {
+        "name": "scripts/verify-decision-trace.mjs",
+        "exitCode": 0,
+        "valid": true,
+        "downloadedGameSha256": "2c79e268e68d7c68f3de86043b8d97b7efa5ae3ebdb6fff9e0f91bce780d3e8a"
+      },
+      "gameJsonSha256": "2c79e268e68d7c68f3de86043b8d97b7efa5ae3ebdb6fff9e0f91bce780d3e8a",
+      "runnerJsonSha256": "8c1578ae1abb6f13c24bece75cfca5c47770cef466251b98af161cc9fc8a635f",
+      "questionsPerRequest": 64,
+      "seeds": [
+        101
+      ],
+      "terminalStatusCounts": {
+        "collision": 1
+      },
+      "decisionStatusCounts": {
+        "late_answer_not_applied": 1,
+        "skipped_outstanding": 20
+      },
+      "httpStatusFields": [
+        {
+          "path": "$.episodes[].terminalStatus",
+          "valueCounts": {
+            "collision": 1
+          }
+        },
+        {
+          "path": "$.runs[].decisions[].httpStatus",
+          "valueCounts": {
+            "200": 1
+          }
+        },
+        {
+          "path": "$.runs[].decisions[].status",
+          "valueCounts": {
+            "late_answer_not_applied": 1,
+            "skipped_outstanding": 20
+          }
+        },
+        {
+          "path": "$.runs[].terminalStatus",
+          "valueCounts": {
+            "collision": 1
+          }
+        }
+      ],
+      "apiRequests": 1,
+      "rawModelResponseRecords": 1,
+      "completeChoiceAndDangerProbabilities": 1,
+      "neuralForwardCallDistribution": {
+        "1": 1
+      },
+      "neuralForwardBatchShapes": {
+        "(64, 392)": 1
+      },
+      "apiSystemOneLatencyMs": {
+        "first": {
+          "count": 1,
+          "mean_ms": 8930.67679700016,
+          "p50_ms": 8930.67679700016,
+          "p95_ms": 8930.67679700016
+        },
+        "warm": {
+          "count": 0,
+          "mean_ms": null,
+          "p50_ms": null,
+          "p95_ms": null
+        },
+        "steady": {
+          "count": 0,
+          "mean_ms": null,
+          "p50_ms": null,
+          "p95_ms": null
+        },
+        "all": {
+          "count": 1,
+          "mean_ms": 8930.67679700016,
+          "p50_ms": 8930.67679700016,
+          "p95_ms": 8930.67679700016
+        }
+      },
+      "gpuPeakAllocatedBytes": 80627438592,
+      "gpuPeakReservedBytes": 88319459328,
+      "inferenceDrained": true
+    }
+  }
+}

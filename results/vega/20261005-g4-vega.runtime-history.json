@@ -1,0 +1,53 @@
+{
+  "model": "vega",
+  "recordedAtUtc": "2026-10-04T16:08:41.318793+00:00",
+  "runtimeReused": false,
+  "weightsCached": null,
+  "priorModelLoaded": false,
+  "priorSystemOneCall": false,
+  "priorInference": false,
+  "priorPrototypeGameRun": false,
+  "evidence": {
+    "runtimeReused": "Official Colab CLI created a new dedicated G4 session for this run; setup and measurement use this VM only.",
+    "weightsCached": "No separate model-weight cache stage or cache scan was run; exact pre-existing HF cache status is unknown.",
+    "priorModelLoaded": "After the new session was created, work was limited to two pinned git clones, shared dependency bootstrap, GPU query and a small BF16 matrix check; no model loader was called.",
+    "priorSystemOneCall": "No System One request was issued before this benchmark process.",
+    "priorInference": "No neural model inference or model warmup occurred before this benchmark process.",
+    "priorPrototypeGameRun": "The new dedicated VM was created for this run; no prototype or other game runner was started in this VM."
+  },
+  "gameRepo": {
+    "origin": "https://github.com/Sunwood-ai-labs/vector-run-benchmark.git",
+    "commit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "clean": true
+  },
+  "benchmarkRepo": {
+    "origin": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab.git",
+    "commit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+    "clean": true
+  },
+  "gpuNvidiaSmi": "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 679 MiB, 96572 MiB, 580.82.07",
+  "dependencies": {
+    "torch": "2.11.0+cu130",
+    "transformers": "5.17.0",
+    "accelerate": "1.15.0",
+    "peft": "0.21.0",
+    "safetensors": "0.8.0",
+    "tokenizers": "0.23.2",
+    "huggingface-hub": "1.31.0",
+    "triton": "3.6.0",
+    "causal-conv1d": null,
+    "flash-linear-attention": null
+  },
+  "bf16CudaMatmulVerified": true,
+  "cudaKernelCache": null,
+  "tritonKernelCache": null,
+  "cacheEvidence": {
+    "cudaKernelCache": "Not queried; no warmup kernel was run.",
+    "tritonKernelCache": "Not queried; no warmup model inference was run."
+  },
+  "officialModelRevision": "7aec49ae11a18741706da549ab626b9052795fe7",
+  "officialBaseRevision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+  "dtype": "official mixed BF16/FP32 resident",
+  "quantization": "none",
+  "offload": "none"
+}
