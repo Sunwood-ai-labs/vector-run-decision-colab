@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "model": "vllm-sr/Decision-2.0-Eos-0.8B",
+  "modelRevision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "runId": "eos-20261005T010117",
+  "runtimeHistory": {
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false,
+    "additionalCacheMetadata": {
+      "cudaKernelCache": null,
+      "tritonCache": null,
+      "evidence": "Not inspected before bootstrap; no cache state is inferred."
+    },
+    "evidence": {
+      "runtimeReused": "Official Colab CLI created a new A100 session for this task; prior Eos VM had been reported lost and was not resumed.",
+      "weightsCached": "Checked the exact pinned Eos snapshot in HF cache roots before clone/bootstrap/model loading. Exact snapshot presence was inspected in the standard and configured HF Hub cache roots.",
+      "priorModelLoaded": "No model loader or model process was started in this new session before this history capture.",
+      "priorSystemOneCall": "No System One request was sent in this new session before this history capture.",
+      "priorInference": "No model inference was performed in this new session before this history capture.",
+      "priorPrototypeGameRun": "The prototype game ran only on the previously lost VM; no game repository or runner has yet been run in this new session."
+    }
+  },
+  "hardware": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "vramBytes": 42405855232,
+    "bf16Supported": true,
+    "cuda": "13.0",
+    "torch": "2.11.0+cu130",
+    "dtype": "mixed BF16/FP32 resident; no quantization/offload"
+  },
+  "security": {
+    "secretAndSessionKeyScan": "pass",
+    "forbiddenKeyOrSecretMatchCount": 0,
+    "rawAuthenticationLogsIncluded": false
+  },
+  "series": [
+    {
+      "file": "eos-q3.game.json",
+      "sha256": "2d1ec85798322ce5debbecd4b9110ff39677c0cb1a50dffaf7d900a6c066fc4d",
+      "validator": "pass",
+      "validatorRuns": 5,
+      "seedOutcomes": [
+        {
+          "seed": 101,
+          "terminal": "collision",
+          "finalTick": 346,
+          "decisionOpportunities": 21,
+          "rawResponses": 6,
+          "lateRepliesNotApplied": 1,
+          "skippedOutstanding": 15
+        },
+        {
+          "seed": 202,
+          "terminal": "collision",
+          "finalTick": 346,
+          "decisionOpportunities": 21,
+          "rawResponses": 15,
+          "lateRepliesNotApplied": 1,
+          "skippedOutstanding": 6
+        },
+        {
+          "seed": 303,
+          "terminal": "collision",
+          "finalTick": 343,
+          "decisionOpportunities": 21,
+          "rawResponses": 14,
+          "lateRepliesNotApplied": 0,
+          "skippedOutstanding": 7
+        },
+        {
+          "seed": 404,
+          "terminal": "collision",
+          "finalTick": 345,
+          "decisionOpportunities": 21,
+          "rawResponses": 14,
+          "lateRepliesNotApplied": 0,
+          "skippedOutstanding": 7
+        },
+        {
+          "seed": 505,
+          "terminal": "collision",
+          "finalTick": 346,
+          "decisionOpportunities": 21,
+          "rawResponses": 15,
+          "lateRepliesNotApplied": 1,
+          "skippedOutstanding": 6
+        }
+      ],
+      "answers": {
+        "totalRawResponses": 64,
+        "lateRepliesNotApplied": 3,
+        "neuralForwardCalls": 64,
+        "allCallsSingleForward": true,
+        "batchShapes": [
+          "3x328",
+          "3x336",
+          "3x344",
+          "3x352",
+          "3x360",
+          "3x368",
+          "3x376",
+          "3x384",
+          "3x392"
+        ]
+      },
+      "timing": {
+        "scope": "synchronized system_one including tokenization and wrapper; neural-only duration unavailable",
+        "processFirstMs": 1747.553797999899,
+        "seriesFirstMs": 1747.553797999899,
+        "meanMs": 122.13334779686846,
+        "p50Ms": 95.14353400004438,
+        "p95Ms": 103.49494900015088
+      },
+      "runnerStatus": "cli_process_exited_zero",
+      "aggregateMeasurementStatus": "not_aggregated"
+    },
+    {
+      "file": "eos-q64.game.json",
+      "sha256": "e8b2a12074828ab9e342a23c4010275ee050737f124a0cadb9a5a37f509b6c7c",
+      "validator": "pass",
+      "validatorRuns": 1,
+      "seedOutcomes": [
+        {
+          "seed": 101,
+          "terminal": "collision",
+          "finalTick": 346,
+          "decisionOpportunities": 21,
+          "rawResponses": 3,
+          "lateRepliesNotApplied": 1,
+          "skippedOutstanding": 18
+        }
+      ],
+      "answers": {
+        "totalRawResponses": 3,
+        "lateRepliesNotApplied": 1,
+        "neuralForwardCalls": 3,
+        "allCallsSingleForward": true,
+        "batchShapes": [
+          "64x392",
+          "64x424",
+          "64x456"
+        ]
+      },
+      "timing": {
+        "scope": "synchronized system_one including tokenization and wrapper; neural-only duration unavailable",
+        "processFirstMs": null,
+        "seriesFirstMs": 878.9028150001741,
+        "meanMs": 917.3565889999887,
+        "p50Ms": 891.9006189998981,
+        "p95Ms": 981.2663329998941
+      },
+      "runnerStatus": "cli_process_exited_zero",
+      "aggregateMeasurementStatus": "not_aggregated"
+    }
+  ]
+}
