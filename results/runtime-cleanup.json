@@ -1,6 +1,6 @@
 {
   "schema": "vector-run-runtime-cleanup/v1",
-  "recordedAtUtc": "2026-10-04 16:43:39 UTC",
+  "recordedAtUtc": "2026-10-04 17:39:40 UTC",
   "provider": "Google Colab",
   "method": "Official Colab CLI with ADC; read-only sessions listing. Raw authentication and session identifiers are excluded.",
   "accountListing": {
@@ -9,7 +9,7 @@
     "authFailure": false
   },
   "dedicatedFormalRuntimeStop": {
-    "kai": "Session terminated",
+    "kai": "Session terminated (R1 and fresh R2)",
     "eos": "Session terminated",
     "sol": "Session terminated",
     "sol-reasoning": "Session terminated",
