@@ -1,0 +1,11 @@
+# NVIDIA Colab runtime, tested with Python 3.12 and torch 2.11.0+cu130.
+# bootstrap.sh pins PyTorch against its official CUDA 13.0 wheel index.
+transformers==5.17.0
+accelerate==1.15.0
+peft==0.21.0
+bitsandbytes==0.50.2
+sentencepiece==0.2.2
+protobuf==5.29.6
+safetensors==0.8.0
+tokenizers==0.23.2
+huggingface-hub==1.31.0
