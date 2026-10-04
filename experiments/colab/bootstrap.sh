@@ -11,7 +11,7 @@ uv pip install --system --index-url https://download.pytorch.org/whl/cu130 'torc
 uv pip install --system -r experiments/colab/requirements.txt
 if ! command -v node >/dev/null 2>&1; then
   node_archive=$(mktemp)
-  curl -fsSL https://nodejs.org/dist/v20.19.0/node-v20.19.0-linux-x64.tar.xz -o "$node_archive"
+  curl -fsSL https://nodejs.org/dist/v24.15.0/node-v24.15.0-linux-x64.tar.xz -o "$node_archive"
   tar -xJf "$node_archive" -C /usr/local --strip-components=1
   rm -f "$node_archive"
 fi
