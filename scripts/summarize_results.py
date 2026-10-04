@@ -154,26 +154,63 @@ def _verify_report_pins(
         metadata = game_meta if isinstance(game_meta, dict) else {}
     verify_game = verification.get("game")
     verify_bench = verification.get("benchmark")
+    pins = verification.get("pins")
+    pin_game = pins.get("game") if isinstance(pins, dict) else None
+    pin_bench = pins.get("benchmark") if isinstance(pins, dict) else None
+    game_verification_pins = [
+        value
+        for value in (
+            verification.get("gameCommit"),
+            verify_game.get("commit") if isinstance(verify_game, dict) else None,
+            pin_game.get("commit") if isinstance(pin_game, dict) else None,
+        )
+        if value is not None
+    ]
+    benchmark_verification_pins = [
+        value
+        for value in (
+            verification.get("benchmarkCommit"),
+            verify_bench.get("commit") if isinstance(verify_bench, dict) else None,
+            pin_bench.get("commit") if isinstance(pin_bench, dict) else None,
+        )
+        if value is not None
+    ]
     _require_commit(game.get("gameCommit"), GAME_COMMIT, "game")
     _require_commit(game_info.get("commit") if isinstance(game_info, dict) else None, GAME_COMMIT, "game.commit")
     _require_commit(game_meta.get("gameCommit") if isinstance(game_meta, dict) else None, GAME_COMMIT, "game metadata")
     _require_commit(metadata.get("gameCommit"), GAME_COMMIT, "sidecar game")
     if isinstance(runner, dict):
         _require_commit(runner_meta.get("gameCommit") if isinstance(runner_meta, dict) else None, GAME_COMMIT, "runner game")
-    _require_commit(verification.get("gameCommit"), GAME_COMMIT, "verification game")
-    if isinstance(verify_game, dict):
-        _require_commit(verify_game.get("commit"), GAME_COMMIT, "verification game.commit")
+    if not game_verification_pins:
+        raise RejectedInput("verification game pin missing")
+    for actual in game_verification_pins:
+        _require_commit(actual, GAME_COMMIT, "verification game")
+    envelope = verification.get("verification")
+    pinned_validator = envelope.get("pinnedValidator") if isinstance(envelope, dict) else None
+    if isinstance(pinned_validator, dict) and pinned_validator.get("gameCommit") is not None:
+        _require_commit(pinned_validator.get("gameCommit"), GAME_COMMIT, "pinned validator game")
 
     _require_commit(game_meta.get("benchmarkCommit") if isinstance(game_meta, dict) else None, BENCHMARK_COMMIT, "game metadata benchmark")
     _require_commit(metadata.get("benchmarkCommit"), BENCHMARK_COMMIT, "sidecar benchmark")
     if isinstance(runner, dict):
         _require_commit(runner_meta.get("benchmarkCommit") if isinstance(runner_meta, dict) else None, BENCHMARK_COMMIT, "runner benchmark")
-    _require_commit(verification.get("benchmarkCommit"), BENCHMARK_COMMIT, "verification benchmark")
-    if isinstance(verify_bench, dict):
-        _require_commit(verify_bench.get("commit"), BENCHMARK_COMMIT, "verification benchmark.commit")
+    if not benchmark_verification_pins:
+        raise RejectedInput("verification benchmark pin missing")
+    for actual in benchmark_verification_pins:
+        _require_commit(actual, BENCHMARK_COMMIT, "verification benchmark")
 
 
 def _security_was_checked(verification: dict[str, Any]) -> bool:
+    envelope = verification.get("verification")
+    if isinstance(envelope, dict):
+        privacy = envelope.get("privacy")
+        if (
+            envelope.get("sourceBytesPreserved") is True
+            and envelope.get("transformations") == []
+            and isinstance(privacy, dict)
+            and privacy.get("credentialPatternMatches") == 0
+        ):
+            return True
     security = verification.get("security")
     if isinstance(security, dict):
         if (
@@ -250,6 +287,58 @@ def _validator_evidence(
             return
 
     if isinstance(series_item, dict):
+        envelope = verification.get("verification")
+        pinned_validator = envelope.get("pinnedValidator") if isinstance(envelope, dict) else None
+        if isinstance(pinned_validator, dict):
+            game_sha = hashlib.sha256(game_path.read_bytes()).hexdigest()
+            validator_sha = pinned_validator.get("gitBlobSha1")
+            raw_artifacts = verification.get("rawArtifacts")
+            raw_game_artifact = next(
+                (item for item in raw_artifacts if isinstance(item, dict) and item.get("file") == game_path.name),
+                None,
+            ) if isinstance(raw_artifacts, list) else None
+            verified_episodes = series_item.get("episodes")
+            episode_fields = (
+                "seed",
+                "terminalStatus",
+                "valid",
+                "eligibleForSummary",
+                "distanceMetres",
+                "survivalSeconds",
+                "censored",
+            )
+            episodes_match = (
+                isinstance(verified_episodes, list)
+                and len(verified_episodes) == len(episodes)
+                and all(
+                    isinstance(proof_episode, dict)
+                    and all(proof_episode.get(key) == game_episode.get(key) for key in episode_fields)
+                    for proof_episode, game_episode in zip(verified_episodes, episodes)
+                )
+            )
+            passed = (
+                pinned_validator.get("path") == "scripts/verify-decision-trace.mjs"
+                and pinned_validator.get("gameCommit") == GAME_COMMIT
+                and isinstance(validator_sha, str)
+                and re.fullmatch(r"[0-9a-fA-F]{40}", validator_sha) is not None
+                and pinned_validator.get(f"{series}Valid") is True
+                and series_item.get("questionsPerRequest") == q
+                and series_item.get("seeds") == [episode.get("seed") for episode in episodes]
+                and series_item.get("runnerStatus") == "cli_process_exited_zero"
+                and series_item.get("gameReportStatus") == "raw_status_fields_captured"
+                and series_item.get("gameReportHashMatchesArtifact") is True
+                and series_item.get("traceReplayValid") is True
+                and series_item.get("gameReportSha256") == game_sha
+                and series_item.get("artifactSha256") == game_sha
+                and series_item.get("inferenceDrained") is True
+                and isinstance(raw_game_artifact, dict)
+                and raw_game_artifact.get("sha256") == game_sha
+                and episodes_match
+            )
+            if passed:
+                return
+            raise RejectedInput("pinned replay validator evidence/hash/episode comparison failed")
+
         validator_result = series_item.get("validator")
         if isinstance(validator_result, dict):
             valid = validator_result.get("valid") is True or validator_result.get("passed") is True
@@ -1155,7 +1244,7 @@ def main(argv: list[str] | None = None) -> int:
         root = _safe_results_root(args.results_root)
         if args.self_test:
             _self_test(root)
-            print("self-test: pass (official series, Vega verifier, blocked evidence, Kai pending/proof gate, pins, paths)")
+            print("self-test: pass (official series, Vega verifier, blocked evidence, Kai hash/provenance gate, pins, paths)")
         series, unavailable, rejected = collect_results(root)
         summary = build_summary(series, unavailable, rejected)
         accepted_count = sum(len(items) for items in series.values())
