@@ -118,6 +118,10 @@ class MeasuredApp:
         try:
             result = self.app.answer(payload)
             record.update({"status": "ok", **result.get("measurements", {})})
+            answer_errors = {key: public_error(value["error"]) for key, value in result.get("answers", {}).items()
+                             if isinstance(value, dict) and value.get("error")}
+            if answer_errors:
+                record.update({"status": "answer_error", "answer_errors": answer_errors})
             return result
         except Exception as error:
             record.update({"status": "error", "error": public_error(error)})

@@ -113,14 +113,20 @@ class App:
         self.lock = threading.Lock()
         self.request_index = 0
         self.neural_forward_calls = 0
+        self.neural_forward_batches: list[dict[str, Any]] = []
         runtime = getattr(model, "runtime", None)
         backend = getattr(runtime, "backend", None)
         neural_model = getattr(backend, "model", None)
-        self.forward_hook = (neural_model.register_forward_pre_hook(self._count_forward)
+        self.forward_hook = (neural_model.register_forward_pre_hook(self._count_forward, with_kwargs=True)
                              if hasattr(neural_model, "register_forward_pre_hook") else None)
 
-    def _count_forward(self, module: Any, inputs: Any) -> None:
+    def _count_forward(self, module: Any, inputs: Any, kwargs: dict[str, Any]) -> None:
         self.neural_forward_calls += 1
+        input_ids = kwargs.get("input_ids")
+        shape = list(input_ids.shape) if hasattr(input_ids, "shape") else None
+        self.neural_forward_batches.append({"input_ids_shape": shape,
+                                           "batch_size": shape[0] if shape else None,
+                                           "padded_tokens_per_question": shape[1] if shape and len(shape) > 1 else None})
 
     def answer(self, payload: dict[str, Any]) -> dict[str, Any]:
         state = payload.get("state")
@@ -146,6 +152,7 @@ class App:
                 torch.cuda.synchronize()
             started = time.perf_counter()
             self.neural_forward_calls = 0
+            self.neural_forward_batches = []
             result = self.model.system_one(state=model_state, questions=questions)
             if cuda:
                 torch.cuda.synchronize()
@@ -158,6 +165,7 @@ class App:
                 "system_one_ms": elapsed,
                 "timing_scope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
                 "neural_forward_calls": self.neural_forward_calls if self.forward_hook else None,
+                "neural_forward_batches": list(self.neural_forward_batches) if self.forward_hook else None,
                 "request_index": self.request_index,
                 "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated() if cuda else None,
                 "gpu_peak_reserved_bytes": torch.cuda.max_memory_reserved() if cuda else None,
