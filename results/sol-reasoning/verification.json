@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "attemptId": "20261005-l4-717f02-b2e8fc",
+  "status": "model_load_blocked_before_game_start",
+  "gameMeasurementStatus": "not_measured",
+  "model": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
+  "modelRevision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+  "game": {
+    "origin": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+    "commit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "cleanHeadGate": "passed"
+  },
+  "benchmark": {
+    "origin": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab",
+    "commit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+    "cleanHeadGate": "passed"
+  },
+  "runtime": {
+    "gpu": "NVIDIA L4",
+    "totalVramBytes": 23659151360,
+    "bf16Supported": true,
+    "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+    "quantization": "none",
+    "offload": "none",
+    "bootstrap": "completed"
+  },
+  "runtimeHistory": {
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false
+  },
+  "modelLoad": {
+    "runnerStatus": "model_load_blocked",
+    "systemOneCalls": 0,
+    "neuralForwardCalls": 0,
+    "reason": "The pinned Hugging Face model identifier was rejected during load. A separate unauthenticated request to the exact pinned revision returned HTTP 401; this runtime had no HF_TOKEN or HUGGING_FACE_HUB_TOKEN environment variable.",
+    "safeRepairAvailable": false,
+    "requiredExternalChange": "Restore unauthenticated access to the pinned model revision or provide an authorized HF credential through the approved runtime secret mechanism."
+  },
+  "series": [
+    {
+      "file": "sol-reasoning-q3.runner.json",
+      "questions": 3,
+      "seeds": [101, 202, 303, 404, 505],
+      "runnerStatus": "model_load_blocked",
+      "gameFileProduced": false,
+      "gameValidation": "not applicable; game did not start"
+    },
+    {
+      "file": "sol-reasoning-q64.runner.json",
+      "questions": 64,
+      "seeds": [101],
+      "runnerStatus": "model_load_blocked",
+      "gameFileProduced": false,
+      "gameValidation": "not applicable; game did not start"
+    }
+  ],
+  "sanitization": {
+    "credentialsAndSessionIdentifiers": "absent",
+    "runnerJsonParse": "passed",
+    "sensitivePatternScan": "passed"
+  }
+}

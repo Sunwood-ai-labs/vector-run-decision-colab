@@ -1,0 +1,253 @@
+{
+  "runnerSchemaVersion": 1,
+  "runnerStatus": "model_load_blocked",
+  "aggregateMeasurementStatus": "not_aggregated",
+  "model": {
+    "id": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
+    "revision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+    "baseRevision": null
+  },
+  "metadata": {
+    "model": {
+      "id": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
+      "revision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+      "baseRevision": null,
+      "baseRepo": null,
+      "originRepo": "vllm-sr/Decision-2.0-Sol-2B",
+      "originRevision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+      "sourceAudit": {
+        "manifest_sha256": "8c662dddc1b1e5e1fd9a2eda0a6d4b1b244392433137b3c6dd005ffb7833ddc4",
+        "model_identity_sha256": "46d0fbc39cf06713898fc683ccfafbd36567ce556bf162433cb11b2a7686a6d4",
+        "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+        "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+        "profile": "qwen-full"
+      }
+    },
+    "hardware": {
+      "gpu": "NVIDIA L4",
+      "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+      "quantization": "none",
+      "dependencies": {
+        "torch": "2.11.0+cu130",
+        "transformers": "5.17.0",
+        "accelerate": "1.15.0",
+        "peft": "0.21.0",
+        "bitsandbytes": "0.50.2",
+        "sentencepiece": "0.2.2",
+        "protobuf": "5.29.6",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.23.2",
+        "huggingface-hub": "1.31.0",
+        "triton": "3.6.0",
+        "causal-conv1d": null,
+        "flash-linear-attention": null
+      }
+    },
+    "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+    "runContract": {
+      "physicsHz": null,
+      "decisionEveryTicks": null,
+      "actions": null,
+      "observationPipeline": null,
+      "series": "q3",
+      "questions": 3,
+      "questionCountPerApiCall": 3,
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ],
+      "maxSeconds": 30,
+      "maxJumps": 2,
+      "runKind": "endless_time_capped",
+      "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+    },
+    "runtimeHistory": {
+      "model": "sol-reasoning",
+      "runtimeReused": false,
+      "weightsCached": false,
+      "priorModelLoaded": false,
+      "priorSystemOneCall": false,
+      "priorInference": false,
+      "priorPrototypeGameRun": false,
+      "evidence": {
+        "runtimeReused": "Official Colab CLI reported Session READY for a new L4 allocation in this run; this is not the previously lost VM.",
+        "weightsCached": "Inspected the model's Hugging Face snapshot directory before any model download; found 0 pinned snapshot(s).",
+        "priorModelLoaded": "Fresh VM; no model load or smoke run was performed before writing this history.",
+        "priorSystemOneCall": "Fresh VM; no system_one request was sent before writing this history.",
+        "priorInference": "Fresh VM; no neural inference was sent before writing this history.",
+        "priorPrototypeGameRun": "Fresh VM; no game checkout or prototype run existed before writing this history."
+      }
+    }
+  },
+  "contract": {
+    "physicsHz": null,
+    "decisionEveryTicks": null,
+    "actions": null,
+    "observationPipeline": null,
+    "series": "q3",
+    "questions": 3,
+    "questionCountPerApiCall": 3,
+    "seeds": [
+      101,
+      202,
+      303,
+      404,
+      505
+    ],
+    "maxSeconds": 30,
+    "maxJumps": 2,
+    "runKind": "endless_time_capped",
+    "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+  },
+  "runtimeHistory": {
+    "model": "sol-reasoning",
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false,
+    "evidence": {
+      "runtimeReused": "Official Colab CLI reported Session READY for a new L4 allocation in this run; this is not the previously lost VM.",
+      "weightsCached": "Inspected the model's Hugging Face snapshot directory before any model download; found 0 pinned snapshot(s).",
+      "priorModelLoaded": "Fresh VM; no model load or smoke run was performed before writing this history.",
+      "priorSystemOneCall": "Fresh VM; no system_one request was sent before writing this history.",
+      "priorInference": "Fresh VM; no neural inference was sent before writing this history.",
+      "priorPrototypeGameRun": "Fresh VM; no game checkout or prototype run existed before writing this history."
+    }
+  },
+  "runtime": {
+    "environment": {
+      "python": "3.13.15",
+      "platform": "Linux Colab",
+      "node": "v24.15.0",
+      "cuda": "13.0",
+      "gpu_probe_error": null,
+      "driver": "580.82.07",
+      "gpu": {
+        "name": "NVIDIA L4",
+        "total_memory_bytes": 23659151360,
+        "free_memory_before_load_bytes": 23455727616,
+        "compute_capability": "8.9",
+        "visible_device_count": 1,
+        "device_index": 0
+      },
+      "dependencies": {
+        "torch": "2.11.0+cu130",
+        "transformers": "5.17.0",
+        "accelerate": "1.15.0",
+        "peft": "0.21.0",
+        "bitsandbytes": "0.50.2",
+        "sentencepiece": "0.2.2",
+        "protobuf": "5.29.6",
+        "safetensors": "0.8.0",
+        "tokenizers": "0.23.2",
+        "huggingface-hub": "1.31.0",
+        "triton": "3.6.0",
+        "causal-conv1d": null,
+        "flash-linear-attention": null
+      }
+    },
+    "condition": {
+      "gpu": "NVIDIA L4",
+      "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+      "quantization": "none",
+      "offload": "none",
+      "singleModelPerRuntime": true
+    },
+    "modelPhaseDefinition": "loadMs measures this process's model load; q3 request 1 is the first API call after model load, request 2 is warm, request 3+ is steady; q64 request 1 is its first API call after q3 on the same loaded model. This does not establish a cold Colab runtime, GPU, filesystem, or kernel cache.",
+    "windowDefinition": {
+      "durationSeconds": 1.0,
+      "origin": "series CLI start",
+      "latencies": "request starts grouped by elapsed window"
+    },
+    "cacheObservations": {
+      "huggingFacePinnedSnapshot": {
+        "beforeModelLoad": {
+          "pinnedSnapshot": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "afterModelLoadAttempt": {
+          "pinnedSnapshot": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        }
+      },
+      "runtimeCaches": {
+        "beforeModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "warmHistory": "unknown",
+        "afterModelLoadAttempt": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        }
+      }
+    },
+    "measuredAtUtc": "2026-10-04T16:06:43.222047+00:00",
+    "loadAttemptMs": 12575.614952000024,
+    "reason": "vllm-sr/Decision-2.0-Sol-2B-Reasoning is not a local folder and is not a valid model identifier listed on '[URL REDACTED]\nIf this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=[REDACTED]",
+    "inferenceRecords": [],
+    "inferenceDrained": true
+  }
+}
