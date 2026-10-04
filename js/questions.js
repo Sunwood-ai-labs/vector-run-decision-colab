@@ -2,7 +2,7 @@ import { liveHazards, dangerLevel, ruleAction } from "./engine.js";
 import { ACTIONS, POLICY } from "./policy.js";
 
 const ACTION_TEXT = [
-  "Decision Lane の走者を、このティックで1つだけ動かす。",
+  "VECTOR RUN の走者を、このティックで1つだけ動かす。",
   "dx は走者の左端から障害の左端までのピクセル。走者は右へ speed_px_per_frame で進む。",
   "jump は箱（crate）と欠線（gap）を越える。接地していて、滑り中でも打撃中でもなく、最も近い障害が crate か gap で dx が jump_dx 以下のときだけ。",
   "slide は梁（beam）の下をくぐる。接地していて、最も近い障害が beam で dx が slide_dx 以下のときだけ。",
@@ -18,7 +18,7 @@ export function visibleState(world, questionCount = 3) {
       ? Array.from({ length: questionCount - 3 }, (_, index) => ((world.frame * 3 + index * 5) % 2) === 0)
       : [];
   return {
-    game: "decision-lane",
+    game: "VECTOR RUN",
     frame: world.frame,
     speed_px_per_frame: POLICY.speed,
     jump_dx: POLICY.jumpMaxDx,
@@ -101,17 +101,19 @@ export function readDecision(payload) {
   const action = ACTIONS.includes(choice) ? choice : "hold";
   const probabilities = answers.action?.probabilities ?? null;
   const noul = answers.commit?.noul;
-  const commit = typeof noul === "number" ? noul >= 0.5 : null;
+  const commit = Number.isFinite(noul) ? noul >= 0.5 : null;
   const score = answers.danger?.score;
-  const danger = typeof score === "number" ? Math.max(0, Math.min(2, Math.round(score))) : null;
+  const danger = Number.isFinite(score) ? Math.max(0, Math.min(2, Math.round(score))) : null;
   let probeHits = 0;
   let probeTotal = 0;
-  for (const key of Object.keys(answers)) {
-    if (!/^p\d+$/.test(key)) continue;
+  const probes = payload?.state?.probes ?? [];
+  let missingAnswers = Number(!ACTIONS.includes(choice)) + Number(commit == null) + Number(danger == null);
+  for (let index = 0; index < probes.length; index += 1) {
     probeTotal += 1;
-    const expected = payload?.state?.probes?.[Number(key.slice(1))];
-    const got = answers[key]?.noul;
-    if (typeof expected === "boolean" && typeof got === "number" && (got >= 0.5) === expected) {
+    const expected = probes[index];
+    const got = answers[`p${index}`]?.noul;
+    if (!Number.isFinite(got)) missingAnswers += 1;
+    if (typeof expected === "boolean" && Number.isFinite(got) && (got >= 0.5) === expected) {
       probeHits += 1;
     }
   }
@@ -123,6 +125,8 @@ export function readDecision(payload) {
     confidence: answers.action?.confidence ?? null,
     probeHits,
     probeTotal,
+    missingAnswers,
+    answerTotal: 3 + probes.length,
     parsed: ACTIONS.includes(choice),
     model: payload?.model ?? null,
     usage: payload?.usage ?? null,
@@ -130,10 +134,19 @@ export function readDecision(payload) {
 }
 
 export function scoreSample(gold, got) {
+  const actionMatch = got.parsed !== false && got.action === gold.action;
+  const commitMatch = got.commit != null && got.commit === gold.commit;
+  const dangerError = got.danger == null ? 2 : Math.abs(got.danger - gold.danger);
+  const probeTotal = gold.probes.length;
+  const probeHits = Math.min(probeTotal, got.probeHits ?? 0);
   return {
-    actionMatch: got.action === gold.action,
-    commitMatch: got.commit == null ? null : got.commit === gold.commit,
-    dangerError: got.danger == null ? null : Math.abs(got.danger - gold.danger),
+    actionMatch,
+    commitMatch,
+    dangerError,
+    answerHits: Number(actionMatch) + Number(commitMatch) + Number(got.danger != null && dangerError === 0) + probeHits,
+    answerTotal: 3 + probeTotal,
+    probeHits,
+    probeTotal,
     consistent: got.commit == null ? null : got.commit === (got.action !== "hold"),
   };
 }
