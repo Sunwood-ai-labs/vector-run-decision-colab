@@ -115,8 +115,12 @@ class MeasuredApp:
             index = len(self.records) + 1
         started = time.perf_counter()
         record = {"index": index, "phase": "first" if index == 1 else "warm" if index == 2 else "steady", "state_frame": payload.get("state", {}).get("frame") if isinstance(payload.get("state"), dict) else None, "question_count": len(payload.get("questions", {}))}
+        record["request"] = payload
         try:
             result = self.app.answer(payload)
+            # Preserve actual late responses after the game aborts its HTTP
+            # request. Draining records evidence without extending game time.
+            record["response"] = result
             record.update({"status": "ok", **result.get("measurements", {})})
             answer_errors = {key: public_error(value["error"]) for key, value in result.get("answers", {}).items()
                              if isinstance(value, dict) and value.get("error")}
