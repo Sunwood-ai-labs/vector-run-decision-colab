@@ -1,0 +1,72 @@
+{
+  "model": {
+    "id": "vllm-sr/Decision-2.0-Kai-0.6B",
+    "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764",
+    "baseRevision": null,
+    "baseRepo": null,
+    "originRepo": "Qwen/Qwen3-0.6B-Base",
+    "originRevision": "da87bfb608c14b7cf20ba1ce41287e8de496c0cd",
+    "sourceAudit": {
+      "manifest_sha256": "ca7bf2cff1494a5bfc51f4271f52557da0f3ce3b6f0f6e7a2b4118cb4965e92e",
+      "model_identity_sha256": "bb806f31a14d4532a1b5e00984442128f47f46cbbc68e57e7623327c81cfb983",
+      "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+      "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d",
+      "profile": "qwen-full"
+    }
+  },
+  "hardware": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+    "quantization": "none",
+    "dependencies": {
+      "torch": "2.11.0+cu130",
+      "transformers": "5.17.0",
+      "accelerate": "1.15.0",
+      "peft": "0.21.0",
+      "bitsandbytes": "0.50.2",
+      "sentencepiece": "0.2.2",
+      "protobuf": "5.29.6",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "huggingface-hub": "1.31.0",
+      "triton": "3.6.0",
+      "causal-conv1d": null,
+      "flash-linear-attention": null
+    }
+  },
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "runContract": {
+    "physicsHz": null,
+    "decisionEveryTicks": null,
+    "actions": null,
+    "observationPipeline": null,
+    "series": "q64",
+    "questions": 64,
+    "questionCountPerApiCall": 64,
+    "seeds": [
+      101
+    ],
+    "maxSeconds": 30,
+    "maxJumps": 2,
+    "runKind": "endless_time_capped",
+    "timeLimitClassification": "censored; never a clear or completed collision benchmark"
+  },
+  "runtimeHistory": {
+    "model": "kai",
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false,
+    "priorPrototypeGameRun": false,
+    "evidence": {
+      "runtimeReused": "A fresh dedicated Colab session was allocated immediately before this check; no prior session was attached.",
+      "weightsCached": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+      "priorModelLoaded": "Fresh dedicated VM; this run has not called the model loader before recording history.",
+      "priorSystemOneCall": "Fresh dedicated VM; no System One request has been sent before recording history.",
+      "priorInference": "Fresh dedicated VM; no model inference has been requested before recording history.",
+      "priorPrototypeGameRun": "Fresh dedicated VM; only immutable canonical repositories were cloned and validated; no game process has run."
+    }
+  }
+}

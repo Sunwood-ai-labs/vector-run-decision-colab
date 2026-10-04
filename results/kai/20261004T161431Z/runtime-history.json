@@ -1,0 +1,17 @@
+{
+  "model": "kai",
+  "runtimeReused": false,
+  "weightsCached": false,
+  "priorModelLoaded": false,
+  "priorSystemOneCall": false,
+  "priorInference": false,
+  "priorPrototypeGameRun": false,
+  "evidence": {
+    "runtimeReused": "A fresh dedicated Colab session was allocated immediately before this check; no prior session was attached.",
+    "weightsCached": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+    "priorModelLoaded": "Fresh dedicated VM; this run has not called the model loader before recording history.",
+    "priorSystemOneCall": "Fresh dedicated VM; no System One request has been sent before recording history.",
+    "priorInference": "Fresh dedicated VM; no model inference has been requested before recording history.",
+    "priorPrototypeGameRun": "Fresh dedicated VM; only immutable canonical repositories were cloned and validated; no game process has run."
+  }
+}

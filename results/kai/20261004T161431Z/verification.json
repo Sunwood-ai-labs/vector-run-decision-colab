@@ -1,0 +1,1175 @@
+{
+  "schemaVersion": 1,
+  "kind": "formal-model-measurement",
+  "model": {
+    "id": "vllm-sr/Decision-2.0-Kai-0.6B",
+    "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764"
+  },
+  "hardware": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+    "quantization": "none",
+    "dependencies": {
+      "torch": "2.11.0+cu130",
+      "transformers": "5.17.0",
+      "accelerate": "1.15.0",
+      "peft": "0.21.0",
+      "bitsandbytes": "0.50.2",
+      "sentencepiece": "0.2.2",
+      "protobuf": "5.29.6",
+      "safetensors": "0.8.0",
+      "tokenizers": "0.23.2",
+      "huggingface-hub": "1.31.0",
+      "triton": "3.6.0",
+      "causal-conv1d": null,
+      "flash-linear-attention": null
+    }
+  },
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "runtimeHistory": "runtime-history.json",
+  "validatedAtUtc": "2026-10-04T16:22:12.089326+00:00",
+  "validator": {
+    "command": "node scripts/verify-decision-trace.mjs RESULT.json",
+    "q3ExitCode": 0,
+    "q64ExitCode": 0,
+    "q3Valid": true,
+    "q64Valid": true
+  },
+  "series": {
+    "q3": {
+      "runnerStatus": "cli_process_exited_zero",
+      "aggregateMeasurementStatus": "not_aggregated",
+      "gameReportStatus": {
+        "jsonStatus": "valid",
+        "statusFields": [
+          {
+            "path": "$.episodes[].terminalStatus",
+            "valueCounts": {
+              "collision": 5
+            }
+          },
+          {
+            "path": "$.runs[].decisions[].httpStatus",
+            "valueCounts": {
+              "200": 94
+            }
+          },
+          {
+            "path": "$.runs[].decisions[].status",
+            "valueCounts": {
+              "answered": 94,
+              "skipped_outstanding": 11
+            }
+          },
+          {
+            "path": "$.runs[].terminalStatus",
+            "valueCounts": {
+              "collision": 5
+            }
+          }
+        ],
+        "assessment": "raw_status_fields_captured",
+        "aggregateMeasurementStatus": "not_aggregated"
+      },
+      "cliExitCode": 0,
+      "inferenceDrained": true,
+      "gameRuns": [
+        {
+          "seed": 101,
+          "valid": true,
+          "eligibleForSummary": true,
+          "censored": false,
+          "endReason": "collision",
+          "collision": {
+            "obstacleId": 0,
+            "tick": 346
+          },
+          "distanceWorld": 729.9783055555556,
+          "distanceMetres": 72.99783055555557,
+          "jumps": 0,
+          "skips": [
+            {
+              "tick": 32,
+              "decisionId": "101-2",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 48,
+              "decisionId": "101-3",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 64,
+              "decisionId": "101-4",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 80,
+              "decisionId": "101-5",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 96,
+              "decisionId": "101-6",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 112,
+              "decisionId": "101-7",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 128,
+              "decisionId": "101-8",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 144,
+              "decisionId": "101-9",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 160,
+              "decisionId": "101-10",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 176,
+              "decisionId": "101-11",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 192,
+              "decisionId": "101-12",
+              "reason": "request_outstanding"
+            }
+          ],
+          "responseErrors": [],
+          "wallSeconds": 2.884765423,
+          "survivalSeconds": 2.8833333333333333,
+          "questionCount": 3,
+          "decisions": 21
+        },
+        {
+          "seed": 202,
+          "valid": true,
+          "eligibleForSummary": true,
+          "censored": false,
+          "endReason": "collision",
+          "collision": {
+            "obstacleId": 0,
+            "tick": 346
+          },
+          "distanceWorld": 729.9783055555556,
+          "distanceMetres": 72.99783055555557,
+          "jumps": 0,
+          "skips": [],
+          "responseErrors": [],
+          "wallSeconds": 2.8843494030000003,
+          "survivalSeconds": 2.8833333333333333,
+          "questionCount": 3,
+          "decisions": 21
+        },
+        {
+          "seed": 303,
+          "valid": true,
+          "eligibleForSummary": true,
+          "censored": false,
+          "endReason": "collision",
+          "collision": {
+            "obstacleId": 0,
+            "tick": 343
+          },
+          "distanceWorld": 723.5704097222223,
+          "distanceMetres": 72.35704097222222,
+          "jumps": 0,
+          "skips": [],
+          "responseErrors": [],
+          "wallSeconds": 2.859307172999999,
+          "survivalSeconds": 2.8583333333333334,
+          "questionCount": 3,
+          "decisions": 21
+        },
+        {
+          "seed": 404,
+          "valid": true,
+          "eligibleForSummary": true,
+          "censored": false,
+          "endReason": "collision",
+          "collision": {
+            "obstacleId": 0,
+            "tick": 345
+          },
+          "distanceWorld": 727.8421875,
+          "distanceMetres": 72.78421875000001,
+          "jumps": 0,
+          "skips": [],
+          "responseErrors": [],
+          "wallSeconds": 2.8760047030000004,
+          "survivalSeconds": 2.875,
+          "questionCount": 3,
+          "decisions": 21
+        },
+        {
+          "seed": 505,
+          "valid": true,
+          "eligibleForSummary": true,
+          "censored": false,
+          "endReason": "collision",
+          "collision": {
+            "obstacleId": 0,
+            "tick": 346
+          },
+          "distanceWorld": 729.9783055555556,
+          "distanceMetres": 72.99783055555557,
+          "jumps": 0,
+          "skips": [],
+          "responseErrors": [],
+          "wallSeconds": 2.8835180519999994,
+          "survivalSeconds": 2.8833333333333333,
+          "questionCount": 3,
+          "decisions": 21
+        }
+      ],
+      "questionCountsPerApiCall": [
+        3
+      ],
+      "apiCallCount": 94,
+      "inferenceStatusCounts": {
+        "ok": 94
+      },
+      "forwardCallCounts": [
+        1
+      ],
+      "batchShapes": [
+        [
+          3,
+          328
+        ],
+        [
+          3,
+          336
+        ],
+        [
+          3,
+          344
+        ],
+        [
+          3,
+          352
+        ],
+        [
+          3,
+          360
+        ],
+        [
+          3,
+          376
+        ],
+        [
+          3,
+          392
+        ]
+      ],
+      "rawModelRepliesCaptured": 94,
+      "systemOneMs": {
+        "first": {
+          "systemOne": {
+            "count": 1,
+            "mean_ms": 1517.2665629997937,
+            "p50_ms": 1517.2665629997937,
+            "p95_ms": 1517.2665629997937
+          },
+          "serverRequest": {
+            "count": 1,
+            "mean_ms": 1517.8845549999096,
+            "p50_ms": 1517.8845549999096,
+            "p95_ms": 1517.8845549999096
+          },
+          "errors": 0
+        },
+        "warm": {
+          "systemOne": {
+            "count": 1,
+            "mean_ms": 46.897001000161254,
+            "p50_ms": 46.897001000161254,
+            "p95_ms": 46.897001000161254
+          },
+          "serverRequest": {
+            "count": 1,
+            "mean_ms": 47.40140300009443,
+            "p50_ms": 47.40140300009443,
+            "p95_ms": 47.40140300009443
+          },
+          "errors": 0
+        },
+        "steady": {
+          "systemOne": {
+            "count": 92,
+            "mean_ms": 45.631992467391406,
+            "p50_ms": 44.92404099983105,
+            "p95_ms": 50.478880000355275
+          },
+          "serverRequest": {
+            "count": 92,
+            "mean_ms": 46.15538082608687,
+            "p50_ms": 45.397454999601905,
+            "p95_ms": 50.955372000316856
+          },
+          "errors": 0
+        },
+        "all": {
+          "systemOne": {
+            "count": 94,
+            "mean_ms": 61.30113692553154,
+            "p50_ms": 44.92454299997917,
+            "p95_ms": 50.88191899994854
+          },
+          "serverRequest": {
+            "count": 94,
+            "mean_ms": 61.82532972340422,
+            "p50_ms": 45.40162900002542,
+            "p95_ms": 51.4096659999268
+          },
+          "errors": 0
+        },
+        "windows1s": [
+          {
+            "index": 0,
+            "startMs": 0,
+            "endMs": 1000,
+            "systemOne": {
+              "count": 1,
+              "mean_ms": 1517.2665629997937,
+              "p50_ms": 1517.2665629997937,
+              "p95_ms": 1517.2665629997937
+            },
+            "serverRequest": {
+              "count": 1,
+              "mean_ms": 1517.8845549999096,
+              "p50_ms": 1517.8845549999096,
+              "p95_ms": 1517.8845549999096
+            },
+            "errors": 0
+          },
+          {
+            "index": 1,
+            "startMs": 1000,
+            "endMs": 2000,
+            "systemOne": {
+              "count": 2,
+              "mean_ms": 52.766516000247066,
+              "p50_ms": 46.897001000161254,
+              "p95_ms": 58.63603100033288
+            },
+            "serverRequest": {
+              "count": 2,
+              "mean_ms": 53.26707149993126,
+              "p50_ms": 47.40140300009443,
+              "p95_ms": 59.13273999976809
+            },
+            "errors": 0
+          },
+          {
+            "index": 2,
+            "startMs": 2000,
+            "endMs": 3000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 45.88033842862517,
+              "p50_ms": 45.16084499982753,
+              "p95_ms": 50.478880000355275
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 46.42166442863527,
+              "p50_ms": 45.63722500006406,
+              "p95_ms": 50.955372000316856
+            },
+            "errors": 0
+          },
+          {
+            "index": 3,
+            "startMs": 3000,
+            "endMs": 4000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 44.974094142812,
+              "p50_ms": 44.832080000105634,
+              "p95_ms": 45.81095799994728
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 45.534423142856085,
+              "p50_ms": 45.351753999966604,
+              "p95_ms": 46.331320999797754
+            },
+            "errors": 0
+          },
+          {
+            "index": 4,
+            "startMs": 4000,
+            "endMs": 5000,
+            "systemOne": {
+              "count": 8,
+              "mean_ms": 45.571116125074695,
+              "p50_ms": 44.71558200020809,
+              "p95_ms": 50.88191899994854
+            },
+            "serverRequest": {
+              "count": 8,
+              "mean_ms": 46.05776899995817,
+              "p50_ms": 45.179701000051864,
+              "p95_ms": 51.4096659999268
+            },
+            "errors": 0
+          },
+          {
+            "index": 5,
+            "startMs": 5000,
+            "endMs": 6000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 45.16060814298076,
+              "p50_ms": 45.026257000245096,
+              "p95_ms": 46.09261800032982
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 45.74387371427032,
+              "p50_ms": 45.603621000282146,
+              "p95_ms": 46.56143200008955
+            },
+            "errors": 0
+          },
+          {
+            "index": 6,
+            "startMs": 6000,
+            "endMs": 7000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 46.41448685723454,
+              "p50_ms": 45.755388000088715,
+              "p95_ms": 51.45478300028117
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 46.90244700006068,
+              "p50_ms": 46.24543099998846,
+              "p95_ms": 51.96102599984442
+            },
+            "errors": 0
+          },
+          {
+            "index": 7,
+            "startMs": 7000,
+            "endMs": 8000,
+            "systemOne": {
+              "count": 8,
+              "mean_ms": 46.0560502498879,
+              "p50_ms": 45.12165100004495,
+              "p95_ms": 48.19661099963923
+            },
+            "serverRequest": {
+              "count": 8,
+              "mean_ms": 46.67814812501092,
+              "p50_ms": 45.68996799980596,
+              "p95_ms": 48.67833000025712
+            },
+            "errors": 0
+          },
+          {
+            "index": 8,
+            "startMs": 8000,
+            "endMs": 9000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 45.56992614288902,
+              "p50_ms": 44.81581700019888,
+              "p95_ms": 50.14122000011412
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 46.0545455713535,
+              "p50_ms": 45.292535000044154,
+              "p95_ms": 50.642187999983435
+            },
+            "errors": 0
+          },
+          {
+            "index": 9,
+            "startMs": 9000,
+            "endMs": 10000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 44.927407857098196,
+              "p50_ms": 44.74865900010627,
+              "p95_ms": 46.04772299990145
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 45.40697128582646,
+              "p50_ms": 45.229616000142414,
+              "p95_ms": 46.54690400002437
+            },
+            "errors": 0
+          },
+          {
+            "index": 10,
+            "startMs": 10000,
+            "endMs": 11000,
+            "systemOne": {
+              "count": 8,
+              "mean_ms": 44.79063987503196,
+              "p50_ms": 44.32760899999266,
+              "p95_ms": 46.58716399990226
+            },
+            "serverRequest": {
+              "count": 8,
+              "mean_ms": 45.26956087488543,
+              "p50_ms": 44.8161419999451,
+              "p95_ms": 47.10963299976356
+            },
+            "errors": 0
+          },
+          {
+            "index": 11,
+            "startMs": 11000,
+            "endMs": 12000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 45.10472628563938,
+              "p50_ms": 44.498456999917835,
+              "p95_ms": 47.713426999962394
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 45.58811028573473,
+              "p50_ms": 44.983233000039036,
+              "p95_ms": 48.19566299966027
+            },
+            "errors": 0
+          },
+          {
+            "index": 12,
+            "startMs": 12000,
+            "endMs": 13000,
+            "systemOne": {
+              "count": 7,
+              "mean_ms": 44.71128642847231,
+              "p50_ms": 44.73636800003078,
+              "p95_ms": 45.07043499961583
+            },
+            "serverRequest": {
+              "count": 7,
+              "mean_ms": 45.18682142855011,
+              "p50_ms": 45.19448899964118,
+              "p95_ms": 45.554632999937894
+            },
+            "errors": 0
+          },
+          {
+            "index": 13,
+            "startMs": 13000,
+            "endMs": 14000,
+            "systemOne": {
+              "count": 8,
+              "mean_ms": 46.88569199993253,
+              "p50_ms": 44.692216999919765,
+              "p95_ms": 56.18017799997688
+            },
+            "serverRequest": {
+              "count": 8,
+              "mean_ms": 47.37471975005292,
+              "p50_ms": 45.15519400001722,
+              "p95_ms": 56.667964999633114
+            },
+            "errors": 0
+          },
+          {
+            "index": 14,
+            "startMs": 14000,
+            "endMs": 15000,
+            "systemOne": {
+              "count": 3,
+              "mean_ms": 44.62639000000005,
+              "p50_ms": 44.50588100007735,
+              "p95_ms": 44.92404099983105
+            },
+            "serverRequest": {
+              "count": 3,
+              "mean_ms": 45.41623866665153,
+              "p50_ms": 45.40162900002542,
+              "p95_ms": 45.92246599986538
+            },
+            "errors": 0
+          }
+        ]
+      },
+      "gpuPeakAllocatedBytes": 1579725312,
+      "gpuPeakReservedBytes": 1616904192,
+      "weightCacheObservation": {
+        "beforeModelLoad": {
+          "pinnedSnapshot": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "afterModelLoad": {
+          "pinnedSnapshot": {
+            "present": true,
+            "fileCount": 36,
+            "bytes": 1520112060,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "after_q3": {
+          "pinnedSnapshot": {
+            "present": true,
+            "fileCount": 36,
+            "bytes": 1520112060,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        }
+      },
+      "runtimeCacheObservation": {
+        "beforeModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "warmHistory": "unknown; snapshots show directory state only",
+        "afterModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "after_q3": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        }
+      }
+    },
+    "q64": {
+      "runnerStatus": "cli_process_exited_zero",
+      "aggregateMeasurementStatus": "not_aggregated",
+      "gameReportStatus": {
+        "jsonStatus": "valid",
+        "statusFields": [
+          {
+            "path": "$.episodes[].terminalStatus",
+            "valueCounts": {
+              "collision": 1
+            }
+          },
+          {
+            "path": "$.runs[].decisions[].httpStatus",
+            "valueCounts": {
+              "200": 6
+            }
+          },
+          {
+            "path": "$.runs[].decisions[].status",
+            "valueCounts": {
+              "answered": 5,
+              "late_answer_not_applied": 1,
+              "skipped_outstanding": 15
+            }
+          },
+          {
+            "path": "$.runs[].terminalStatus",
+            "valueCounts": {
+              "collision": 1
+            }
+          }
+        ],
+        "assessment": "raw_status_fields_captured",
+        "aggregateMeasurementStatus": "not_aggregated"
+      },
+      "cliExitCode": 0,
+      "inferenceDrained": true,
+      "gameRuns": [
+        {
+          "seed": 101,
+          "valid": true,
+          "eligibleForSummary": true,
+          "censored": false,
+          "endReason": "collision",
+          "collision": {
+            "obstacleId": 0,
+            "tick": 346
+          },
+          "distanceWorld": 729.9783055555556,
+          "distanceMetres": 72.99783055555557,
+          "jumps": 0,
+          "skips": [
+            {
+              "tick": 32,
+              "decisionId": "101-2",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 48,
+              "decisionId": "101-3",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 64,
+              "decisionId": "101-4",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 96,
+              "decisionId": "101-6",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 112,
+              "decisionId": "101-7",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 128,
+              "decisionId": "101-8",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 160,
+              "decisionId": "101-10",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 176,
+              "decisionId": "101-11",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 192,
+              "decisionId": "101-12",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 224,
+              "decisionId": "101-14",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 240,
+              "decisionId": "101-15",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 256,
+              "decisionId": "101-16",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 288,
+              "decisionId": "101-18",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 304,
+              "decisionId": "101-19",
+              "reason": "request_outstanding"
+            },
+            {
+              "tick": 320,
+              "decisionId": "101-20",
+              "reason": "request_outstanding"
+            }
+          ],
+          "responseErrors": [],
+          "wallSeconds": 2.884104487,
+          "survivalSeconds": 2.8833333333333333,
+          "questionCount": 64,
+          "decisions": 21
+        }
+      ],
+      "questionCountsPerApiCall": [
+        64
+      ],
+      "apiCallCount": 6,
+      "inferenceStatusCounts": {
+        "ok": 6
+      },
+      "forwardCallCounts": [
+        1
+      ],
+      "batchShapes": [
+        [
+          64,
+          392
+        ],
+        [
+          64,
+          400
+        ],
+        [
+          64,
+          416
+        ],
+        [
+          64,
+          424
+        ]
+      ],
+      "rawModelRepliesCaptured": 6,
+      "systemOneMs": {
+        "first": {
+          "systemOne": {
+            "count": 1,
+            "mean_ms": 449.83473400043295,
+            "p50_ms": 449.83473400043295,
+            "p95_ms": 449.83473400043295
+          },
+          "serverRequest": {
+            "count": 1,
+            "mean_ms": 450.3770999999688,
+            "p50_ms": 450.3770999999688,
+            "p95_ms": 450.3770999999688
+          },
+          "errors": 0
+        },
+        "warm": {
+          "systemOne": {
+            "count": 1,
+            "mean_ms": 452.473813999859,
+            "p50_ms": 452.473813999859,
+            "p95_ms": 452.473813999859
+          },
+          "serverRequest": {
+            "count": 1,
+            "mean_ms": 452.99191100002645,
+            "p50_ms": 452.99191100002645,
+            "p95_ms": 452.99191100002645
+          },
+          "errors": 0
+        },
+        "steady": {
+          "systemOne": {
+            "count": 4,
+            "mean_ms": 446.5606587499451,
+            "p50_ms": 449.86717099982343,
+            "p95_ms": 453.4340059999522
+          },
+          "serverRequest": {
+            "count": 4,
+            "mean_ms": 447.0488965000641,
+            "p50_ms": 450.37132000015845,
+            "p95_ms": 453.92695100008496
+          },
+          "errors": 0
+        },
+        "all": {
+          "systemOne": {
+            "count": 6,
+            "mean_ms": 448.09186383334537,
+            "p50_ms": 449.86717099982343,
+            "p95_ms": 453.4340059999522
+          },
+          "serverRequest": {
+            "count": 6,
+            "mean_ms": 448.5940995000419,
+            "p50_ms": 450.3770999999688,
+            "p95_ms": 453.92695100008496
+          },
+          "errors": 0
+        },
+        "windows1s": [
+          {
+            "index": 0,
+            "startMs": 0,
+            "endMs": 1000,
+            "systemOne": {
+              "count": 2,
+              "mean_ms": 451.15427400014596,
+              "p50_ms": 449.83473400043295,
+              "p95_ms": 452.473813999859
+            },
+            "serverRequest": {
+              "count": 2,
+              "mean_ms": 451.6845054999976,
+              "p50_ms": 450.3770999999688,
+              "p95_ms": 452.99191100002645
+            },
+            "errors": 0
+          },
+          {
+            "index": 1,
+            "startMs": 1000,
+            "endMs": 2000,
+            "systemOne": {
+              "count": 2,
+              "mean_ms": 441.4707290000024,
+              "p50_ms": 429.7265560003325,
+              "p95_ms": 453.2149019996723
+            },
+            "serverRequest": {
+              "count": 2,
+              "mean_ms": 441.94865750000645,
+              "p50_ms": 430.20978699996704,
+              "p95_ms": 453.68752800004586
+            },
+            "errors": 0
+          },
+          {
+            "index": 2,
+            "startMs": 2000,
+            "endMs": 3000,
+            "systemOne": {
+              "count": 2,
+              "mean_ms": 451.6505884998878,
+              "p50_ms": 449.86717099982343,
+              "p95_ms": 453.4340059999522
+            },
+            "serverRequest": {
+              "count": 2,
+              "mean_ms": 452.1491355001217,
+              "p50_ms": 450.37132000015845,
+              "p95_ms": 453.92695100008496
+            },
+            "errors": 0
+          }
+        ]
+      },
+      "gpuPeakAllocatedBytes": 2942460928,
+      "gpuPeakReservedBytes": 4169138176,
+      "weightCacheObservation": {
+        "beforeModelLoad": {
+          "pinnedSnapshot": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "afterModelLoad": {
+          "pinnedSnapshot": {
+            "present": true,
+            "fileCount": 36,
+            "bytes": 1520112060,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        },
+        "after_q64": {
+          "pinnedSnapshot": {
+            "present": true,
+            "fileCount": 36,
+            "bytes": 1520112060,
+            "scanError": null
+          },
+          "downloadActivity": "unknown; Hub transfer events are not observed by this runner"
+        }
+      },
+      "runtimeCacheObservation": {
+        "beforeModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "warmHistory": "unknown; snapshots show directory state only",
+        "afterModelLoad": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        },
+        "after_q64": {
+          "cudaCompiler": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "triton": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchExtensions": {
+            "present": false,
+            "fileCount": null,
+            "bytes": null,
+            "scanError": null
+          },
+          "torchInductor": {
+            "present": true,
+            "fileCount": 0,
+            "bytes": 0,
+            "scanError": null
+          },
+          "warmHistory": "unknown; directory presence does not prove cache hits or exact warm duration"
+        }
+      }
+    }
+  },
+  "privacyScan": {
+    "credentialOrVMPathFindings": 0,
+    "filesWithFindings": [],
+    "scope": "all JSON artifacts after normalizing runtime-history cache evidence to a path-free note"
+  },
+  "artifacts": [
+    {
+      "name": "kai-q3.game.json",
+      "bytes": 1645521,
+      "sha256": "c8f62622a1f4809da2b6c139bb435a064de1246ad70b1f6cc6a7a0425294d3e8",
+      "sensitivePatternCount": 0
+    },
+    {
+      "name": "kai-q3.metadata.json",
+      "bytes": 2916,
+      "sha256": "7a951b38f7de077bc0973a2593afca96552ee7f6f48a24f9338331c2ce0e01d8",
+      "sensitivePatternCount": 0
+    },
+    {
+      "name": "kai-q3.runner.json",
+      "bytes": 576327,
+      "sha256": "1b702b4f835c678fb613bbb326e726827806679c96fd536b52cfe6e886062583",
+      "sensitivePatternCount": 0
+    },
+    {
+      "name": "kai-q64.game.json",
+      "bytes": 499117,
+      "sha256": "01a1c4bbe693427bc4ef2ef9138682261297c506b19274cf1ef74f3e59322ff7",
+      "sensitivePatternCount": 0
+    },
+    {
+      "name": "kai-q64.metadata.json",
+      "bytes": 2875,
+      "sha256": "0c62c7c9db5ad474de5ccb15fc1988454f0db43bd747ce59caf0057b7fc7dba3",
+      "sensitivePatternCount": 0
+    },
+    {
+      "name": "kai-q64.runner.json",
+      "bytes": 232118,
+      "sha256": "de58550a59e18438908fd10cd2f2fa2d5172fa1ad7cbaa62ee52c287197daf94",
+      "sensitivePatternCount": 0
+    },
+    {
+      "name": "runtime-history.json",
+      "bytes": 967,
+      "sha256": "9e5a410f2bb11c4f5b87d8f4593a28dd975d0cc632cbadffaecd4c17d187b415",
+      "sensitivePatternCount": 0
+    }
+  ]
+}
