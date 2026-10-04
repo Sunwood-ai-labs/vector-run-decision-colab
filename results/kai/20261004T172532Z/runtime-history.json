@@ -1,0 +1,28 @@
+{
+  "model": "kai",
+  "runtimeReused": false,
+  "weightsCached": false,
+  "priorModelLoaded": false,
+  "priorSystemOneCall": false,
+  "priorInference": false,
+  "priorPrototypeGameRun": false,
+  "evidence": {
+    "runtimeReused": "Fresh dedicated Colab A100 session created for this R2 run; no previous session was attached.",
+    "weightsCached": "Before runner/model load, checked only presence of the pinned HF snapshot directory; present=false. No model files were opened.",
+    "priorModelLoaded": "Fresh session; setup completed clones, handoff checks, package bootstrap, and GPU capability checks only; model loader has not run.",
+    "priorSystemOneCall": "No System One or model API call was sent before this history file was written.",
+    "priorInference": "No model inference was requested before this history file was written.",
+    "priorPrototypeGameRun": "Only the two pinned canonical repositories were cloned and checked; no game CLI has run in this session."
+  },
+  "capturedBeforeModelLoadUtc": "2026-10-04T17:32:38.028484+00:00",
+  "runtime": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "torch": "2.11.0+cu130",
+    "cuda": "13.0",
+    "bf16Supported": true
+  },
+  "pinnedModel": {
+    "repo": "vllm-sr/Decision-2.0-Kai-0.6B",
+    "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764"
+  }
+}

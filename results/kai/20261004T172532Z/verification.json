@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "runId": "20261004T172532Z",
+  "pins": {
+    "benchmark": {
+      "repository": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab",
+      "commit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0"
+    },
+    "game": {
+      "repository": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+      "commit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3"
+    }
+  },
+  "model": {
+    "id": "vllm-sr/Decision-2.0-Kai-0.6B",
+    "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764",
+    "baseRevision": null
+  },
+  "condition": {
+    "gpu": "NVIDIA A100-SXM4-40GB",
+    "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+    "quantization": "none",
+    "offload": null
+  },
+  "runtimeHistory": {
+    "file": "runtime-history.json",
+    "sha256": "6d4e646d29fc0d398502cac18cd10157bc70f1da9c00c076c3f4a7c7cf35daab",
+    "runtimeReused": false,
+    "weightsCached": false,
+    "priorModelLoaded": false,
+    "priorSystemOneCall": false,
+    "priorInference": false
+  },
+  "series": {
+    "q3": {
+      "questionsPerRequest": 3,
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505
+      ],
+      "runnerStatus": "cli_process_exited_zero",
+      "aggregateMeasurementStatus": "not_aggregated",
+      "gameReportStatus": "raw_status_fields_captured",
+      "gameReportSha256": "06cdf567d2933048d3c9a88170dc5f8e9f9b21732eaa25d3c5ba418730e54248",
+      "artifactSha256": "06cdf567d2933048d3c9a88170dc5f8e9f9b21732eaa25d3c5ba418730e54248",
+      "gameReportHashMatchesArtifact": true,
+      "traceReplayValid": true,
+      "episodes": [
+        {
+          "seed": 101,
+          "terminalStatus": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "distanceMetres": 72.99783055555557,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        },
+        {
+          "seed": 202,
+          "terminalStatus": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "distanceMetres": 72.99783055555557,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        },
+        {
+          "seed": 303,
+          "terminalStatus": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "distanceMetres": 72.35704097222222,
+          "survivalSeconds": 2.8583333333333334,
+          "censored": false
+        },
+        {
+          "seed": 404,
+          "terminalStatus": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "distanceMetres": 72.78421875000001,
+          "survivalSeconds": 2.875,
+          "censored": false
+        },
+        {
+          "seed": 505,
+          "terminalStatus": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "distanceMetres": 72.99783055555557,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        }
+      ],
+      "decisionStatuses": {
+        "answered": 93,
+        "skipped_outstanding": 12
+      },
+      "measuredApiResponses": 93,
+      "neuralForwardCallsByResponse": {
+        "1": 93
+      },
+      "systemOneTimingScope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
+      "systemOneMs": {
+        "mean": 61.785,
+        "p50": 45.343,
+        "p95": 47.653
+      },
+      "loadMs": 29068.570163999993,
+      "inferenceDrained": true,
+      "gpuPeakAllocatedBytes": 1579725312,
+      "gpuPeakReservedBytes": 1616904192
+    },
+    "q64": {
+      "questionsPerRequest": 64,
+      "seeds": [
+        101
+      ],
+      "runnerStatus": "cli_process_exited_zero",
+      "aggregateMeasurementStatus": "not_aggregated",
+      "gameReportStatus": "raw_status_fields_captured",
+      "gameReportSha256": "33e5a938a210ff1eb8a82733c103802c7b2d1904e3d8966b2bf2495b53461df8",
+      "artifactSha256": "33e5a938a210ff1eb8a82733c103802c7b2d1904e3d8966b2bf2495b53461df8",
+      "gameReportHashMatchesArtifact": true,
+      "traceReplayValid": true,
+      "episodes": [
+        {
+          "seed": 101,
+          "terminalStatus": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "distanceMetres": 72.99783055555557,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        }
+      ],
+      "decisionStatuses": {
+        "answered": 5,
+        "late_answer_not_applied": 1,
+        "skipped_outstanding": 15
+      },
+      "measuredApiResponses": 6,
+      "neuralForwardCallsByResponse": {
+        "1": 6
+      },
+      "systemOneTimingScope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
+      "systemOneMs": {
+        "mean": 445.79,
+        "p50": 446.585,
+        "p95": 452.552
+      },
+      "loadMs": 29068.570163999993,
+      "inferenceDrained": true,
+      "gpuPeakAllocatedBytes": 2942460928,
+      "gpuPeakReservedBytes": 4169138176
+    }
+  },
+  "rawArtifacts": [
+    {
+      "file": "kai-q3.game.json",
+      "bytes": 1639002,
+      "sha256": "06cdf567d2933048d3c9a88170dc5f8e9f9b21732eaa25d3c5ba418730e54248"
+    },
+    {
+      "file": "kai-q3.metadata.json",
+      "bytes": 2933,
+      "sha256": "ffdc0fe2e96ed347e32080d65a443d9f4bef7e24d8578cf31736edf6d23933a5"
+    },
+    {
+      "file": "kai-q3.runner.json",
+      "bytes": 570472,
+      "sha256": "34ef9432d88b37c4aba4b2cbe8392a544368e5acad09df5edaa3cb41139f8224"
+    },
+    {
+      "file": "kai-q64.game.json",
+      "bytes": 499119,
+      "sha256": "33e5a938a210ff1eb8a82733c103802c7b2d1904e3d8966b2bf2495b53461df8"
+    },
+    {
+      "file": "kai-q64.metadata.json",
+      "bytes": 2892,
+      "sha256": "cf856553416c2b56e2cc1fb016d00e65f3514711b98b0a189d3a556fc1616cd8"
+    },
+    {
+      "file": "kai-q64.runner.json",
+      "bytes": 232162,
+      "sha256": "209a0eb0dffa891c5296bb33b8351216a785232c5702dc322dd32b424904a304"
+    },
+    {
+      "file": "runtime-history.json",
+      "bytes": 1311,
+      "sha256": "6d4e646d29fc0d398502cac18cd10157bc70f1da9c00c076c3f4a7c7cf35daab"
+    }
+  ],
+  "verification": {
+    "sourceBytesPreserved": true,
+    "transformations": [],
+    "pinnedValidator": {
+      "path": "scripts/verify-decision-trace.mjs",
+      "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+      "gitBlobSha1": "2a76d38268f0d4d4d960c433ab5a8eb42535ce25",
+      "q3Valid": true,
+      "q64Valid": true
+    },
+    "privacy": {
+      "scope": "seven raw artifact files",
+      "credentialPatternMatches": 0
+    },
+    "q64LateResponse": {
+      "status": "late_answer_not_applied",
+      "rawRequestPresent": true,
+      "rawResponsePresent": true,
+      "rawProbabilitiesPresent": true,
+      "applied": false
+    }
+  }
+}
