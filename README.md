@@ -6,7 +6,7 @@ Decision 2.0の7モデルを、既存の横スクロールゲーム **[VECTOR RU
 
 ## 現在の状態
 
-既存VECTOR RUNへ接続する計測APIとノートブックを整備中です。**正式ゲームでの実測結果はまだありません。** 過去の作業commitにある60Hz・4行動の「決断レーン」は別ゲームの接続確認であり、VECTOR RUNの成績から除外します。
+既存VECTOR RUNの正式計測APIとノートブックを公開し、専用Colabでの実測結果を順次追加しています。[公開結果](results/)には生のゲーム記録、GPU実行記録、検証証拠を保存します。Sol-2B-Reasoningは配布元の固定revisionがHTTP 401を返したため、ゲーム未測定として記録しています。過去の作業commitにある60Hz・4行動の「決断レーン」は別ゲームの接続確認であり、VECTOR RUNの成績から除外します。
 
 ## 実行構成
 
@@ -27,11 +27,11 @@ Kai-0.6B、Eos-0.8B、Sol-2B、Sol-2B-Reasoning、Nox-4B、Lux-9B、Vega-27Bを�
 
 GPU名、モデルrevision、BF16/FP32混在の読み込み条件、依存版、ゲームとノートブックのcommit、推論の実forward数、遅れて到着した回答も保存します。GPU条件が違う結果は同じ条件として順位付けしません。
 
-ノートブックは[notebooks/vector_run_decision_colab.ipynb](notebooks/vector_run_decision_colab.ipynb)、Colab CLI手順は[experiments/colab](experiments/colab)にまとめます。正式ゲームcommitと実行コードの整備後、再現コマンドをここに追加します。
+ノートブックは[notebooks/vector_run_decision_colab.ipynb](notebooks/vector_run_decision_colab.ipynb)、Colab CLI手順は[experiments/colab](experiments/colab)にまとめます。正式測定はゲーム`717f02dc9852b88c253ace32f42fcb6d780ed0d3`と実行コード`b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0`を別々にcloneして固定します。後続の録画機能・文書・結果の追加で、この測定コードは変更しません。
 
 ## 3×3比較動画
 
-7モデルとルール・無操作の2対照を9枠に配置します。同じシードの実測記録を同じ時計で等速再生し、ブラウザでキャプチャします。録画中に時間を止めたり、モデルごとに速度を変えたりしません。
+7モデルとルール・無操作の2対照を9枠に配置します。同じシードの実測記録を同じ時計で等速再生し、ブラウザでキャプチャします。録画中に時間を止めたり、モデルごとに速度を変えたりしません。モデルを取得できず未測定の枠は、理由を静的に表示します。
 
 個別Colabでの実測記録の再生であり、同期した9モデルの同時推論ではありません。元の入力ログとゲーム物理の照合、全フレームの動画デコード、代表画像の目視を検証に含めます。
 
