@@ -112,6 +112,15 @@ class App:
         self.metadata = metadata or {}
         self.lock = threading.Lock()
         self.request_index = 0
+        self.neural_forward_calls = 0
+        runtime = getattr(model, "runtime", None)
+        backend = getattr(runtime, "backend", None)
+        neural_model = getattr(backend, "model", None)
+        self.forward_hook = (neural_model.register_forward_pre_hook(self._count_forward)
+                             if hasattr(neural_model, "register_forward_pre_hook") else None)
+
+    def _count_forward(self, module: Any, inputs: Any) -> None:
+        self.neural_forward_calls += 1
 
     def answer(self, payload: dict[str, Any]) -> dict[str, Any]:
         state = payload.get("state")
@@ -136,6 +145,7 @@ class App:
             if cuda:
                 torch.cuda.synchronize()
             started = time.perf_counter()
+            self.neural_forward_calls = 0
             result = self.model.system_one(state=model_state, questions=questions)
             if cuda:
                 torch.cuda.synchronize()
@@ -147,6 +157,7 @@ class App:
             result["measurements"] = {
                 "system_one_ms": elapsed,
                 "timing_scope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
+                "neural_forward_calls": self.neural_forward_calls if self.forward_hook else None,
                 "request_index": self.request_index,
                 "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated() if cuda else None,
                 "gpu_peak_reserved_bytes": torch.cuda.max_memory_reserved() if cuda else None,

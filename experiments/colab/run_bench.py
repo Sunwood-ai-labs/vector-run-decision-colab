@@ -196,7 +196,7 @@ def main() -> int:
             blocked = gate or ("Previous inference did not drain; refusing concurrent GPU loads" if fatal_drain else None)
             if entry.get("status") in ("blocked", "unavailable"):
                 blocked = blocked or entry.get("blocked_reason") or "Model manifest marks model unavailable"
-            minimum = entry.get("minimum_gpu_memory_bytes") or entry.get("required_gpu_memory_bytes")
+            minimum = entry.get("minimum_gpu_memory_bytes") or entry.get("required_gpu_memory_bytes") or entry.get("memory_estimate", {}).get("minimum_bytes")
             if minimum and env["gpu"] and minimum > env["gpu"]["free_memory_before_load_bytes"]:
                 blocked = f"GPU memory preflight: requires {minimum} bytes; available {env['gpu']['free_memory_before_load_bytes']} bytes. No quantization/offload applied."
             if blocked:

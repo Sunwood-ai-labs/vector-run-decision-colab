@@ -435,7 +435,24 @@
         "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/blob/7aec49ae11a18741706da549ab626b9052795fe7/config.json",
         "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/blob/7aec49ae11a18741706da549ab626b9052795fe7/MODEL_MANIFEST.json",
         "https://huggingface.co/vllm-sr/Decision-2.0-Vega-27B/blob/7aec49ae11a18741706da549ab626b9052795fe7/modeling_decision2.py"
-      ]
+      ],
+      "memory_estimate": {
+        "kind": "arithmetic lower bound, not measured GPU memory",
+        "base_parameters": 25624600064,
+        "base_assumed_bytes_per_parameter": 2,
+        "adapter_parameters": 3735289856,
+        "adapter_bytes_per_parameter": 4,
+        "head_parameters": 5263872,
+        "head_bytes_per_parameter": 4,
+        "minimum_bytes": 66211415040,
+        "excludes": [
+          "FP32 base parameters not eligible for BF16 residency",
+          "activations",
+          "temporary allocations"
+        ],
+        "needs_gpu_capacity_validation": true,
+        "minimum_gib": 61.664185523986816
+      }
     }
   ]
 }
