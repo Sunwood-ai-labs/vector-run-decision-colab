@@ -1,6 +1,6 @@
 {
   "runnerSchemaVersion": 1,
-  "runnerStatus": "model_load_blocked",
+  "runnerStatus": "model_access_blocked",
   "aggregateMeasurementStatus": "not_aggregated",
   "model": {
     "id": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
@@ -153,7 +153,7 @@
     },
     "modelPhaseDefinition": "loadMs measures this process's model load; q3 request 1 is the first API call after model load, request 2 is warm, request 3+ is steady; q64 request 1 is its first API call after q3 on the same loaded model. This does not establish a cold Colab runtime, GPU, filesystem, or kernel cache.",
     "windowDefinition": {
-      "durationSeconds": 1.0,
+      "durationSeconds": 1,
       "origin": "series CLI start",
       "latencies": "request starts grouped by elapsed window"
     },
@@ -241,5 +241,8 @@
     "reason": "vllm-sr/Decision-2.0-Sol-2B-Reasoning is not a local folder and is not a valid model identifier listed on '[URL REDACTED]\nIf this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=[REDACTED]",
     "inferenceRecords": [],
     "inferenceDrained": true
-  }
+  },
+  "failureStage": "before_model_load_completed",
+  "inferenceStatus": "not_started",
+  "neuralForwardCalls": 0
 }
