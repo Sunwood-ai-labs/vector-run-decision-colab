@@ -1171,5 +1171,142 @@
       "sha256": "9e5a410f2bb11c4f5b87d8f4593a28dd975d0cc632cbadffaecd4c17d187b415",
       "sensitivePatternCount": 0
     }
-  ]
+  ],
+  "privacyNormalizationProvenance": {
+    "status": "weak_provenance_quarantined",
+    "aggregateEligible": false,
+    "rawPreSanitizationGameJsonAvailable": false,
+    "rawGameShaSemantics": "recordedRawGameSha256 values come from runner.gameReport.sha256; source game bytes were not found, so these recorded digests could not be independently verified",
+    "sourceSearch": {
+      "scope": [
+        "run-specific local staging artifacts",
+        "isolated results clone artifact directory",
+        "task-named temporary artifacts and backups",
+        "task-named files/directories in WSL /tmp"
+      ],
+      "rawGameFilesFound": false,
+      "sanitizerSourceShowsInPlaceWrite": true
+    },
+    "sanitizerReview": {
+      "operation": "Recursive JSON traversal replaced values only when key was weightsCached and value was a string; each JSON file was written in place with no backup in the reviewed script.",
+      "booleanWeightsCachedFields": "not targeted by this string-only branch",
+      "sourceLocation": "task-local temporary sanitizer script (host path omitted)"
+    },
+    "physicalTraceUnchanged": null,
+    "physicalTraceAssessment": "Not established: the original game JSON files matching the recorded raw SHA values are unavailable, so no before/after re-hash or JSON diff can verify actions, states, raw probabilities, timings, or pins. Treat both series as weak provenance and exclude them from aggregates.",
+    "artifacts": [
+      {
+        "artifact": "kai-q3.game.json",
+        "publishedArtifactSha256": "c8f62622a1f4809da2b6c139bb435a064de1246ad70b1f6cc6a7a0425294d3e8",
+        "transformations": [
+          {
+            "path": "$.metadata.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawGameSha256": "ecf52cb5b7d4558ecd22e0577037ede3373a4c42a2b8eee58c454dd9e7744706",
+        "recordedRawHashSource": "kai-q3.runner.json:gameReport.sha256 (recorded before normalization; not independently re-hashed)"
+      },
+      {
+        "artifact": "kai-q3.metadata.json",
+        "publishedArtifactSha256": "7a951b38f7de077bc0973a2593afca96552ee7f6f48a24f9338331c2ce0e01d8",
+        "transformations": [
+          {
+            "path": "$.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawArtifactSha256": null
+      },
+      {
+        "artifact": "kai-q3.runner.json",
+        "publishedArtifactSha256": "1b702b4f835c678fb613bbb326e726827806679c96fd536b52cfe6e886062583",
+        "transformations": [
+          {
+            "path": "$.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          },
+          {
+            "path": "$.metadata.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawArtifactSha256": null
+      },
+      {
+        "artifact": "kai-q64.game.json",
+        "publishedArtifactSha256": "01a1c4bbe693427bc4ef2ef9138682261297c506b19274cf1ef74f3e59322ff7",
+        "transformations": [
+          {
+            "path": "$.metadata.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawGameSha256": "d4c15946268fac302b9d045c92258df4eb988bbe842d8be1dd93c98863cd9b70",
+        "recordedRawHashSource": "kai-q64.runner.json:gameReport.sha256 (recorded before normalization; not independently re-hashed)"
+      },
+      {
+        "artifact": "kai-q64.metadata.json",
+        "publishedArtifactSha256": "0c62c7c9db5ad474de5ccb15fc1988454f0db43bd747ce59caf0057b7fc7dba3",
+        "transformations": [
+          {
+            "path": "$.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawArtifactSha256": null
+      },
+      {
+        "artifact": "kai-q64.runner.json",
+        "publishedArtifactSha256": "de58550a59e18438908fd10cd2f2fa2d5172fa1ad7cbaa62ee52c287197daf94",
+        "transformations": [
+          {
+            "path": "$.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          },
+          {
+            "path": "$.metadata.runtimeHistory.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawArtifactSha256": null
+      },
+      {
+        "artifact": "runtime-history.json",
+        "publishedArtifactSha256": "9e5a410f2bb11c4f5b87d8f4593a28dd975d0cc632cbadffaecd4c17d187b415",
+        "transformations": [
+          {
+            "path": "$.evidence.weightsCached",
+            "before": "Not retained: the pre-sanitization JSON is unavailable; task records and the reviewed sanitizer establish that this was path-bearing cache evidence, but not its exact original string.",
+            "after": "Before bootstrap and model loading, the pinned Kai revision snapshot was checked in the HF cache; it was absent (false).",
+            "reason": "Remove host-specific absolute Hugging Face cache path evidence from public JSON."
+          }
+        ],
+        "physicalTraceUnchanged": null,
+        "recordedRawArtifactSha256": null
+      }
+    ]
+  }
 }
