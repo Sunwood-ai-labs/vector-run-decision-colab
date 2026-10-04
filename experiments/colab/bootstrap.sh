@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Run only in the dedicated Colab VM; does not manage any Colab sessions.
 set -euo pipefail
-cd "${VECTOR_RUN_ROOT:-/content/vector-run}"
+cd "${VECTOR_RUN_ROOT:-/content/vector-run-decision-colab}"
 if ! command -v uv >/dev/null 2>&1; then
   curl -LsSf https://astral.sh/uv/0.12.23/install.sh | sh
 fi

@@ -1,4 +1,4 @@
-name: Verify benchmark code
+name: Verify Colab benchmark scaffold
 on:
   push:
   pull_request:
@@ -9,9 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-      - uses: astral-sh/setup-uv@v6
-      - run: node --test tests/*.test.mjs
-      - run: uv run --no-project --python 3.12 server/decision_server.py --self-test
+          node-version: '24.15.0'
+      - name: Validate notebook JSON, empty outputs, seven model pins and game pin
+        run: python scripts/validate_colab_notebooks.py
+      - name: Run CPU-only adapter and blocked-report unit tests
+        run: python -m unittest discover -s tests -v
