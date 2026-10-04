@@ -1,0 +1,22 @@
+{
+  "status": "design_in_progress_not_ready_for_measurement",
+  "repository": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+  "baselineCommit": "7adcbaad44b249c9505e5a8e9bcfa4f79b11f364",
+  "measurementCommit": null,
+  "localRepository": "C:/Prj/vector-run-benchmark",
+  "branch": "bench/colab-realtime-api",
+  "physicsHz": 120,
+  "decisionEveryTicks": 16,
+  "actions": ["wait", "jump", "release"],
+  "observationPipeline": "structured-visible-state-v1",
+  "input": "JSON visible state plus Japanese question instructions; no hidden course state or gold labels",
+  "plannedCli": "node scripts/decision-bench.mjs --agent remote --seeds 101,202,303,404,505 --questions 3 --max-seconds 30 --max-jumps 2 --model MODEL --url http://127.0.0.1:8780/v1/systemone --metadata FILE --output FILE --trace",
+  "metadataPlanned": {"model": {"id": "MODEL", "revision": "HF_SHA", "baseRevision": null}, "hardware": {"gpu": "ACTUAL_GPU", "dtype": "mixed BF16/FP32", "quantization": "none", "dependencies": {}}, "gameCommit": "PINNED_EXTERNAL_GAME_SHA"},
+  "primarySeeds": [101,202,303,404,505],
+  "stressSeeds": [101],
+  "stressQuestions": 64,
+  "timeLimitSeconds": 30,
+  "timeLimitClassification": "censored; never a clear or a completed collision benchmark",
+  "traceSchema": "pending game owner handoff",
+  "prototypeCommitExcluded": "87d41b9904b20b298467caa7cc892500959f7c65"
+}
