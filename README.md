@@ -1,60 +1,40 @@
-# VECTOR RUN × Decision 2.0 × Google Colab
+# Decision 2.0 × VECTOR RUN — Google Colab notebooks
 
-横スクロールゲームをDecision 2.0の7モデルで走らせ、クリア・被弾・行動・推論遅延を測る実験です。**推論中もゲームの時間を進めます。** モデルごとに専用Colabランタイムで実行し、7モデルと2つの対照走者を3×3の動画で比較します。
+Decision 2.0の7モデルを、既存の横スクロールゲーム **[VECTOR RUN](https://github.com/Sunwood-ai-labs/vector-run-benchmark)** で比較するColab実験リポジトリです。ゲーム本体・物理・観測API・録画機能はゲームのリポジトリで管理し、ここにはノートブック、モデル実行コード、計測結果、比較動画を置きます。
 
-[![Code verification](https://github.com/Sunwood-ai-labs/vector-run-decision-colab/actions/workflows/verify.yml/badge.svg)](https://github.com/Sunwood-ai-labs/vector-run-decision-colab/actions/workflows/verify.yml)
 [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Sunwood-ai-labs/vector-run-decision-colab/blob/main/notebooks/vector_run_decision_colab.ipynb)
 
-## 比較条件
+## 現在の状態
 
-Kai-0.6B、Eos-0.8B、Sol-2B、Sol-2B-Reasoning、Nox-4B、Lux-9B、Vega-27Bを対象にします。重みはリポジトリに含めません。
+既存VECTOR RUNへ接続する計測APIとノートブックを整備中です。**正式ゲームでの実測結果はまだありません。** 過去の作業commitにある60Hz・4行動の「決断レーン」は別ゲームの接続確認であり、VECTOR RUNの成績から除外します。
 
-同じ状態と`hold / jump / slide / strike`の4候補を渡します。主測定は`action / commit / danger`の3問、シード1・2・3。64問の測定はシード1の別系列です。ルール走者とholdのみの走者は、モデルとは別の対照です。
+## 実行構成
 
-GPU、モデルrevision、dtype、量子化、依存版を記録します。GPUの同時起動枠に達した場合は制限を記録し、空いた枠を使います。詳しくは[計測方法](docs/benchmark-method.md)を参照してください。
-
-## 遊ぶ
-
-Windowsでは`play.bat`を起動して、<http://127.0.0.1:8734/>を開きます。Pythonとuvがある環境では次でも起動できます。
-
-```sh
-uv run --no-project --python 3.12 -m http.server 8734 --bind 127.0.0.1
-```
-
-| キー | 動作 |
+| リポジトリ | 管理するもの |
 | --- | --- |
-| Space / ↑ / W | ジャンプ：箱、欠線 |
-| ↓ / S | スライディング：梁 |
-| J / K | ストライク：ドローン |
-| R | 同じシードで再走 |
+| [vector-run-benchmark](https://github.com/Sunwood-ai-labs/vector-run-benchmark) | ゲーム本体、120Hz物理、ジャンプ・リリース、観測と計測API、3×3再生・録画 |
+| このリポジトリ | Colabノートブック、Decision 2.0読み込み、CLI運用、公開結果と動画 |
 
-ルール走者はモデルの推論結果ではありません。モデルで遊ぶにはColabのノートブックまたは推論サーバーを使います。
+ゲームは固定commitで外部から取得します。ゲームのコードをコピーして二重管理しません。モデル重み、認証情報、Colabセッション識別子も公開物に含めません。
 
-## リアルタイムで測る
+## Colabで比較する
 
-Node.js 24とPythonを使います。物理は60FPS、判断機会は8フレームごと。推論中も物理を進め、返ってきた行動を1回だけ適用します。反射ルールによる介入や候補削減は行いません。
+Kai-0.6B、Eos-0.8B、Sol-2B、Sol-2B-Reasoning、Nox-4B、Lux-9B、Vega-27Bを対象にします。モデルごとに専用Git worktreeとColabランタイムを使い、Google Colab CLIで並列実行します。GPU枠の制限は記録し、空いた枠を再利用します。
 
-```sh
-node bench.mjs --agent rule --timing realtime --seeds 3 --questions 3 --trace --output results/rule-q3.json
-node bench.mjs --agent idle --timing realtime --seeds 3 --questions 3 --trace --output results/idle-q3.json
-node bench.mjs --agent remote --timing realtime --seeds 3 --questions 3 --trace --model vllm-sr/Decision-2.0-Kai-0.6B --url http://127.0.0.1:8780/v1/systemone --output results/kai-q3.json
-```
+ゲームの時間は推論中も進めます。行動は`wait / jump / release`、物理120Hz、判断機会は16tickごと。モデルには画面内の状態だけをJSONで渡し、コースの未来情報を渡しません。この観測方法は`structured-visible-state-v1`として、通常の画像入力と区別します。
 
-64問は`--questions 64 --seeds 1`を指定し、別ファイルに保存します。
+主測定は3問・シード101/202/303/404/505。64問はシード101の別系列です。ゲームは終わりのない走者なので、30秒の上限に到達したランは打切りとして記録し、クリアとは扱いません。
 
-## 3×3動画
+GPU名、モデルrevision、BF16/FP32混在の読み込み条件、依存版、ゲームとノートブックのcommit、推論の実forward数、遅れて到着した回答も保存します。GPU条件が違う結果は同じ条件として順位付けしません。
 
-9枠は7モデル・ルール走者・hold走者です。共通シードを等速で再生し、終了した枠は結果を表示したまま全体の時計を進めます。
+ノートブックは[notebooks/vector_run_decision_colab.ipynb](notebooks/vector_run_decision_colab.ipynb)、Colab CLI手順は[experiments/colab](experiments/colab)にまとめます。正式ゲームcommitと実行コードの整備後、再現コマンドをここに追加します。
 
-動画は**保存した実測traceの等速再生をブラウザでキャプチャしたもの**です。9モデルの同期した同時推論を撮影したものではありません。失敗や未測定の枠はその状態を表示し、ルール走者で置き換えません。
+## 3×3比較動画
 
-## コードの確認
+7モデルとルール・無操作の2対照を9枠に配置します。同じシードの実測記録を同じ時計で等速再生し、ブラウザでキャプチャします。録画中に時間を止めたり、モデルごとに速度を変えたりしません。
 
-```sh
-node --test tests/*.test.mjs
-uv run --no-project --python 3.12 server/decision_server.py --self-test
-```
+個別Colabでの実測記録の再生であり、同期した9モデルの同時推論ではありません。元の入力ログとゲーム物理の照合、全フレームの動画デコード、代表画像の目視を検証に含めます。
 
-CIはゲームと接続コードを検証します。CIの成功だけでGPU推論やモデルのクリアを確認したとは扱いません。
+## 出典
 
-このゲームは明示したルールへの追従とリアルタイム制御の小さな実験です。JevArenaやDecision Indexの再現ではありません。[ライセンス](LICENSE)・[モデルの出典](NOTICE.md)を参照してください。
+[固定モデルと配布元コードの監査](docs/model-sources.md)・[配布物とライセンス](NOTICE.md)。この小さなゲーム実験は、JevArenaやDecision Indexの再現ではありません。
