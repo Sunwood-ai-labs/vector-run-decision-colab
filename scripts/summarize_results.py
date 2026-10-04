@@ -1111,8 +1111,17 @@ def _self_test(results_root: Path) -> None:
         or any(not HASH_RE.fullmatch(item.get("publishedGameSha256", "")) for item in kai_pending)
     ):
         raise RejectedInput("self-test failed to retain both Kai hashes as pending verification")
-    if not kai_pending and {item["series"] for item in series.get("kai", [])} != {"q3", "q64"}:
-        raise RejectedInput("self-test expected Kai proof acceptance or explicit pending status")
+    kai_series = {item["series"] for item in series.get("kai", [])}
+    if not kai_pending and kai_series != {"q3", "q64"}:
+        inventory = _read_json(results_root.parent / "handoffs" / "formal-results.json")
+        kai_inventory = (inventory.get("targets") or {}).get("kai")
+        if (
+            kai_series
+            or not isinstance(kai_inventory, dict)
+            or kai_inventory.get("status") != "pending"
+            or kai_inventory.get("q3Paths") != []
+        ):
+            raise RejectedInput("self-test expected Kai proof acceptance or explicit pending inventory with no trace paths")
     allowed_proof = {
         "artifactTransformations": [{
             "artifact": "trace.game.json",
@@ -1146,7 +1155,7 @@ def main(argv: list[str] | None = None) -> int:
         root = _safe_results_root(args.results_root)
         if args.self_test:
             _self_test(root)
-        print("self-test: pass (official series, Vega verifier, blocked evidence, Kai hashes/proof gate, pins, paths)")
+            print("self-test: pass (official series, Vega verifier, blocked evidence, Kai pending/proof gate, pins, paths)")
         series, unavailable, rejected = collect_results(root)
         summary = build_summary(series, unavailable, rejected)
         accepted_count = sum(len(items) for items in series.values())
