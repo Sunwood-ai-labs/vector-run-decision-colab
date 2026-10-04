@@ -1,0 +1,106 @@
+{
+  "artifactKind": "vector-run-video-capture-qa",
+  "artifactVersion": 1,
+  "status": "passed",
+  "video": {
+    "file": "vector-run-comparison.mp4",
+    "sha256": "3e0aacb39f6bae763d74494290ccaf9d2eefb222f7ba0082d969b1b9eef69cd8",
+    "sizeBytes": 2235654,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "30/1",
+          "avg_frame_rate": "30/1",
+          "duration": "33.000000",
+          "nb_frames": "990"
+        }
+      ],
+      "format": {
+        "duration": "33.000000"
+      }
+    }
+  },
+  "browser": {
+    "mode": "playwright-launch",
+    "executable": "chrome.exe",
+    "headless": false,
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    }
+  },
+  "timing": {
+    "browserElapsedMs": 33000.50000000447,
+    "pageObservedElapsedMs": 33006.90000000596,
+    "hostElapsedMs": 35520.437399999995,
+    "startSpreadMs": 0.10000000149011612,
+    "maxFrameGapMs": 74.3000000029806,
+    "frameCount": 1848,
+    "recordingStartOffsetSeconds": 11.70719999999553
+  },
+  "captureLayout": {
+    "captureMode": true,
+    "gateVisible": false,
+    "comparisonVisible": true,
+    "tileIds": [
+      "kai",
+      "eos",
+      "sol",
+      "solReasoning",
+      "nox",
+      "lux",
+      "vega",
+      "rule",
+      "idle"
+    ],
+    "reasoningHasIframe": false,
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "scrollHeight": 1080,
+    "tilesWithinViewport": true
+  },
+  "sourceManifestSha256": "4aecfdbb47d85e1300a5919ab543e060614f250cac40e74ae4ac6c275739d3a9",
+  "fullDecode": {
+    "passed": true,
+    "tool": "ffmpeg",
+    "mode": "full video decode to null output"
+  },
+  "qaFrames": [
+    {
+      "relativePath": "qa\\start.png",
+      "sha256": "a6817af7fdd3734f6689cb0db052b2b13eacdd1ee3d721cc17cee1bfb971739f"
+    },
+    {
+      "relativePath": "qa\\mid.png",
+      "sha256": "46bb029e33a676e5f4436fcf8f7f2a32f3b7c920262953a863c83eb0432a55b4"
+    },
+    {
+      "relativePath": "qa\\end.png",
+      "sha256": "c6a0e035f6c9be6434a333fc94b8a3e541163092b75bd9ac81e74d35a46eee8f"
+    }
+  ],
+  "visualQA": {
+    "status": "passed",
+    "requiredFrames": [
+      "qa\\start.png",
+      "qa\\mid.png",
+      "qa\\end.png"
+    ],
+    "reviewedAtUtc": "2026-10-04T18:08:10.422Z",
+    "reviewMethod": "Manual review of start/mid/end PNGs by capture owner and independent Luna Max",
+    "checks": [
+      "All nine tiles are present in the 3x3 display order.",
+      "Sol-Reasoning is a static 未測定:配布元401 card with no game replay.",
+      "Model names and actual GPU labels are visible.",
+      "The grid and game panels are not clipped.",
+      "Terminal statuses and the right-censored rule result are visible at the end."
+    ]
+  },
+  "sourceManifestFile": "capture-inputs.json"
+}

@@ -1,0 +1,200 @@
+{
+  "manifestKind": "vector-run-comparison-capture-inputs",
+  "manifestVersion": 1,
+  "createdAt": "2026-10-04T17:50:56.427Z",
+  "pins": {
+    "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "sourceDigest": "d7f9de9c3aaf0e22669dd54e916f9a854ea33b2339f83c183438f4c93be5357a",
+    "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0"
+  },
+  "cohort": {
+    "schema": "vector-run-decision-bench/v1",
+    "questionCount": 3,
+    "runIds": [
+      "kai",
+      "eos",
+      "sol",
+      "nox",
+      "lux",
+      "vega",
+      "rule",
+      "idle"
+    ]
+  },
+  "sources": [
+    {
+      "kind": "runner_provenance",
+      "id": "kai",
+      "relativePath": "../results/kai/20261004T172532Z/kai-q3.runner.json",
+      "sha256": "34ef9432d88b37c4aba4b2cbe8392a544368e5acad09df5edaa3cb41139f8224",
+      "reportNameMapping": {
+        "originalRunnerFilename": "kai-q3.game.json",
+        "publishedFilename": "kai-q3.game.json"
+      }
+    },
+    {
+      "kind": "runner_verification",
+      "id": "kai",
+      "relativePath": "../results/kai/20261004T172532Z/verification.json",
+      "sha256": "de3d4553433d71c07a44b8c7bb1c7fde4f2ed4ff6012de0d78474f261e6a73ac"
+    },
+    {
+      "kind": "native_report",
+      "id": "kai",
+      "relativePath": "../results/kai/20261004T172532Z/kai-q3.game.json",
+      "sha256": "06cdf567d2933048d3c9a88170dc5f8e9f9b21732eaa25d3c5ba418730e54248"
+    },
+    {
+      "kind": "runner_provenance",
+      "id": "eos",
+      "relativePath": "../results/eos/eos-20261005T010117/eos-q3.runner.json",
+      "sha256": "89dde6ac8c04ca735f83616d641c11b1706bfdfa24334975a4e86e4225854914",
+      "reportNameMapping": {
+        "originalRunnerFilename": "eos-q3.game.json",
+        "publishedFilename": "eos-q3.game.json"
+      }
+    },
+    {
+      "kind": "runner_verification",
+      "id": "eos",
+      "relativePath": "../results/eos/eos-20261005T010117/verification.json",
+      "sha256": "81aa0e34512e5165dbb8cba60d7dbc2ecc62bb346ac0e06538c4c1a4a7852c10"
+    },
+    {
+      "kind": "native_report",
+      "id": "eos",
+      "relativePath": "../results/eos/eos-20261005T010117/eos-q3.game.json",
+      "sha256": "2d1ec85798322ce5debbecd4b9110ff39677c0cb1a50dffaf7d900a6c066fc4d"
+    },
+    {
+      "kind": "runner_provenance",
+      "id": "sol",
+      "relativePath": "../results/sol/sol-20261004T160248Z/sol-q3.runner.json",
+      "sha256": "2022e0ab5cf9b475219ff5bbaaa14611130e2d7cf5deb08098753576940c08cc",
+      "reportNameMapping": {
+        "originalRunnerFilename": "sol-q3.game.json",
+        "publishedFilename": "sol-q3.game.json"
+      }
+    },
+    {
+      "kind": "runner_verification",
+      "id": "sol",
+      "relativePath": "../results/sol/sol-20261004T160248Z/verification.json",
+      "sha256": "f612a9bacdb9549bb8cb1b5b1c809d9bbe9a4059e21218730d023b9deedfd486"
+    },
+    {
+      "kind": "native_report",
+      "id": "sol",
+      "relativePath": "../results/sol/sol-20261004T160248Z/sol-q3.game.json",
+      "sha256": "0aa66c36fdac61508777be98d060b30a24a727a2f15a3ac4ffa8625294ecaab4"
+    },
+    {
+      "kind": "runner_provenance",
+      "id": "nox",
+      "relativePath": "../results/nox/nox-l4-717f02d-b2e8fcb-r1/nox-q3.runner.json",
+      "sha256": "947651845847a79fd3ad893be52607cf1f33f45278da739d8533bad84562d169",
+      "reportNameMapping": {
+        "originalRunnerFilename": "nox-q3.game.json",
+        "publishedFilename": "nox-q3.game.json"
+      }
+    },
+    {
+      "kind": "runner_verification",
+      "id": "nox",
+      "relativePath": "../results/nox/nox-l4-717f02d-b2e8fcb-r1/verification.json",
+      "sha256": "988f2be54848c13262171f2709243d7cb079c36c748bd88e4b10bb51afef04c6"
+    },
+    {
+      "kind": "native_report",
+      "id": "nox",
+      "relativePath": "../results/nox/nox-l4-717f02d-b2e8fcb-r1/nox-q3.game.json",
+      "sha256": "8ececbd6ee9c625da913215ca7ed678ec1accdece8303f8c39495c260b64d96d"
+    },
+    {
+      "kind": "runner_provenance",
+      "id": "lux",
+      "relativePath": "../results/lux/lux-20261004T160324Z/lux-q3.runner.json",
+      "sha256": "240ce1faa8bd8119ad98e945f2e1e5a9bfdf0bef8d4dcbf86403b8b29757bf82",
+      "reportNameMapping": {
+        "originalRunnerFilename": "lux-q3.game.json",
+        "publishedFilename": "lux-q3.game.json"
+      }
+    },
+    {
+      "kind": "runner_verification",
+      "id": "lux",
+      "relativePath": "../results/lux/lux-20261004T160324Z/lux-20261004T160324Z-verification.json",
+      "sha256": "0374c049038519cb930ce9d826b01e33ca2851bd4b489607b2ebb788aadce7da"
+    },
+    {
+      "kind": "native_report",
+      "id": "lux",
+      "relativePath": "../results/lux/lux-20261004T160324Z/lux-q3.game.json",
+      "sha256": "b5c7d1a58a6bff6c0c8c96a58aa6694bd9baa88f427af71ed237cba1af2b7cc9"
+    },
+    {
+      "kind": "runner_provenance",
+      "id": "vega",
+      "relativePath": "../results/vega/20261005-g4-vega-q3.runner.json",
+      "sha256": "d6eba8c3ad90fb672cbe066ea31aa876db8d3bb513111e7eaea3ffba31ae409d",
+      "reportNameMapping": {
+        "originalRunnerFilename": "vega-q3.game.json",
+        "publishedFilename": "20261005-g4-vega-q3.game.json"
+      }
+    },
+    {
+      "kind": "runner_verification",
+      "id": "vega",
+      "relativePath": "../results/vega/20261005-g4-vega.verification.json",
+      "sha256": "52b9452630bb866dcedef7e36b9258f2c095698d6efe255a5dc410c23c59485f"
+    },
+    {
+      "kind": "native_report",
+      "id": "vega",
+      "relativePath": "../results/vega/20261005-g4-vega-q3.game.json",
+      "sha256": "ea0b96fcd5b5b57bb21d8c4c4c45d9431a4fc699b3e676460781fa699c046608"
+    },
+    {
+      "kind": "native_report",
+      "id": "rule",
+      "relativePath": "../results/baselines/rule-q3.game.json",
+      "sha256": "592508795b7c0c4f7ecf9df6779c4d733f31db904b036ff08f9b8154f9f96265"
+    },
+    {
+      "kind": "native_report",
+      "id": "idle",
+      "relativePath": "../results/baselines/idle-q3.game.json",
+      "sha256": "5f0ebe66554055bbc5ea2fd96bc673eec1b00467cd1384a0533acc1fbdfc50ba"
+    },
+    {
+      "kind": "reasoning_unavailable_evidence",
+      "id": "solReasoning",
+      "relativePath": "../results/sol-reasoning/verification.json",
+      "sha256": "ce39be0f9569347383c43bc9eb1407f9eca5aa075ed0a3ac39c56b1ed1736310"
+    },
+    {
+      "kind": "formal_results",
+      "id": "formal-results",
+      "relativePath": "formal-results.json",
+      "sha256": "eae6ddefe27c908b1628c646af4586e719fce83df9fc92e31b7679c914c044f4"
+    }
+  ],
+  "staticSolReasoningTile": {
+    "id": "solReasoning",
+    "label": "未測定: 配布元401",
+    "status": "not_measured",
+    "noReplay": true,
+    "noScore": true,
+    "score": null
+  },
+  "recording": {
+    "requested": true,
+    "status": "capture_pending",
+    "performed": false,
+    "mode": "native trace replay at 1x browser time",
+    "durationSeconds": 33,
+    "terminalHoldSeconds": 3,
+    "outputFile": null
+  },
+  "outputDirectory": "C:\\Prj\\decision-lane\\videos"
+}

@@ -1,0 +1,61 @@
+{
+  "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+  "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+  "targets": {
+    "kai": {
+      "status": "measured_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\kai\\20261004T172532Z\\kai-q3.game.json"
+      ]
+    },
+    "eos": {
+      "status": "measured_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\eos\\eos-20261005T010117\\eos-q3.game.json"
+      ]
+    },
+    "sol": {
+      "status": "measured_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\sol\\sol-20261004T160248Z\\sol-q3.game.json"
+      ]
+    },
+    "sol-reasoning": {
+      "status": "model_access_blocked",
+      "replay": false,
+      "evidence": "C:\\Prj\\decision-lane\\results\\sol-reasoning\\verification.json",
+      "label": "未測定: 配布元401"
+    },
+    "nox": {
+      "status": "measured_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\nox\\nox-l4-717f02d-b2e8fcb-r1\\nox-q3.game.json"
+      ]
+    },
+    "lux": {
+      "status": "measured_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\lux\\lux-20261004T160324Z\\lux-q3.game.json"
+      ]
+    },
+    "vega": {
+      "status": "measured_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\vega\\20261005-g4-vega-q3.game.json"
+      ]
+    },
+    "rule": {
+      "status": "control_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\baselines\\rule-q3.game.json"
+      ]
+    },
+    "idle": {
+      "status": "control_trace_available",
+      "q3Paths": [
+        "C:\\Prj\\decision-lane\\results\\baselines\\idle-q3.game.json"
+      ]
+    }
+  },
+  "note": "Path discovery only. Recorder must independently verify replay, exact pins, seed, question count, actual GPU metadata and production forward evidence."
+}
