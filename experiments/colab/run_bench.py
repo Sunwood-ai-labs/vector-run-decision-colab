@@ -238,7 +238,11 @@ def main() -> int:
                 report = json.loads(output.read_text(encoding="utf-8"))
                 if not isinstance(report, dict) or not report.get("episodes"):
                     raise RuntimeError("Game CLI did not emit the required episodes/trace object")
-                base = {**report, "status": "ok", "series": series, "runtime": {**runtime}}
+                harness_status = report.get("status")
+                outcome = "ok" if harness_status == "measured" else "completed_with_errors" if harness_status == "partial" else "unavailable"
+                base = {**report, "status": outcome, "harnessStatus": harness_status, "series": series, "runtime": {**runtime}}
+                if outcome != "ok":
+                    total_errors += 1
             except Exception as error:
                 base.update({"status": failure_status(error), "error": public_error(error), "episodes": []})
                 total_errors += 1
