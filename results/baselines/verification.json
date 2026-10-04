@@ -1,0 +1,273 @@
+{
+  "schema": "vector-run-cpu-baseline-verification/v1",
+  "verifiedAtUtc": "2026-10-04T16:31:59.4877742Z",
+  "scope": "CPU-only canonical game rule/idle baselines; no GPU or model inference",
+  "freezePins": {
+    "gameOrigin": "https://github.com/Sunwood-ai-labs/vector-run-benchmark.git",
+    "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+    "nodeVersion": "v24.15.0",
+    "cleanCheckout": true
+  },
+  "executionEnvironment": {
+    "cpuModel": "13th Gen Intel(R) Core(TM) i7-13620H",
+    "logicalCpuCount": 16,
+    "os": "Ubuntu 24.04.4 LTS",
+    "kernelRelease": "6.6.87.2-microsoft-standard-WSL2",
+    "architecture": "x86_64",
+    "nodeVersion": "v24.15.0",
+    "runtime": "WSL2"
+  },
+  "conditions": {
+    "agents": [
+      "rule",
+      "idle"
+    ],
+    "questionsPerApiCall": 3,
+    "seeds": [
+      101,
+      202,
+      303,
+      404,
+      505
+    ],
+    "maxSeconds": 30,
+    "maxJumps": 2,
+    "physicsHz": 120,
+    "decisionEveryTicks": 16,
+    "frameGapPolicy": "gap over 100ms invalidates; no catch-up ticks discarded",
+    "trace": true,
+    "gpuUsed": false
+  },
+  "sourceVerification": {
+    "gameSourceDigestReported": "d7f9de9c3aaf0e22669dd54e916f9a854ea33b2339f83c183438f4c93be5357a",
+    "gameSourceDigestIndependentlyRecomputed": "d7f9de9c3aaf0e22669dd54e916f9a854ea33b2339f83c183438f4c93be5357a",
+    "match": true,
+    "sourceFiles": [
+      "dist/engine.js",
+      "dist/app.js",
+      "scripts/decision-bench.mjs",
+      "scripts/verify-decision-trace.mjs"
+    ]
+  },
+  "privacyAudit": {
+    "status": "passed",
+    "checks": [
+      "local host/user/path markers absent",
+      "credential/session markers absent",
+      "local agent URL null",
+      "remote raw request/response payloads absent"
+    ]
+  },
+  "series": [
+    {
+      "agent": "rule",
+      "artifact": {
+        "path": "results/baselines/rule-q3.game.json",
+        "bytes": 12419933,
+        "sha256": "592508795b7c0c4f7ecf9df6779c4d733f31db904b036ff08f9b8154f9f96265"
+      },
+      "cli": {
+        "status": "completed",
+        "exitCode": 0
+      },
+      "traceValidator": {
+        "status": "passed",
+        "script": "scripts/verify-decision-trace.mjs",
+        "questionCount": 3,
+        "runCount": 5,
+        "terminalKinds": [
+          "censored",
+          "censored",
+          "censored",
+          "censored",
+          "censored"
+        ]
+      },
+      "privacyAudit": {
+        "status": "passed",
+        "scannedPrivateMarkers": 11,
+        "localAgentUrlNull": true,
+        "remoteRequestPayloadCount": 0,
+        "remoteResponsePayloadCount": 0
+      },
+      "attemptHistory": [
+        {
+          "attempt": 1,
+          "cliExitCode": 0,
+          "traceValidator": "passed",
+          "privacyAudit": "passed",
+          "selectedAsFirstValidCompletion": true
+        }
+      ],
+      "retryPolicy": {
+        "maxRetries": 2,
+        "retriesUsed": 0,
+        "selectionRule": "earliest CLI completion passing replay/hash/privacy validation; preserve game outcomes separately"
+      },
+      "gameOutcomes": [
+        {
+          "seed": 101,
+          "terminalStatus": "time_limit",
+          "endReason": "time_limit",
+          "valid": false,
+          "eligibleForSummary": false,
+          "finalTick": 3600,
+          "survivalSeconds": 30,
+          "censored": true
+        },
+        {
+          "seed": 202,
+          "terminalStatus": "time_limit",
+          "endReason": "time_limit",
+          "valid": false,
+          "eligibleForSummary": false,
+          "finalTick": 3600,
+          "survivalSeconds": 30,
+          "censored": true
+        },
+        {
+          "seed": 303,
+          "terminalStatus": "time_limit",
+          "endReason": "time_limit",
+          "valid": false,
+          "eligibleForSummary": false,
+          "finalTick": 3600,
+          "survivalSeconds": 30,
+          "censored": true
+        },
+        {
+          "seed": 404,
+          "terminalStatus": "time_limit",
+          "endReason": "time_limit",
+          "valid": false,
+          "eligibleForSummary": false,
+          "finalTick": 3600,
+          "survivalSeconds": 30,
+          "censored": true
+        },
+        {
+          "seed": 505,
+          "terminalStatus": "time_limit",
+          "endReason": "time_limit",
+          "valid": false,
+          "eligibleForSummary": false,
+          "finalTick": 3600,
+          "survivalSeconds": 30,
+          "censored": true
+        }
+      ]
+    },
+    {
+      "agent": "idle",
+      "artifact": {
+        "path": "results/baselines/idle-q3.game.json",
+        "bytes": 1032506,
+        "sha256": "5f0ebe66554055bbc5ea2fd96bc673eec1b00467cd1384a0533acc1fbdfc50ba"
+      },
+      "cli": {
+        "status": "completed",
+        "exitCode": 0
+      },
+      "traceValidator": {
+        "status": "passed",
+        "script": "scripts/verify-decision-trace.mjs",
+        "questionCount": 3,
+        "runCount": 5,
+        "terminalKinds": [
+          "collision",
+          "collision",
+          "collision",
+          "collision",
+          "collision"
+        ]
+      },
+      "privacyAudit": {
+        "status": "passed",
+        "scannedPrivateMarkers": 11,
+        "localAgentUrlNull": true,
+        "remoteRequestPayloadCount": 0,
+        "remoteResponsePayloadCount": 0
+      },
+      "attemptHistory": [
+        {
+          "attempt": 1,
+          "cliExitCode": 0,
+          "traceValidator": "passed",
+          "privacyAudit": "passed",
+          "selectedAsFirstValidCompletion": true
+        }
+      ],
+      "retryPolicy": {
+        "maxRetries": 2,
+        "retriesUsed": 0,
+        "selectionRule": "earliest CLI completion passing replay/hash/privacy validation; preserve game outcomes separately"
+      },
+      "gameOutcomes": [
+        {
+          "seed": 101,
+          "terminalStatus": "collision",
+          "endReason": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "finalTick": 346,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        },
+        {
+          "seed": 202,
+          "terminalStatus": "collision",
+          "endReason": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "finalTick": 346,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        },
+        {
+          "seed": 303,
+          "terminalStatus": "collision",
+          "endReason": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "finalTick": 343,
+          "survivalSeconds": 2.8583333333333334,
+          "censored": false
+        },
+        {
+          "seed": 404,
+          "terminalStatus": "collision",
+          "endReason": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "finalTick": 345,
+          "survivalSeconds": 2.875,
+          "censored": false
+        },
+        {
+          "seed": 505,
+          "terminalStatus": "collision",
+          "endReason": "collision",
+          "valid": true,
+          "eligibleForSummary": true,
+          "finalTick": 346,
+          "survivalSeconds": 2.8833333333333333,
+          "censored": false
+        }
+      ]
+    }
+  ],
+  "metadataCorrections": [
+    {
+      "field": "metadata.benchmarkCommit",
+      "files": [
+        "results/baselines/rule-q3.game.json",
+        "results/baselines/idle-q3.game.json"
+      ],
+      "originalValue": "b2e8fcbbf4b6f48931e4f9bbfbd434023348d3f0",
+      "correctValue": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+      "reason": "Transcription typo; the corrected benchmark commit exists. CPU rule/idle controls do not execute benchmark code, so no remeasurement was needed.",
+      "remeasurementRequired": false
+    }
+  ]
+}
