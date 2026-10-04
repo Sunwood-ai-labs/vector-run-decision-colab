@@ -1,0 +1,1983 @@
+{
+  "schemaVersion": "vector-run-results/v1",
+  "benchmark": {
+    "name": "VECTOR RUN",
+    "gameCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "benchmarkCommit": "b2e8fcbbf4b4f68931e4f9bbfbd434023348d3f0",
+    "physicsFps": 60,
+    "decisionEveryFrames": 8,
+    "actionTiming": "realtime; physics continues during inference"
+  },
+  "targets": [
+    {
+      "slug": "kai",
+      "name": "Kai",
+      "category": "model",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "kai",
+          "runId": "20261004T172532Z",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Kai-0.6B",
+            "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764",
+            "sourceAudit": {
+              "manifest_sha256": "ca7bf2cff1494a5bfc51f4271f52557da0f3ce3b6f0f6e7a2b4118cb4965e92e",
+              "model_identity_sha256": "bb806f31a14d4532a1b5e00984442128f47f46cbbc68e57e7623327c81cfb983",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.35704097222222,
+              "survivalSeconds": 2.8583333333333334,
+              "jumps": 0
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.78421875000001,
+              "survivalSeconds": 2.875,
+              "jumps": 0
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 72.82695027777778,
+            "meanObservedSurvivalSeconds": 2.8766666666666665,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 93,
+            "skippedOutstanding": 12,
+            "lateAnswers": 0,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 93,
+            "errorRecordCount": 0,
+            "forwardCalls": 93,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  3,
+                  328
+                ],
+                "batches": 9
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  336
+                ],
+                "batches": 13
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  344
+                ],
+                "batches": 8
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  352
+                ],
+                "batches": 7
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  360
+                ],
+                "batches": 51
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  376
+                ],
+                "batches": 3
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  392
+                ],
+                "batches": 2
+              }
+            ],
+            "systemOneP50Ms": 45.34312200007662,
+            "firstSystemOneMs": 1553.7445990000833,
+            "remainingSystemOneP50Ms": 45.33973000002334,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": 1579725312.0,
+            "gpuPeakReservedBytes": 1616904192.0
+          },
+          "sourceFiles": {
+            "game": "kai/20261004T172532Z/kai-q3.game.json",
+            "metadata": "kai/20261004T172532Z/kai-q3.metadata.json",
+            "runner": "kai/20261004T172532Z/kai-q3.runner.json",
+            "verification": "kai/20261004T172532Z/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "06cdf567d2933048d3c9a88170dc5f8e9f9b21732eaa25d3c5ba418730e54248",
+            "publishedGameSha256": "06cdf567d2933048d3c9a88170dc5f8e9f9b21732eaa25d3c5ba418730e54248",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ],
+      "q64": [
+        {
+          "slug": "kai",
+          "runId": "20261004T172532Z",
+          "series": "q64",
+          "questions": 64,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Kai-0.6B",
+            "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764",
+            "sourceAudit": {
+              "manifest_sha256": "ca7bf2cff1494a5bfc51f4271f52557da0f3ce3b6f0f6e7a2b4118cb4965e92e",
+              "model_identity_sha256": "bb806f31a14d4532a1b5e00984442128f47f46cbbc68e57e7623327c81cfb983",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 64,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 1,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 1
+            },
+            "meanDistanceMetres": 72.99783055555557,
+            "meanObservedSurvivalSeconds": 2.8833333333333333,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 5,
+            "skippedOutstanding": 15,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 6,
+            "errorRecordCount": 0,
+            "forwardCalls": 6,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  64,
+                  392
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  400
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  416
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  424
+                ],
+                "batches": 3
+              }
+            ],
+            "systemOneP50Ms": 448.7071075000131,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": true,
+            "gpuPeakAllocatedBytes": 2942460928.0,
+            "gpuPeakReservedBytes": 4169138176.0
+          },
+          "sourceFiles": {
+            "game": "kai/20261004T172532Z/kai-q64.game.json",
+            "metadata": "kai/20261004T172532Z/kai-q64.metadata.json",
+            "runner": "kai/20261004T172532Z/kai-q64.runner.json",
+            "verification": "kai/20261004T172532Z/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "33e5a938a210ff1eb8a82733c103802c7b2d1904e3d8966b2bf2495b53461df8",
+            "publishedGameSha256": "33e5a938a210ff1eb8a82733c103802c7b2d1904e3d8966b2bf2495b53461df8",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "eos",
+      "name": "Eos",
+      "category": "model",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "eos",
+          "runId": "eos-20261005T010117",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Eos-0.8B",
+            "revision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+            "sourceAudit": {
+              "manifest_sha256": "e8b1081be4a76deca5247792a4031c8e19e2b52b95d91775c13d9e257c407101",
+              "model_identity_sha256": "d97127991870ae202017a99eb496bdc56a62afd038594a67febfab0aea9d76fe",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 1
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 1
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.35704097222222,
+              "survivalSeconds": 2.8583333333333334,
+              "jumps": 1
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.78421875000001,
+              "survivalSeconds": 2.875,
+              "jumps": 1
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 1
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 72.82695027777778,
+            "meanObservedSurvivalSeconds": 2.8766666666666665,
+            "meanJumps": 1,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 61,
+            "skippedOutstanding": 41,
+            "lateAnswers": 3,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 64,
+            "errorRecordCount": 0,
+            "forwardCalls": 64,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  3,
+                  328
+                ],
+                "batches": 7
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  336
+                ],
+                "batches": 4
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  344
+                ],
+                "batches": 4
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  352
+                ],
+                "batches": 16
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  360
+                ],
+                "batches": 14
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  368
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  376
+                ],
+                "batches": 9
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  384
+                ],
+                "batches": 8
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  392
+                ],
+                "batches": 1
+              }
+            ],
+            "systemOneP50Ms": 95.19280899996829,
+            "firstSystemOneMs": 1747.553797999899,
+            "remainingSystemOneP50Ms": 95.14353400004438,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": 2223820288.0,
+            "gpuPeakReservedBytes": 2346713088.0
+          },
+          "sourceFiles": {
+            "game": "eos/eos-20261005T010117/eos-q3.game.json",
+            "metadata": null,
+            "runner": "eos/eos-20261005T010117/eos-q3.runner.json",
+            "verification": "eos/eos-20261005T010117/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "2d1ec85798322ce5debbecd4b9110ff39677c0cb1a50dffaf7d900a6c066fc4d",
+            "publishedGameSha256": "2d1ec85798322ce5debbecd4b9110ff39677c0cb1a50dffaf7d900a6c066fc4d",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ],
+      "q64": [
+        {
+          "slug": "eos",
+          "runId": "eos-20261005T010117",
+          "series": "q64",
+          "questions": 64,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Eos-0.8B",
+            "revision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+            "sourceAudit": {
+              "manifest_sha256": "e8b1081be4a76deca5247792a4031c8e19e2b52b95d91775c13d9e257c407101",
+              "model_identity_sha256": "d97127991870ae202017a99eb496bdc56a62afd038594a67febfab0aea9d76fe",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 64,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 1
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 1,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 1
+            },
+            "meanDistanceMetres": 72.99783055555557,
+            "meanObservedSurvivalSeconds": 2.8833333333333333,
+            "meanJumps": 1,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 2,
+            "skippedOutstanding": 18,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 3,
+            "errorRecordCount": 0,
+            "forwardCalls": 3,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  64,
+                  392
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  424
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  456
+                ],
+                "batches": 1
+              }
+            ],
+            "systemOneP50Ms": 891.9006189998981,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": true,
+            "gpuPeakAllocatedBytes": 6204887552.0,
+            "gpuPeakReservedBytes": 9535750144.0
+          },
+          "sourceFiles": {
+            "game": "eos/eos-20261005T010117/eos-q64.game.json",
+            "metadata": null,
+            "runner": "eos/eos-20261005T010117/eos-q64.runner.json",
+            "verification": "eos/eos-20261005T010117/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "e8b2a12074828ab9e342a23c4010275ee050737f124a0cadb9a5a37f509b6c7c",
+            "publishedGameSha256": "e8b2a12074828ab9e342a23c4010275ee050737f124a0cadb9a5a37f509b6c7c",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sol",
+      "name": "Sol",
+      "category": "model",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "sol",
+          "runId": "sol-20261004T160248Z",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Sol-2B",
+            "revision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+            "sourceAudit": {
+              "manifest_sha256": "a91c440ca371668d488a788bdfe12cc574a97123df60730afedf419737ced970",
+              "model_identity_sha256": "e20df76c14edb0d28ef17593f49a1870fdea9438ff4805594402e39766f3546c",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 136.24411875,
+              "survivalSeconds": 5.325,
+              "jumps": 1
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 1
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.35704097222222,
+              "survivalSeconds": 2.8583333333333334,
+              "jumps": 1
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.78421875000001,
+              "survivalSeconds": 2.875,
+              "jumps": 1
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 85.47620791666668,
+            "meanObservedSurvivalSeconds": 3.365,
+            "meanJumps": 0.8,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 74,
+            "skippedOutstanding": 48,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 75,
+            "errorRecordCount": 0,
+            "forwardCalls": 75,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  3,
+                  328
+                ],
+                "batches": 10
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  344
+                ],
+                "batches": 6
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  352
+                ],
+                "batches": 26
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  360
+                ],
+                "batches": 14
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  376
+                ],
+                "batches": 4
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  384
+                ],
+                "batches": 6
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  392
+                ],
+                "batches": 7
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  400
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  408
+                ],
+                "batches": 1
+              }
+            ],
+            "systemOneP50Ms": 96.16842299999462,
+            "firstSystemOneMs": 1616.5508540000246,
+            "remainingSystemOneP50Ms": 96.15082650003615,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": 4995116032.0,
+            "gpuPeakReservedBytes": 5163188224.0
+          },
+          "sourceFiles": {
+            "game": "sol/sol-20261004T160248Z/sol-q3.game.json",
+            "metadata": null,
+            "runner": "sol/sol-20261004T160248Z/sol-q3.runner.json",
+            "verification": "sol/sol-20261004T160248Z/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "0aa66c36fdac61508777be98d060b30a24a727a2f15a3ac4ffa8625294ecaab4",
+            "publishedGameSha256": "0aa66c36fdac61508777be98d060b30a24a727a2f15a3ac4ffa8625294ecaab4",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ],
+      "q64": [
+        {
+          "slug": "sol",
+          "runId": "sol-20261004T160248Z",
+          "series": "q64",
+          "questions": 64,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Sol-2B",
+            "revision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+            "sourceAudit": {
+              "manifest_sha256": "a91c440ca371668d488a788bdfe12cc574a97123df60730afedf419737ced970",
+              "model_identity_sha256": "e20df76c14edb0d28ef17593f49a1870fdea9438ff4805594402e39766f3546c",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA A100-SXM4-40GB",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 64,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 1,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 1
+            },
+            "meanDistanceMetres": 72.99783055555557,
+            "meanObservedSurvivalSeconds": 2.8833333333333333,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 2,
+            "skippedOutstanding": 18,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 3,
+            "errorRecordCount": 0,
+            "forwardCalls": 3,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  64,
+                  392
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  424
+                ],
+                "batches": 2
+              }
+            ],
+            "systemOneP50Ms": 1134.0704509999568,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": true,
+            "gpuPeakAllocatedBytes": 8941203456.0,
+            "gpuPeakReservedBytes": 11272192000.0
+          },
+          "sourceFiles": {
+            "game": "sol/sol-20261004T160248Z/sol-q64.game.json",
+            "metadata": null,
+            "runner": "sol/sol-20261004T160248Z/sol-q64.runner.json",
+            "verification": "sol/sol-20261004T160248Z/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "99ba7974f8ca3e810c9dd8122762b74ffde51a8a7f62b32dd319f5bd756aac01",
+            "publishedGameSha256": "99ba7974f8ca3e810c9dd8122762b74ffde51a8a7f62b32dd319f5bd756aac01",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "sol-reasoning",
+      "name": "Sol-Reasoning",
+      "category": "model",
+      "status": "unavailable",
+      "unavailability": {
+        "slug": "sol-reasoning",
+        "status": "unavailable",
+        "reasonCode": "distribution_http_401",
+        "model": {
+          "id": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
+          "revision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29"
+        },
+        "evidence": {
+          "httpStatus": 401,
+          "weightsCached": false,
+          "systemOneCalls": 0,
+          "neuralForwardCalls": 0
+        },
+        "sourceFiles": [
+          "verification.json",
+          "sol-reasoning-q3.runner.json",
+          "sol-reasoning-q64.runner.json"
+        ]
+      },
+      "pendingVerification": [],
+      "q3": [],
+      "q64": []
+    },
+    {
+      "slug": "nox",
+      "name": "Nox",
+      "category": "model",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "nox",
+          "runId": "nox-l4-717f02d-b2e8fcb-r1",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Nox-4B",
+            "revision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+            "sourceAudit": {
+              "manifest_sha256": "49771ea33a451274687ad2a246ce5fb78f8f42ec904fc91a467477179975bb16",
+              "model_identity_sha256": "31d4ee9213686eeed6283d08ed7bce52ebef94ec47b7f97f7e1209f916fe51ea",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA L4",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 1
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 2
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 76.63156875,
+              "survivalSeconds": 3.025,
+              "jumps": 3
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.78421875000001,
+              "survivalSeconds": 2.875,
+              "jumps": 2
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 76.41769722222222,
+              "survivalSeconds": 3.0166666666666666,
+              "jumps": 3
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 74.36582916666667,
+            "meanObservedSurvivalSeconds": 2.9366666666666665,
+            "meanJumps": 2.2,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 26,
+            "skippedOutstanding": 76,
+            "lateAnswers": 5,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 31,
+            "errorRecordCount": 0,
+            "forwardCalls": 31,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  3,
+                  328
+                ],
+                "batches": 5
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  344
+                ],
+                "batches": 2
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  360
+                ],
+                "batches": 5
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  376
+                ],
+                "batches": 9
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  392
+                ],
+                "batches": 10
+              }
+            ],
+            "systemOneP50Ms": 358.4785670000201,
+            "firstSystemOneMs": 1956.1183020000499,
+            "remainingSystemOneP50Ms": 358.05903400000716,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": 10175174144.0,
+            "gpuPeakReservedBytes": 10412359680.0
+          },
+          "sourceFiles": {
+            "game": "nox/nox-l4-717f02d-b2e8fcb-r1/nox-q3.game.json",
+            "metadata": null,
+            "runner": "nox/nox-l4-717f02d-b2e8fcb-r1/nox-q3.runner.json",
+            "verification": "nox/nox-l4-717f02d-b2e8fcb-r1/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "8ececbd6ee9c625da913215ca7ed678ec1accdece8303f8c39495c260b64d96d",
+            "publishedGameSha256": "8ececbd6ee9c625da913215ca7ed678ec1accdece8303f8c39495c260b64d96d",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ],
+      "q64": [
+        {
+          "slug": "nox",
+          "runId": "nox-l4-717f02d-b2e8fcb-r1",
+          "series": "q64",
+          "questions": 64,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Nox-4B",
+            "revision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+            "sourceAudit": {
+              "manifest_sha256": "49771ea33a451274687ad2a246ce5fb78f8f42ec904fc91a467477179975bb16",
+              "model_identity_sha256": "31d4ee9213686eeed6283d08ed7bce52ebef94ec47b7f97f7e1209f916fe51ea",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA L4",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 64,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 1,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 1
+            },
+            "meanDistanceMetres": 72.99783055555557,
+            "meanObservedSurvivalSeconds": 2.8833333333333333,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 0,
+            "skippedOutstanding": 20,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 1,
+            "errorRecordCount": 0,
+            "forwardCalls": 1,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  64,
+                  392
+                ],
+                "batches": 1
+              }
+            ],
+            "systemOneP50Ms": 11379.645839999966,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": true,
+            "gpuPeakAllocatedBytes": 17448664064.0,
+            "gpuPeakReservedBytes": 18924699648.0
+          },
+          "sourceFiles": {
+            "game": "nox/nox-l4-717f02d-b2e8fcb-r1/nox-q64.game.json",
+            "metadata": null,
+            "runner": "nox/nox-l4-717f02d-b2e8fcb-r1/nox-q64.runner.json",
+            "verification": "nox/nox-l4-717f02d-b2e8fcb-r1/verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "a242a783dda671d37fe3511d26c19347c12e57e4579b504742ed286e6036e10e",
+            "publishedGameSha256": "a242a783dda671d37fe3511d26c19347c12e57e4579b504742ed286e6036e10e",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "lux",
+      "name": "Lux",
+      "category": "model",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "lux",
+          "runId": "lux-20261004T160324Z",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Lux-9B",
+            "revision": "78bf3c03d9147aeb30b641edfe0e30ed04887ca5",
+            "sourceAudit": {
+              "manifest_sha256": "4e0f4ca0cf3c833933f9bed3021012d061910016c9f4ca43b34f5d66e8d0a260",
+              "model_identity_sha256": "0ece5faa210173f443f353474b419fd913a253b06645da3e8370c2db0e1c3339",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.35704097222222,
+              "survivalSeconds": 2.8583333333333334,
+              "jumps": 0
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.78421875000001,
+              "survivalSeconds": 2.875,
+              "jumps": 0
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 72.82695027777778,
+            "meanObservedSurvivalSeconds": 2.8766666666666665,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 66,
+            "skippedOutstanding": 39,
+            "lateAnswers": 0,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 66,
+            "errorRecordCount": 0,
+            "forwardCalls": 66,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  3,
+                  328
+                ],
+                "batches": 9
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  336
+                ],
+                "batches": 3
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  344
+                ],
+                "batches": 6
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  352
+                ],
+                "batches": 29
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  360
+                ],
+                "batches": 17
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  384
+                ],
+                "batches": 2
+              }
+            ],
+            "systemOneP50Ms": 95.21026300001267,
+            "firstSystemOneMs": 1445.2832350000335,
+            "remainingSystemOneP50Ms": 95.19638800020402,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": 18289834496.0,
+            "gpuPeakReservedBytes": 18463326208.0
+          },
+          "sourceFiles": {
+            "game": "lux/lux-20261004T160324Z/lux-q3.game.json",
+            "metadata": null,
+            "runner": "lux/lux-20261004T160324Z/lux-q3.runner.json",
+            "verification": "lux/lux-20261004T160324Z/lux-20261004T160324Z-verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "b5c7d1a58a6bff6c0c8c96a58aa6694bd9baa88f427af71ed237cba1af2b7cc9",
+            "publishedGameSha256": "b5c7d1a58a6bff6c0c8c96a58aa6694bd9baa88f427af71ed237cba1af2b7cc9",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ],
+      "q64": [
+        {
+          "slug": "lux",
+          "runId": "lux-20261004T160324Z",
+          "series": "q64",
+          "questions": 64,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Lux-9B",
+            "revision": "78bf3c03d9147aeb30b641edfe0e30ed04887ca5",
+            "sourceAudit": {
+              "manifest_sha256": "4e0f4ca0cf3c833933f9bed3021012d061910016c9f4ca43b34f5d66e8d0a260",
+              "model_identity_sha256": "0ece5faa210173f443f353474b419fd913a253b06645da3e8370c2db0e1c3339",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 64,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 1,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 1
+            },
+            "meanDistanceMetres": 72.99783055555557,
+            "meanObservedSurvivalSeconds": 2.8833333333333333,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 1,
+            "skippedOutstanding": 19,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 2,
+            "errorRecordCount": 0,
+            "forwardCalls": 2,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  64,
+                  392
+                ],
+                "batches": 1
+              },
+              {
+                "inputIdsShape": [
+                  64,
+                  424
+                ],
+                "batches": 1
+              }
+            ],
+            "systemOneP50Ms": 2413.420459000008,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": true,
+            "gpuPeakAllocatedBytes": 26415166464.0,
+            "gpuPeakReservedBytes": 30299652096.0
+          },
+          "sourceFiles": {
+            "game": "lux/lux-20261004T160324Z/lux-q64.game.json",
+            "metadata": null,
+            "runner": "lux/lux-20261004T160324Z/lux-q64.runner.json",
+            "verification": "lux/lux-20261004T160324Z/lux-20261004T160324Z-verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "ee9791acb95561397ee7308d59ce9fd0eae32c45ac46a14901b0a1c4de4bb303",
+            "publishedGameSha256": "ee9791acb95561397ee7308d59ce9fd0eae32c45ac46a14901b0a1c4de4bb303",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "vega",
+      "name": "Vega",
+      "category": "model",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "vega",
+          "runId": "20261005-g4-717f02d",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Vega-27B",
+            "revision": "7aec49ae11a18741706da549ab626b9052795fe7",
+            "sourceAudit": {
+              "manifest_sha256": "24dcf251f5b50a2259201cc5e11889b6d2545afd4ccecabb0e2344549542bdd3",
+              "model_identity_sha256": "584697310502cd20e91728e69f724c028b47b95daf3790256dea3e434c48be82",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 76.63156875,
+              "survivalSeconds": 3.025,
+              "jumps": 1
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 131.88525763888887,
+              "survivalSeconds": 5.158333333333333,
+              "jumps": 2
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.35704097222222,
+              "survivalSeconds": 2.8583333333333334,
+              "jumps": 1
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 132.32086875,
+              "survivalSeconds": 5.175,
+              "jumps": 3
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 136.46222222222224,
+              "survivalSeconds": 5.333333333333333,
+              "jumps": 2
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 109.93139166666667,
+            "meanObservedSurvivalSeconds": 4.31,
+            "meanJumps": 1.8,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 42,
+            "skippedOutstanding": 113,
+            "lateAnswers": 3,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 45,
+            "errorRecordCount": 0,
+            "forwardCalls": 45,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  3,
+                  328
+                ],
+                "batches": 5
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  352
+                ],
+                "batches": 13
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  360
+                ],
+                "batches": 10
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  376
+                ],
+                "batches": 4
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  384
+                ],
+                "batches": 3
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  392
+                ],
+                "batches": 5
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  408
+                ],
+                "batches": 3
+              },
+              {
+                "inputIdsShape": [
+                  3,
+                  416
+                ],
+                "batches": 2
+              }
+            ],
+            "systemOneP50Ms": 359.18183800004044,
+            "firstSystemOneMs": 2175.4336330000115,
+            "remainingSystemOneP50Ms": 359.04225300009784,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": 69335009792.0,
+            "gpuPeakReservedBytes": 70049071104.0
+          },
+          "sourceFiles": {
+            "game": "vega/20261005-g4-vega-q3.game.json",
+            "metadata": null,
+            "runner": "vega/20261005-g4-vega-q3.runner.json",
+            "verification": "vega/20261005-g4-vega.verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "ea0b96fcd5b5b57bb21d8c4c4c45d9431a4fc699b3e676460781fa699c046608",
+            "publishedGameSha256": "ea0b96fcd5b5b57bb21d8c4c4c45d9431a4fc699b3e676460781fa699c046608",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ],
+      "q64": [
+        {
+          "slug": "vega",
+          "runId": "20261005-g4-717f02d",
+          "series": "q64",
+          "questions": 64,
+          "model": {
+            "id": "vllm-sr/Decision-2.0-Vega-27B",
+            "revision": "7aec49ae11a18741706da549ab626b9052795fe7",
+            "sourceAudit": {
+              "manifest_sha256": "24dcf251f5b50a2259201cc5e11889b6d2545afd4ccecabb0e2344549542bdd3",
+              "model_identity_sha256": "584697310502cd20e91728e69f724c028b47b95daf3790256dea3e434c48be82",
+              "remote_code_sha256": "a3f700b3d2a5deb344821802248a5ea7ea06ccedc5af1823dca4e3e813c17fbb",
+              "runtime_api_sha256": "10925403f8fd5f38dca85e6ab25879bd6137777c2254c6d58a93c55f24fb9c7d"
+            }
+          },
+          "hardware": {
+            "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+            "dtype": "BF16 backbone autocast with FP32 head; mixed BF16/FP32 resident parameters",
+            "quantization": "none"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 64,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 1,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 1
+            },
+            "meanDistanceMetres": 72.99783055555557,
+            "meanObservedSurvivalSeconds": 2.8833333333333333,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 0,
+            "skippedOutstanding": 20,
+            "lateAnswers": 1,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "recordCount": 1,
+            "errorRecordCount": 0,
+            "forwardCalls": 1,
+            "batchShapes": [
+              {
+                "inputIdsShape": [
+                  64,
+                  392
+                ],
+                "batches": 1
+              }
+            ],
+            "systemOneP50Ms": 8930.67679700016,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": true,
+            "gpuPeakAllocatedBytes": 80627438592.0,
+            "gpuPeakReservedBytes": 88319459328.0
+          },
+          "sourceFiles": {
+            "game": "vega/20261005-g4-vega-q64.game.json",
+            "metadata": null,
+            "runner": "vega/20261005-g4-vega-q64.runner.json",
+            "verification": "vega/20261005-g4-vega.verification.json"
+          },
+          "integrity": {
+            "runnerReportedGameSha256": "2c79e268e68d7c68f3de86043b8d97b7efa5ae3ebdb6fff9e0f91bce780d3e8a",
+            "publishedGameSha256": "2c79e268e68d7c68f3de86043b8d97b7efa5ae3ebdb6fff9e0f91bce780d3e8a",
+            "metadataOnlyTransformationProven": false
+          }
+        }
+      ]
+    },
+    {
+      "slug": "rule",
+      "name": "rule",
+      "category": "control",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "rule",
+          "runId": "cpu-baselines",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "rule-visible-v1",
+            "revision": "control"
+          },
+          "hardware": {
+            "gpu": null,
+            "cpuModel": "13th Gen Intel(R) Core(TM) i7-13620H",
+            "runtime": "WSL2"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "time_limit",
+              "endReason": "time_limit",
+              "censored": true,
+              "eligibleForSummary": false,
+              "distanceMetres": 849.0,
+              "survivalSeconds": 30.0,
+              "jumps": 24
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "time_limit",
+              "endReason": "time_limit",
+              "censored": true,
+              "eligibleForSummary": false,
+              "distanceMetres": 849.0,
+              "survivalSeconds": 30.0,
+              "jumps": 24
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "time_limit",
+              "endReason": "time_limit",
+              "censored": true,
+              "eligibleForSummary": false,
+              "distanceMetres": 849.0,
+              "survivalSeconds": 30.0,
+              "jumps": 24
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "time_limit",
+              "endReason": "time_limit",
+              "censored": true,
+              "eligibleForSummary": false,
+              "distanceMetres": 849.0,
+              "survivalSeconds": 30.0,
+              "jumps": 24
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "time_limit",
+              "endReason": "time_limit",
+              "censored": true,
+              "eligibleForSummary": false,
+              "distanceMetres": 849.0,
+              "survivalSeconds": 30.0,
+              "jumps": 25
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 5,
+            "terminalCounts": {
+              "time_limit": 5
+            },
+            "meanDistanceMetres": 849.0,
+            "meanObservedSurvivalSeconds": 30.0,
+            "meanJumps": 24.2
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 1125,
+            "skippedOutstanding": 0,
+            "lateAnswers": 0,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "notApplicable": true,
+            "recordCount": 0,
+            "forwardCalls": null,
+            "batchShapes": [],
+            "systemOneP50Ms": null,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": null,
+            "gpuPeakReservedBytes": null
+          },
+          "sourceFiles": {
+            "game": "baselines/rule-q3.game.json",
+            "metadata": null,
+            "runner": null,
+            "verification": "baselines/verification.json"
+          }
+        }
+      ],
+      "q64": []
+    },
+    {
+      "slug": "idle",
+      "name": "idle",
+      "category": "control",
+      "status": "measured",
+      "unavailability": null,
+      "pendingVerification": [],
+      "q3": [
+        {
+          "slug": "idle",
+          "runId": "cpu-baselines",
+          "series": "q3",
+          "questions": 3,
+          "model": {
+            "id": "idle-v1",
+            "revision": "control"
+          },
+          "hardware": {
+            "gpu": null,
+            "cpuModel": "13th Gen Intel(R) Core(TM) i7-13620H",
+            "runtime": "WSL2"
+          },
+          "episodes": [
+            {
+              "seed": 101,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            },
+            {
+              "seed": 202,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            },
+            {
+              "seed": 303,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.35704097222222,
+              "survivalSeconds": 2.8583333333333334,
+              "jumps": 0
+            },
+            {
+              "seed": 404,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.78421875000001,
+              "survivalSeconds": 2.875,
+              "jumps": 0
+            },
+            {
+              "seed": 505,
+              "questions": 3,
+              "terminalStatus": "collision",
+              "endReason": "collision",
+              "censored": false,
+              "eligibleForSummary": true,
+              "distanceMetres": 72.99783055555557,
+              "survivalSeconds": 2.8833333333333333,
+              "jumps": 0
+            }
+          ],
+          "episodeSummary": {
+            "episodeCount": 5,
+            "censoredCount": 0,
+            "terminalCounts": {
+              "collision": 5
+            },
+            "meanDistanceMetres": 72.82695027777778,
+            "meanObservedSurvivalSeconds": 2.8766666666666665,
+            "meanJumps": 0,
+            "clearRate": 0.0
+          },
+          "errors": {
+            "runtimeGameInvalidErrors": 0,
+            "responseErrors": 0,
+            "inferenceErrors": 0
+          },
+          "decisions": {
+            "answeredResponses": 0,
+            "skippedOutstanding": 0,
+            "lateAnswers": 0,
+            "missingQuestionAnswers": 0
+          },
+          "inference": {
+            "notApplicable": true,
+            "recordCount": 0,
+            "forwardCalls": null,
+            "batchShapes": [],
+            "systemOneP50Ms": null,
+            "firstSystemOneMs": null,
+            "remainingSystemOneP50Ms": null,
+            "sameProcessAfterQ3": null,
+            "gpuPeakAllocatedBytes": null,
+            "gpuPeakReservedBytes": null
+          },
+          "sourceFiles": {
+            "game": "baselines/idle-q3.game.json",
+            "metadata": null,
+            "runner": null,
+            "verification": "baselines/verification.json"
+          }
+        }
+      ],
+      "q64": []
+    }
+  ],
+  "excludedInputs": []
+}
