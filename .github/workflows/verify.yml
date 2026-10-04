@@ -1,0 +1,17 @@
+name: Verify benchmark code
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: astral-sh/setup-uv@v6
+      - run: node --test tests/*.test.mjs
+      - run: uv run --no-project --python 3.12 server/decision_server.py --self-test

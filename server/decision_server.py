@@ -1,7 +1,7 @@
-"""Decision Lane の System One エンドポイント。
+"""VECTOR RUN の System One エンドポイント。
 
---mock（既定）はコースに書いたルールで答えます。GPU も transformers も要りません。
---model vllm-sr/Decision-2.0-Kai-0.6B で公開モデルをその場で読みます。
+--mock は明示した場合だけコースに書いたルールで答えます。
+公開モデルは --model と --revision で固定し、単一 CUDA GPU で読みます。
 """
 
 from __future__ import annotations
@@ -9,6 +9,8 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import threading
+import time
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
@@ -104,12 +106,31 @@ def self_test() -> None:
 
 
 class App:
-    def __init__(self, model: Any, model_name: str) -> None:
+    def __init__(self, model: Any, model_name: str, metadata: dict[str, Any] | None = None) -> None:
         self.model = model
         self.model_name = model_name
+        self.metadata = metadata or {}
+        self.lock = threading.Lock()
+        self.request_index = 0
+        self.neural_forward_calls = 0
+        self.neural_forward_batches: list[dict[str, Any]] = []
+        runtime = getattr(model, "runtime", None)
+        backend = getattr(runtime, "backend", None)
+        neural_model = getattr(backend, "model", None)
+        self.forward_hook = (neural_model.register_forward_pre_hook(self._count_forward, with_kwargs=True)
+                             if hasattr(neural_model, "register_forward_pre_hook") else None)
+
+    def _count_forward(self, module: Any, inputs: Any, kwargs: dict[str, Any]) -> None:
+        self.neural_forward_calls += 1
+        input_ids = kwargs.get("input_ids")
+        shape = list(input_ids.shape) if hasattr(input_ids, "shape") else None
+        self.neural_forward_batches.append({"input_ids_shape": shape,
+                                           "batch_size": shape[0] if shape else None,
+                                           "padded_tokens_per_question": shape[1] if shape and len(shape) > 1 else None})
 
     def answer(self, payload: dict[str, Any]) -> dict[str, Any]:
         state = payload.get("state")
+        model_state = state
         questions = payload.get("questions")
         if isinstance(state, str):
             state = json.loads(state)
@@ -121,7 +142,35 @@ class App:
                 "answers": mock_answers(state, questions),
                 "usage": {"input_tokens": 0, "output_tokens": 0},
             }
-        return self.model.system_one(state=state, questions=questions)
+        # The public Decision wrapper owns tokenizer, head and PEFT handling.
+        # No rule assistance or action filtering is applied to real responses.
+        import torch
+
+        with self.lock, torch.inference_mode():
+            cuda = torch.cuda.is_available()
+            if cuda:
+                torch.cuda.synchronize()
+            started = time.perf_counter()
+            self.neural_forward_calls = 0
+            self.neural_forward_batches = []
+            result = self.model.system_one(state=model_state, questions=questions)
+            if cuda:
+                torch.cuda.synchronize()
+            elapsed = (time.perf_counter() - started) * 1000
+            if not isinstance(result, dict) or not isinstance(result.get("answers"), dict):
+                raise ValueError("system_one did not return an answers object")
+            self.request_index += 1
+            result = dict(result)
+            result["measurements"] = {
+                "system_one_ms": elapsed,
+                "timing_scope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
+                "neural_forward_calls": self.neural_forward_calls if self.forward_hook else None,
+                "neural_forward_batches": list(self.neural_forward_batches) if self.forward_hook else None,
+                "request_index": self.request_index,
+                "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated() if cuda else None,
+                "gpu_peak_reserved_bytes": torch.cuda.max_memory_reserved() if cuda else None,
+            }
+            return result
 
 
 def make_handler(app: App):
@@ -153,7 +202,7 @@ def make_handler(app: App):
         def do_GET(self) -> None:  # noqa: N802
             path = self.path.split("?", 1)[0]
             if path == "/health":
-                self.end(200, {"ok": True, "model": app.model_name, "mock": app.model is None})
+                self.end(200, {"ok": True, "model": app.model_name, "mock": app.model is None, "metadata": app.metadata})
                 return
             if path == "/v1/models":
                 self.end(200, {"data": [{"id": app.model_name}]})
@@ -176,17 +225,34 @@ def make_handler(app: App):
     return Handler
 
 
-def load_model(repo: str):
+def load_model(repo: str, revision: str | None = None, base_revision: str | None = None,
+               dtype: str = "bfloat16", quantization: str = "none"):
     from transformers import AutoModel
 
-    print(f"loading {repo}", file=sys.stderr)
-    return AutoModel.from_pretrained(repo, trust_remote_code=True)
+    if not revision:
+        raise ValueError("A pinned Hugging Face commit revision is required")
+    if dtype != "bfloat16" or quantization != "none":
+        raise ValueError("Audited Decision remote loader supports BF16 resident weights; external quantization/offload is unsupported")
+    if repo.endswith("Vega-27B") and base_revision != "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0":
+        raise ValueError("Vega requires the audited Qwen/Qwen3.8-27B base revision")
+    print(f"loading {repo}@{revision} on cuda:0", file=sys.stderr)
+    model = AutoModel.from_pretrained(
+        repo, revision=revision, trust_remote_code=True,
+        device_map={"": "cuda:0"}, bf16_resident=True,
+    )
+    if hasattr(model, "eval"):
+        model.eval()
+    return model
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Decision Lane System One server")
     parser.add_argument("--model", default="", help="Hugging Face repo, for example vllm-sr/Decision-2.0-Kai-0.6B")
     parser.add_argument("--mock", action="store_true", help="Answer with the written course rule")
+    parser.add_argument("--revision", help="Pinned model commit SHA")
+    parser.add_argument("--base-revision", help="Pinned base commit SHA for Vega")
+    parser.add_argument("--dtype", default="bfloat16", choices=["bfloat16"])
+    parser.add_argument("--quantization", default="none", choices=["none"])
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8780)
     parser.add_argument("--self-test", action="store_true")
@@ -195,12 +261,15 @@ def main() -> None:
         self_test()
         return
     if args.model and not args.mock:
-        model = load_model(args.model)
+        model = load_model(args.model, args.revision, args.base_revision, args.dtype, args.quantization)
         name = args.model
-    else:
+    elif args.mock:
         model = None
         name = "decision-lane-mock"
-    app = App(model, name)
+    else:
+        parser.error("choose --model with --revision, or explicitly --mock")
+    app = App(model, name, {"revision": args.revision, "baseRevision": args.base_revision,
+                            "dtype": args.dtype, "quantization": args.quantization})
     server = ThreadingHTTPServer((args.host, args.port), make_handler(app))
     print(f"Decision Lane listening on http://{args.host}:{args.port} ({name})", file=sys.stderr)
     try:
