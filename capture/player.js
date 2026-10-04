@@ -31,9 +31,11 @@ function paint() {
     ctx.fillStyle = palette.panel; ctx.fillRect(x, y, w, h);
     text(tile.label, x + 14, y + 36, 29, palette.ink, w - 28);
     if (tile.trace) {
-      const gpu = ['rule', 'idle'].includes(tile.id) ? '基準 / CPU' : `Colab GPU: ${tile.trace.report.hardware.gpu ?? '未確認'}`;
+      const gpu = (['rule', 'idle'].includes(tile.id) ? '基準 / CPU' : `Colab GPU: ${tile.trace.report.hardware.gpu ?? '未確認'}`) + (tile.trace.episode.status === 'partial' ? ' · partial' : '');
       text(gpu, x + 14, y + 63, 17, palette.muted, w - 28);
-      ctx.save(); ctx.translate(x, y + 75); drawWorld(ctx, tile.world, w, 160); ctx.restore();
+      ctx.save(); ctx.translate(x, y + 75);
+      ctx.beginPath(); ctx.rect(0, 0, w, 160); ctx.clip();
+      drawWorld(ctx, tile.world, w, 160); ctx.restore();
       const world = tile.world;
       const label = world.done ? (world.cleared ? 'CLEAR / 結果保持' : '終了 / 結果保持') : `RUN · action ${world.lastAction}`;
       text(label, x + 14, y + 260, 22, world.done ? palette.accent : palette.ink, 340);
@@ -78,12 +80,12 @@ const ready = (async () => {
       if (spec.result) try {
         const response = await fetch(new URL(spec.result, url));
         if (!response.ok) throw new Error(`trace HTTP ${response.status}`);
-        const raw = await response.text();
+        const bytes = await response.arrayBuffer();
         if (tile.sourceSha256) {
-          const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw))), b => b.toString(16).padStart(2, '0')).join('');
+          const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), b => b.toString(16).padStart(2, '0')).join('');
           if (hash !== tile.sourceSha256) throw new Error('trace SHA256 mismatch');
         }
-        tile.trace = loadMeasuredTrace(JSON.parse(raw), tile, manifest); tile.world = structuredClone(tile.trace.initialWorld);
+        tile.trace = loadMeasuredTrace(JSON.parse(new TextDecoder().decode(bytes)), tile, manifest); tile.world = structuredClone(tile.trace.initialWorld);
       } catch (error) { tile.error = error.message; }
       return tile;
     }));
