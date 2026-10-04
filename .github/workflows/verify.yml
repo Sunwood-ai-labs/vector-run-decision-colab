@@ -19,3 +19,5 @@ jobs:
         run: python scripts/validate_colab_notebooks.py
       - name: Run CPU-only adapter and blocked-report unit tests
         run: python -m unittest discover -s tests -v
+      - name: Verify formal result hashes, pins and excluded-input gates
+        run: python scripts/summarize_results.py --results-root results --self-test --check
