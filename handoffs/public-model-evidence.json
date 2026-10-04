@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Public-safe index of pinned model-source evidence and non-prototype runtime proof; references are read-only branch snapshots.",
+  "checkedAtUtc": "2026-10-04",
+  "core": {
+    "branch": "bench/colab-models",
+    "commit": "700c2f4446497db791ce2ce882f7706aad53d432",
+    "remote": "https://github.com/Sunwood-ai-labs/vector-run-decision-colab.git",
+    "modelSourceDoc": {
+      "path": "docs/model-sources.md",
+      "blob": "daee1eb2190249f09d00eb488701057818ada166"
+    },
+    "modelManifest": {
+      "path": "experiments/colab/model-manifest.json",
+      "blob": "64bdbbf46fd4502abf187e6385d2b35e3d512202"
+    }
+  },
+  "auditCoverage": {
+    "sourceTableModelCount": 7,
+    "manifestModelCount": 7,
+    "matchedRevisionCount": 7,
+    "matchedParameterCount": 7,
+    "dedicatedPerModelAuditJsonCount": 6,
+    "dedicatedAuditGap": "Kai has no separate source-audit.json in the pinned core tree; its pin and parameter count are documented in the shared source table and manifest.",
+    "modelSpecificAuditSourceReferenceCounts": {
+      "Eos": 25,
+      "Lux": 14,
+      "Nox": 27,
+      "Sol": 23,
+      "Sol-Reasoning": 24,
+      "Vega": 12
+    },
+    "documentedPinnedFileHashChecks": {
+      "filesPerModelRevision": 11,
+      "revisionCount": 7,
+      "totalChecks": 77,
+      "basis": "Claim in the pinned docs/model-sources.md, not a fresh Hugging Face download performed for this inventory."
+    }
+  },
+  "models": [
+    {
+      "name": "Kai",
+      "repo": "vllm-sr/Decision-2.0-Kai-0.6B",
+      "revision": "cd49ea3813fd8ba0928a9a23ef6c9a0f2f0cd764",
+      "parametersLoaded": 597103104,
+      "maxInputTokensPerQuestion": 8192,
+      "evidenceBranch": "bench/colab-models",
+      "evidenceCommit": "700c2f4446497db791ce2ce882f7706aad53d432",
+      "sourceAudit": {
+        "kind": "shared-source-table-and-manifest",
+        "dedicatedJson": false,
+        "revisionAndParameterMatch": true
+      }
+    },
+    {
+      "name": "Eos",
+      "repo": "vllm-sr/Decision-2.0-Eos-0.8B",
+      "revision": "3594047d69f476f1d01cf84c593e213fc3a4dfe0",
+      "parametersLoaded": 753446208,
+      "maxInputTokensPerQuestion": 16384,
+      "evidenceBranch": "bench/model-eos",
+      "evidenceCommit": "2f2ec6ddd90704db1c04f2374b59aa0f68b85fa1",
+      "sourceAudit": {
+        "path": "experiments/models/eos/source-audit.json",
+        "blob": "711e4f3d338024ed22e6a556ae69f8b655b754ae",
+        "sourceReferenceCount": 25,
+        "revisionAndParameterMatch": true
+      }
+    },
+    {
+      "name": "Sol",
+      "repo": "vllm-sr/Decision-2.0-Sol-2B",
+      "revision": "64235bef55dad29387dd16da7c90e038bf2f0972",
+      "parametersLoaded": 1883930944,
+      "maxInputTokensPerQuestion": 16384,
+      "evidenceBranch": "bench/model-sol",
+      "evidenceCommit": "2375ab4d05c72192a432580dff8eb235571f64f8",
+      "sourceAudit": {
+        "path": "experiments/models/sol/source-audit.json",
+        "blob": "c9cfab31076f25d7f90a36350c6e29c4e399544f",
+        "sourceReferenceCount": 23,
+        "revisionAndParameterMatch": true
+      }
+    },
+    {
+      "name": "Sol-Reasoning",
+      "repo": "vllm-sr/Decision-2.0-Sol-2B-Reasoning",
+      "revision": "ace3ae7032a4f96ffe6be778b9a72e36b68d6e29",
+      "parametersLoaded": 1883930944,
+      "maxInputTokensPerQuestion": 16384,
+      "evidenceBranch": "bench/model-sol-reasoning",
+      "evidenceCommit": "18a4145ab5fb52f08b853e66aa78e70ccfa26e64",
+      "sourceAudit": {
+        "path": "experiments/models/sol-reasoning/source-audit.json",
+        "blob": "128273879106cd2478efc32e013d05ef3ae1c0c3",
+        "sourceReferenceCount": 24,
+        "revisionAndParameterMatch": true
+      }
+    },
+    {
+      "name": "Nox",
+      "repo": "vllm-sr/Decision-2.0-Nox-4B",
+      "revision": "25e8f67d1b486c647222df3aac640d2d5d736bbe",
+      "parametersLoaded": 4208383488,
+      "maxInputTokensPerQuestion": 16384,
+      "evidenceBranch": "bench/model-nox",
+      "evidenceCommit": "b389d1ca086a3a8bf7bf5107df6c1b3dca186a08",
+      "sourceAudit": {
+        "path": "experiments/models/nox/source-audit.json",
+        "blob": "e727a1a10e1ab880560b8d70395067eb5c03ef0c",
+        "sourceReferenceCount": 27,
+        "sourceEvidenceCount": 10,
+        "revisionAndParameterMatch": true
+      }
+    },
+    {
+      "name": "Lux",
+      "repo": "vllm-sr/Decision-2.0-Lux-9B",
+      "revision": "78bf3c03d9147aeb30b641edfe0e30ed04887ca5",
+      "parametersLoaded": 7940895744,
+      "maxInputTokensPerQuestion": 16384,
+      "evidenceBranch": "bench/model-lux",
+      "evidenceCommit": "5bd4b3b5f108d7b7513c168c7f15de2b94bc4cdd",
+      "sourceAudit": {
+        "path": "experiments/models/lux/source-audit.json",
+        "blob": "62954311d421e0a192cdcbbec8fd4249be8ac4e1",
+        "sourceReferenceCount": 14,
+        "revisionAndParameterMatch": true
+      }
+    },
+    {
+      "name": "Vega",
+      "repo": "vllm-sr/Decision-2.0-Vega-27B",
+      "revision": "7aec49ae11a18741706da549ab626b9052795fe7",
+      "baseRepo": "Qwen/Qwen3.8-27B",
+      "baseRevision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+      "parametersLoaded": 29365153792,
+      "maxInputTokensPerQuestion": 32768,
+      "evidenceBranch": "bench/model-vega",
+      "evidenceCommit": "d0a15f70ae28009c899be3e56276a7c22cf32a92",
+      "sourceAudit": {
+        "path": "experiments/models/vega/source-audit.json",
+        "blob": "caea94266d3644946ffda7b582d835daf4520899",
+        "sourceReferenceCount": 12,
+        "baseSourceCount": 2,
+        "safetensorsHeaderEvidenceCount": 20,
+        "revisionAndParameterMatch": true
+      }
+    }
+  ],
+  "publishableFiles": [
+    {
+      "branch": "bench/colab-models",
+      "commit": "700c2f4446497db791ce2ce882f7706aad53d432",
+      "path": "docs/model-sources.md",
+      "blob": "daee1eb2190249f09d00eb488701057818ada166",
+      "role": "shared HF pin, parameter count, loader/API contract, and source-check summary"
+    },
+    {
+      "branch": "bench/colab-models",
+      "commit": "700c2f4446497db791ce2ce882f7706aad53d432",
+      "path": "experiments/colab/model-manifest.json",
+      "blob": "64bdbbf46fd4502abf187e6385d2b35e3d512202",
+      "role": "seven fixed model/base revisions and parameter counts"
+    },
+    {
+      "branch": "bench/model-eos",
+      "commit": "2f2ec6ddd90704db1c04f2374b59aa0f68b85fa1",
+      "path": "experiments/models/eos/source-audit.json",
+      "blob": "711e4f3d338024ed22e6a556ae69f8b655b754ae",
+      "role": "pinned source audit"
+    },
+    {
+      "branch": "bench/model-lux",
+      "commit": "5bd4b3b5f108d7b7513c168c7f15de2b94bc4cdd",
+      "path": "experiments/models/lux/source-audit.json",
+      "blob": "62954311d421e0a192cdcbbec8fd4249be8ac4e1",
+      "role": "pinned source audit"
+    },
+    {
+      "branch": "bench/model-nox",
+      "commit": "b389d1ca086a3a8bf7bf5107df6c1b3dca186a08",
+      "path": "experiments/models/nox/source-audit.json",
+      "blob": "e727a1a10e1ab880560b8d70395067eb5c03ef0c",
+      "role": "pinned source audit"
+    },
+    {
+      "branch": "bench/model-sol",
+      "commit": "2375ab4d05c72192a432580dff8eb235571f64f8",
+      "path": "experiments/models/sol/source-audit.json",
+      "blob": "c9cfab31076f25d7f90a36350c6e29c4e399544f",
+      "role": "pinned source audit"
+    },
+    {
+      "branch": "bench/model-sol-reasoning",
+      "commit": "18a4145ab5fb52f08b853e66aa78e70ccfa26e64",
+      "path": "experiments/models/sol-reasoning/source-audit.json",
+      "blob": "128273879106cd2478efc32e013d05ef3ae1c0c3",
+      "role": "pinned source audit"
+    },
+    {
+      "branch": "bench/model-vega",
+      "commit": "d0a15f70ae28009c899be3e56276a7c22cf32a92",
+      "path": "experiments/models/vega/source-audit.json",
+      "blob": "caea94266d3644946ffda7b582d835daf4520899",
+      "role": "pinned adapter/base source audit"
+    },
+    {
+      "branch": "bench/model-vega",
+      "commit": "d0a15f70ae28009c899be3e56276a7c22cf32a92",
+      "path": "results/vega/resident-readiness.json",
+      "blob": "b768d5ec106f95417f436a07b362703d001af11f",
+      "role": "sanitized GPU resident-readiness metadata only; system_one_called=false and game_benchmark_completed=false"
+    }
+  ],
+  "gpuRuntimeEvidence": {
+    "publicModelInferenceResultsIncluded": 0,
+    "prototypeResultsIncluded": 0,
+    "publishableReadinessArtifactsIncluded": 1,
+    "residentReadinessArtifact": "results/vega/resident-readiness.json",
+    "residentReadinessInterpretation": "Confirms resident loading and health only; it is not a completed system_one inference or game benchmark.",
+    "otherRawRuntimeProbeLogsIncluded": 0
+  },
+  "excludedCategories": [
+    "legacy game prototype results, baseline outputs, traces, and prototype QA",
+    "raw runtime or allocation logs, including records with embedded nvidia-smi output",
+    "notebooks containing outputs or session identifiers",
+    "credentials, session IDs, and raw authentication logs",
+    "oldrun.sh and legacy game-import or runner code",
+    "weights, captures, and video outputs"
+  ],
+  "privacyReview": {
+    "reviewedPublishableArtifacts": 9,
+    "credentialValuePatternMatches": 0,
+    "activeSessionOrRuntimeIdentifierValues": 0,
+    "reviewLimit": "Static name/value scan of selected source files and the Vega readiness file; not a general repository-wide secret scan."
+  },
+  "benchmarkClaim": "This index contains model-source pins and limited GPU readiness metadata. It contains no VECTOR RUN game score or completed model inference benchmark result."
+}
