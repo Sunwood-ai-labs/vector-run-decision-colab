@@ -1,22 +1,785 @@
 {
-  "status": "design_in_progress_not_ready_for_measurement",
-  "repository": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
-  "baselineCommit": "7adcbaad44b249c9505e5a8e9bcfa4f79b11f364",
-  "measurementCommit": null,
-  "localRepository": "C:/Prj/vector-run-benchmark",
-  "branch": "bench/colab-realtime-api",
-  "physicsHz": 120,
-  "decisionEveryTicks": 16,
-  "actions": ["wait", "jump", "release"],
-  "observationPipeline": "structured-visible-state-v1",
-  "input": "JSON visible state plus Japanese question instructions; no hidden course state or gold labels",
-  "plannedCli": "node scripts/decision-bench.mjs --agent remote --seeds 101,202,303,404,505 --questions 3 --max-seconds 30 --max-jumps 2 --model MODEL --url http://127.0.0.1:8780/v1/systemone --metadata FILE --output FILE --trace",
-  "metadataPlanned": {"model": {"id": "MODEL", "revision": "HF_SHA", "baseRevision": null}, "hardware": {"gpu": "ACTUAL_GPU", "dtype": "mixed BF16/FP32", "quantization": "none", "dependencies": {}}, "gameCommit": "PINNED_EXTERNAL_GAME_SHA"},
-  "primarySeeds": [101,202,303,404,505],
-  "stressSeeds": [101],
-  "stressQuestions": 64,
-  "timeLimitSeconds": 30,
-  "timeLimitClassification": "censored; never a clear or a completed collision benchmark",
-  "traceSchema": "pending game owner handoff",
-  "prototypeCommitExcluded": "87d41b9904b20b298467caa7cc892500959f7c65"
+  "status": "ready_for_measurement",
+  "game": {
+    "repo": "https://github.com/Sunwood-ai-labs/vector-run-benchmark",
+    "measurementCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "sourceDigest": "d7f9de9c3aaf0e22669dd54e916f9a854ea33b2339f83c183438f4c93be5357a",
+    "engineVersion": "1.1.0",
+    "observationPipeline": "structured-visible-state-v1",
+    "physicsHz": 120,
+    "playbackRate": "1x realtime",
+    "productionSeedSet": [
+      101,
+      202,
+      303,
+      404,
+      505
+    ],
+    "maxJumps": 2,
+    "frameGapLimitMs": 100,
+    "sourceDigestAlgorithm": "SHA-256(path + NUL + UTF-8 text with CRLF normalized to LF + NUL), in documented source order"
+  },
+  "publicState": {
+    "schema": "vector-run-visible-state/v1",
+    "q3StateKeysExact": [
+      "schema",
+      "tick",
+      "dead",
+      "player",
+      "obstacles"
+    ],
+    "q64StateKeysExact": [
+      "schema",
+      "tick",
+      "dead",
+      "player",
+      "obstacles",
+      "probes"
+    ],
+    "playerKeysExact": [
+      "y",
+      "vy",
+      "speed",
+      "held",
+      "jumpsUsed",
+      "maxJumps"
+    ],
+    "obstacleKeysExact": [
+      "x",
+      "width",
+      "height"
+    ],
+    "probes": "q64 only: 61 explicit synthetic booleans generated from request-call index only; q3 omits state.probes even if supplied in builder input",
+    "forbiddenFromModelRequest": [
+      "seed",
+      "rng",
+      "nextEncounter",
+      "encounterTime",
+      "offscreen/future obstacles",
+      "course generation state"
+    ]
+  },
+  "systemOne": {
+    "method": "POST",
+    "url": "http://127.0.0.1:8780/v1/systemone",
+    "contentType": "application/json",
+    "requestTopLevelKeysExact": [
+      "model",
+      "state",
+      "questions"
+    ],
+    "questionCountMeaning": "--questions 3|64 is the number of questions in one request only; it never limits dispatch count",
+    "series": {
+      "q3": {
+        "questionCountPerRequest": 3,
+        "questionKeysExact": [
+          "action",
+          "commit",
+          "danger"
+        ],
+        "stateHasProbes": false
+      },
+      "q64": {
+        "questionCountPerRequest": 64,
+        "questionKeysExact": [
+          "action",
+          "commit",
+          "danger",
+          "p0",
+          "p1",
+          "p2",
+          "p3",
+          "p4",
+          "p5",
+          "p6",
+          "p7",
+          "p8",
+          "p9",
+          "p10",
+          "p11",
+          "p12",
+          "p13",
+          "p14",
+          "p15",
+          "p16",
+          "p17",
+          "p18",
+          "p19",
+          "p20",
+          "p21",
+          "p22",
+          "p23",
+          "p24",
+          "p25",
+          "p26",
+          "p27",
+          "p28",
+          "p29",
+          "p30",
+          "p31",
+          "p32",
+          "p33",
+          "p34",
+          "p35",
+          "p36",
+          "p37",
+          "p38",
+          "p39",
+          "p40",
+          "p41",
+          "p42",
+          "p43",
+          "p44",
+          "p45",
+          "p46",
+          "p47",
+          "p48",
+          "p49",
+          "p50",
+          "p51",
+          "p52",
+          "p53",
+          "p54",
+          "p55",
+          "p56",
+          "p57",
+          "p58",
+          "p59",
+          "p60"
+        ],
+        "stateHasProbes": true,
+        "probeCount": 61,
+        "probeValueType": "boolean",
+        "probeInstructionTemplate": "state.probes[i] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+      }
+    },
+    "actionInstructionExact": "画面は横800×縦360、地面はy=278。playerの固定boxはx=116,width=34,height=42。player.yは地面からの高さで上向きが正、vyも上向きが正。obstacles[].xは画面左端、width/heightはbox寸法です。この可視状態だけから次の操作を1つ選んでください。heldは維持されます。jump上限はstate.player.maxJumpsです（標準設定は2回）。2回目のjumpにはreleaseしてからjumpを再pressします。着地すると回数が戻ります。",
+    "responseRequiredAnswers": {
+      "q3": [
+        "answers.action.choice",
+        "answers.action.probabilities",
+        "answers.commit.noul",
+        "answers.danger.score"
+      ],
+      "q64": [
+        "answers.action.choice",
+        "answers.action.probabilities",
+        "answers.commit.noul",
+        "answers.danger.score",
+        "answers.p0.noul..answers.p60.noul"
+      ]
+    },
+    "responseValidation": "answers keys must exactly match q3/q64; required values are type/value checked. Top-level model/usage/measurements and per-answer type/probabilities metadata are allowed. Generated text/rationale is rejected.",
+    "rawRetention": {
+      "decisionFields": [
+        "rawRequest",
+        "rawRequestBody",
+        "rawResponse",
+        "rawProbabilities"
+      ],
+      "rawResponse": "exact complete HTTP response body string; metadata is not stripped or synthesized",
+      "knownEnvelopeMetadataKeys": [
+        "model",
+        "usage",
+        "measurements"
+      ],
+      "forwardEvidence": "Production server hook on the actual neural backend records neural_forward_calls and input_ids shapes in neural_forward_batches; CPU fixture forward_performed/device is not production evidence.",
+      "evidenceKeysExact": [
+        "decision.status",
+        "decision.lateReply",
+        "decision.rawResponse",
+        "decision.rawProbabilities",
+        "decision.completionTick",
+        "decision.applicationTick",
+        "JSON.parse(decision.rawResponse).measurements.neural_forward_calls",
+        "JSON.parse(decision.rawResponse).measurements.neural_forward_batches"
+      ],
+      "hardwareMetadataPaths": [
+        "report.hardware",
+        "report.metadata.hardware",
+        "report.model",
+        "report.gameCommit",
+        "report.metadata.model",
+        "report.metadata.gameCommit"
+      ],
+      "hardwareDevicePassthrough": "metadata.hardware is preserved as supplied; if it has a device field it remains at report.hardware.device and report.metadata.hardware.device; the CLI does not invent or normalize GPU identity"
+    },
+    "timing": {
+      "dispatchEveryTicks": 16,
+      "dispatchCadenceMs": 133.33333333333334,
+      "singleOutstanding": true,
+      "physicsHz": 120,
+      "physicsContinuesDuringInference": true,
+      "applyAtNextPhysicsTickAfterCompletion": true,
+      "horizonSeconds": 30,
+      "horizonFinalTick": 3600,
+      "maxSecondsCli": "positive values up to 30; production invocation is 30",
+      "clockGapOverMs": 100,
+      "clockGapResult": "invalid frame_gap; no catch-up gap is discarded or hidden"
+    },
+    "lateReply": {
+      "status": "late_answer_not_applied",
+      "requiredDecisionFields": [
+        "lateReply=true",
+        "rawResponse",
+        "rawProbabilities",
+        "latencyMs",
+        "applicationTick=null",
+        "completionTick=null"
+      ],
+      "meaning": "valid measured reply arrived after terminal; distinct from missing/unmeasured and never applied as an action"
+    },
+    "invalidAnswers": "missing/malformed answers record invalid_response/error, action=null, applicationTick=null, no action/inputLog/release; physics continues"
+  },
+  "result": {
+    "schema": "vector-run-decision-bench/v1",
+    "reportFieldsExact": [
+      "schema",
+      "createdAt",
+      "game",
+      "variant",
+      "agent",
+      "model",
+      "hardware",
+      "gameCommit",
+      "metadata",
+      "episodes",
+      "runs",
+      "runtimeGameInvalidErrors"
+    ],
+    "gameFields": [
+      "repo",
+      "commit",
+      "sourceDigest",
+      "engineVersion",
+      "config",
+      "configHash",
+      "ruleId",
+      "observationPipeline"
+    ],
+    "variantFields": [
+      "id",
+      "physicsHz",
+      "playbackRate",
+      "questionCount",
+      "questionCountMeaning",
+      "systemOneQuestionCount",
+      "dispatchEveryTicks",
+      "dispatchCadenceMs",
+      "oneOutstanding",
+      "maxSeconds",
+      "terminationCap",
+      "maxJumps",
+      "frameGapPolicy",
+      "trace"
+    ],
+    "runFields": [
+      "seed",
+      "maxJumps",
+      "questionCount",
+      "agent",
+      "model",
+      "initialState",
+      "actions",
+      "inputLogs",
+      "frameSnapshots",
+      "decisions",
+      "skips",
+      "latencies",
+      "runtimeGameInvalidErrors",
+      "responseErrors",
+      "terminalStatus",
+      "endReason",
+      "finalTick",
+      "finalSnapshotHash",
+      "traceEnabled",
+      "censored",
+      "distanceWorld",
+      "distanceMetres",
+      "survivalSeconds",
+      "wallSeconds",
+      "jumps",
+      "collision",
+      "finalState",
+      "postTerminalWaitMs",
+      "traceValidation",
+      "valid",
+      "eligibleForSummary"
+    ],
+    "timeline": {
+      "initialState": "tick 0, separate from frameSnapshots",
+      "frameSnapshots": "array of {tick,state}, one per physical tick from 1 through finalTick",
+      "inputLogs": "Engine jump/release events only; event.tick=N is the state tick before stepping to N+1, applicationTick=N+1; legacy replayRecord consumes input.tick=N",
+      "actions": "decision application rows including wait; wait is a no-op preserving held and is excluded from inputLogs",
+      "finalSnapshotHash": "engine hash(JSON.stringify(private Engine.snapshot())); private snapshot is not exported"
+    },
+    "decisionFields": [
+      "decisionId",
+      "questionCount",
+      "dispatchTick",
+      "completionTick",
+      "applicationTick",
+      "latencyMs",
+      "rawRequest",
+      "rawRequestBody",
+      "rawResponse",
+      "rawProbabilities",
+      "answers",
+      "action",
+      "lateReply",
+      "applied",
+      "status"
+    ],
+    "decisionConditionalFields": [
+      "requestStartedWallMs",
+      "responseObservedTick",
+      "completedWallMs",
+      "httpStatus",
+      "error",
+      "accepted"
+    ],
+    "actionFields": [
+      "tick",
+      "applicationTick",
+      "action",
+      "accepted",
+      "decisionId"
+    ],
+    "skipFields": [
+      "tick",
+      "decisionId",
+      "reason"
+    ],
+    "skipReasons": [
+      "request_outstanding",
+      "idle_baseline"
+    ],
+    "latencyFields": [
+      "decisionId",
+      "dispatchTick",
+      "completionTick",
+      "latencyMs",
+      "late (remote rows only)"
+    ],
+    "baselineRows": {
+      "remote": "each tick-16 opportunity has a decision; request_outstanding is also represented in skips",
+      "rule": "local decision rows have rawRequest/rawResponse null; applied wait/jump/release are represented in actions, with only jump/release in inputLogs",
+      "idle": "idle_no_action decision row plus skips.reason=idle_baseline at each tick-16 opportunity"
+    },
+    "terminalSemantics": {
+      "collision": "validated through existing dist/engine.js replayRecord; eligible collision runs may enter summarize",
+      "time_limit": "censored; validated by scripts/verify-decision-trace.mjs; never passed to replayRecord/summarize",
+      "frame_gap": "invalid run in runtimeGameInvalidErrors; never treated as clear/collision"
+    },
+    "provenance": "metadata file is preserved as metadata and its model, hardware, and gameCommit values are also exposed at report top level; game.commit and game.sourceDigest identify the measurement code"
+  },
+  "cli": {
+    "remote": "node scripts/decision-bench.mjs --agent remote --seeds 101 --questions 64 --max-seconds 30 --max-jumps 2 --model MODEL --url http://127.0.0.1:8780/v1/systemone --metadata metadata.json --output artifacts/decision-bench/q64/seed-101/MODEL.json --trace",
+    "rule": "node scripts/decision-bench.mjs --agent rule --seeds 101 --questions 64 --max-seconds 30 --max-jumps 2 --metadata metadata.json --output artifacts/decision-bench/q64/seed-101/rule.json --trace",
+    "idle": "node scripts/decision-bench.mjs --agent idle --seeds 101 --questions 64 --max-seconds 30 --max-jumps 2 --metadata metadata.json --output artifacts/decision-bench/q64/seed-101/idle.json --trace",
+    "validate": "node scripts/verify-decision-trace.mjs result-1.json result-2.json ... result-9.json",
+    "validatorRule": "all files in one invocation must share q3 or q64; production video sets require nine homogeneous questionCount traces"
+  },
+  "cpuValidation": {
+    "testFile": "tests/decision-bench.test.mjs",
+    "checks": [
+      "exact q3/q64 keys",
+      "synthetic boolean probes and true-value wording",
+      "real HTTP CPU fake server with model/usage/measurements and typed answer metadata",
+      "raw response/probabilities retention",
+      "wait no-op/input tick mapping",
+      "slow-request physics continuation/skips",
+      "invalid null action",
+      "valid late raw reply",
+      "q3/q64 dispatch ticks 16/32",
+      "censored snapshot/fingerprint replay",
+      "max-seconds <=30"
+    ],
+    "integratedTests": {
+      "passed": 33,
+      "failed": 0
+    }
+  },
+  "videoAlignment": {
+    "sourceOfTruth": "native vector-run-decision-bench/v1 report and scripts/verify-decision-trace.mjs",
+    "questionLabel": "q3/request or q64/request",
+    "dispatchLabel": "every 16 ticks (~133.3 ms), one outstanding",
+    "measurementFreezeGate": "do not wait for app replay/capture helper; video consumes this committed CLI schema as-is",
+    "coldFirstGate": "require late_answer_not_applied plus intact rawResponse/rawProbabilities, null applicationTick, and actual neural-forward evidence in rawResponse.measurements"
+  },
+  "freeze": {
+    "measurementCommit": "717f02dc9852b88c253ace32f42fcb6d780ed0d3",
+    "recordingPlayer": "separate later capture-integration change; no measurement CLI/source edits required after measurementCommit",
+    "sourceDigest": "d7f9de9c3aaf0e22669dd54e916f9a854ea33b2339f83c183438f4c93be5357a",
+    "status": "ready_for_measurement",
+    "sourceDigestAlgorithm": "SHA-256(path + NUL + UTF-8 text with CRLF normalized to LF + NUL), in documented source order"
+  },
+  "wireContract": {
+    "method": "POST",
+    "url": "http://127.0.0.1:8780/v1/systemone",
+    "contentType": "application/json",
+    "requestExactTopLevelKeys": [
+      "model",
+      "state",
+      "questions"
+    ],
+    "questionKeysExact": [
+      "action",
+      "commit",
+      "danger",
+      "p0",
+      "p1",
+      "p2",
+      "p3",
+      "p4",
+      "p5",
+      "p6",
+      "p7",
+      "p8",
+      "p9",
+      "p10",
+      "p11",
+      "p12",
+      "p13",
+      "p14",
+      "p15",
+      "p16",
+      "p17",
+      "p18",
+      "p19",
+      "p20",
+      "p21",
+      "p22",
+      "p23",
+      "p24",
+      "p25",
+      "p26",
+      "p27",
+      "p28",
+      "p29",
+      "p30",
+      "p31",
+      "p32",
+      "p33",
+      "p34",
+      "p35",
+      "p36",
+      "p37",
+      "p38",
+      "p39",
+      "p40",
+      "p41",
+      "p42",
+      "p43",
+      "p44",
+      "p45",
+      "p46",
+      "p47",
+      "p48",
+      "p49",
+      "p50",
+      "p51",
+      "p52",
+      "p53",
+      "p54",
+      "p55",
+      "p56",
+      "p57",
+      "p58",
+      "p59",
+      "p60"
+    ],
+    "questionsPerCall": {
+      "flagMeaning": "simultaneous_questions_per_api_call",
+      "q3": [
+        "action",
+        "commit",
+        "danger"
+      ],
+      "q64": [
+        "action",
+        "commit",
+        "danger",
+        "p0",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7",
+        "p8",
+        "p9",
+        "p10",
+        "p11",
+        "p12",
+        "p13",
+        "p14",
+        "p15",
+        "p16",
+        "p17",
+        "p18",
+        "p19",
+        "p20",
+        "p21",
+        "p22",
+        "p23",
+        "p24",
+        "p25",
+        "p26",
+        "p27",
+        "p28",
+        "p29",
+        "p30",
+        "p31",
+        "p32",
+        "p33",
+        "p34",
+        "p35",
+        "p36",
+        "p37",
+        "p38",
+        "p39",
+        "p40",
+        "p41",
+        "p42",
+        "p43",
+        "p44",
+        "p45",
+        "p46",
+        "p47",
+        "p48",
+        "p49",
+        "p50",
+        "p51",
+        "p52",
+        "p53",
+        "p54",
+        "p55",
+        "p56",
+        "p57",
+        "p58",
+        "p59",
+        "p60"
+      ]
+    },
+    "requestShape": {
+      "model": "audited HF model identifier",
+      "state": {
+        "schema": "vector-run-visible-state/v1",
+        "tick": "integer",
+        "dead": "boolean",
+        "player": "visible current player fields",
+        "obstacles": "currently visible boxes only",
+        "probes": "q64 only: 61 synthetic booleans"
+      },
+      "questions": {
+        "action": {
+          "type": "choice",
+          "instructions": "画面は横800×縦360、地面はy=278。playerの固定boxはx=116,width=34,height=42。player.yは地面からの高さで上向きが正、vyも上向きが正。obstacles[].xは画面左端、width/heightはbox寸法です。この可視状態だけから次の操作を1つ選んでください。heldは維持されます。jump上限はstate.player.maxJumpsです（標準設定は2回）。2回目のjumpにはreleaseしてからjumpを再pressします。着地すると回数が戻ります。",
+          "criteria": {
+            "wait": "ジャンプ入力を新しく押さず、現在のheld状態を維持する。",
+            "jump": "ジャンプ入力を押す。held中や上限到達中は受理されない場合があります。",
+            "release": "ジャンプ入力を離す。"
+          }
+        },
+        "commit": {
+          "type": "noul",
+          "instructions": "選んだ操作を実行する意思の強さを数値で示してください。説明文は出力しないでください。"
+        },
+        "danger": {
+          "type": "score",
+          "instructions": "この可視状態で操作を選ぶ危険度を3段階で評価してください。",
+          "criteria": [
+            "safe",
+            "caution",
+            "danger"
+          ]
+        },
+        "p0..p60": {
+          "type": "noul",
+          "instructions": "state.probes[0] の値はtrueですか。trueなら1、falseなら0に対応する数値で回答してください。説明文は出力しないでください。"
+        }
+      }
+    },
+    "responseShape": {
+      "answers": {
+        "action": {
+          "choice": "wait|jump|release",
+          "probabilities": "raw probability map"
+        },
+        "commit": {
+          "noul": "numeric probability"
+        },
+        "danger": {
+          "score": "numeric ordinal score"
+        },
+        "p0..p60": {
+          "noul": "numeric probability"
+        }
+      }
+    },
+    "responseAdditionalMetadata": "model, usage, measurements and typed answer metadata are retained",
+    "timing": {
+      "dispatchEveryTicks": 16,
+      "dispatchCadenceMs": 133.33333333333334,
+      "singleOutstanding": true,
+      "physicsHz": 120,
+      "physicsContinuesDuringInference": true,
+      "applyAtNextPhysicsTickAfterCompletion": true,
+      "horizonSeconds": 30,
+      "horizonFinalTick": 3600,
+      "maxSecondsCli": "positive values up to 30; production invocation is 30",
+      "clockGapOverMs": 100,
+      "clockGapResult": "invalid frame_gap; no catch-up gap is discarded or hidden"
+    }
+  },
+  "resultDraft": {
+    "schema": "vector-run-decision-bench/v1",
+    "reportFieldsExact": [
+      "schema",
+      "createdAt",
+      "game",
+      "variant",
+      "agent",
+      "model",
+      "hardware",
+      "gameCommit",
+      "metadata",
+      "episodes",
+      "runs",
+      "runtimeGameInvalidErrors"
+    ],
+    "gameFields": [
+      "repo",
+      "commit",
+      "sourceDigest",
+      "engineVersion",
+      "config",
+      "configHash",
+      "ruleId",
+      "observationPipeline"
+    ],
+    "variantFields": [
+      "id",
+      "physicsHz",
+      "playbackRate",
+      "questionCount",
+      "questionCountMeaning",
+      "systemOneQuestionCount",
+      "dispatchEveryTicks",
+      "dispatchCadenceMs",
+      "oneOutstanding",
+      "maxSeconds",
+      "terminationCap",
+      "maxJumps",
+      "frameGapPolicy",
+      "trace"
+    ],
+    "runFields": [
+      "seed",
+      "maxJumps",
+      "questionCount",
+      "agent",
+      "model",
+      "initialState",
+      "actions",
+      "inputLogs",
+      "frameSnapshots",
+      "decisions",
+      "skips",
+      "latencies",
+      "runtimeGameInvalidErrors",
+      "responseErrors",
+      "terminalStatus",
+      "endReason",
+      "finalTick",
+      "finalSnapshotHash",
+      "traceEnabled",
+      "censored",
+      "distanceWorld",
+      "distanceMetres",
+      "survivalSeconds",
+      "wallSeconds",
+      "jumps",
+      "collision",
+      "finalState",
+      "postTerminalWaitMs",
+      "traceValidation",
+      "valid",
+      "eligibleForSummary"
+    ],
+    "timeline": {
+      "initialState": "tick 0, separate from frameSnapshots",
+      "frameSnapshots": "array of {tick,state}, one per physical tick from 1 through finalTick",
+      "inputLogs": "Engine jump/release events only; event.tick=N is the state tick before stepping to N+1, applicationTick=N+1; legacy replayRecord consumes input.tick=N",
+      "actions": "decision application rows including wait; wait is a no-op preserving held and is excluded from inputLogs",
+      "finalSnapshotHash": "engine hash(JSON.stringify(private Engine.snapshot())); private snapshot is not exported"
+    },
+    "decisionFields": [
+      "decisionId",
+      "questionCount",
+      "dispatchTick",
+      "completionTick",
+      "applicationTick",
+      "latencyMs",
+      "rawRequest",
+      "rawRequestBody",
+      "rawResponse",
+      "rawProbabilities",
+      "answers",
+      "action",
+      "lateReply",
+      "applied",
+      "status"
+    ],
+    "decisionConditionalFields": [
+      "requestStartedWallMs",
+      "responseObservedTick",
+      "completedWallMs",
+      "httpStatus",
+      "error",
+      "accepted"
+    ],
+    "actionFields": [
+      "tick",
+      "applicationTick",
+      "action",
+      "accepted",
+      "decisionId"
+    ],
+    "skipFields": [
+      "tick",
+      "decisionId",
+      "reason"
+    ],
+    "skipReasons": [
+      "request_outstanding",
+      "idle_baseline"
+    ],
+    "latencyFields": [
+      "decisionId",
+      "dispatchTick",
+      "completionTick",
+      "latencyMs",
+      "late (remote rows only)"
+    ],
+    "baselineRows": {
+      "remote": "each tick-16 opportunity has a decision; request_outstanding is also represented in skips",
+      "rule": "local decision rows have rawRequest/rawResponse null; applied wait/jump/release are represented in actions, with only jump/release in inputLogs",
+      "idle": "idle_no_action decision row plus skips.reason=idle_baseline at each tick-16 opportunity"
+    },
+    "terminalSemantics": {
+      "collision": "validated through existing dist/engine.js replayRecord; eligible collision runs may enter summarize",
+      "time_limit": "censored; validated by scripts/verify-decision-trace.mjs; never passed to replayRecord/summarize",
+      "frame_gap": "invalid run in runtimeGameInvalidErrors; never treated as clear/collision"
+    },
+    "provenance": "metadata file is preserved as metadata and its model, hardware, and gameCommit values are also exposed at report top level; game.commit and game.sourceDigest identify the measurement code",
+    "validationStatus": "passed",
+    "validator": {
+      "status": "passed",
+      "command": "node scripts/verify-decision-trace.mjs RESULT.json [RESULT.json ...]",
+      "evidence": "33/33 integrated CPU tests passed; CPU HTTP fake-server and malformed/late response tests passed; 30-second real-clock rule test reached 3600 physics ticks with no clock invalidation. Each GPU result still requires its own trace verification."
+    }
+  }
 }
