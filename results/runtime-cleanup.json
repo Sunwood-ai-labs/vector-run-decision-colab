@@ -1,0 +1,21 @@
+{
+  "schema": "vector-run-runtime-cleanup/v1",
+  "recordedAtUtc": "2026-10-04 16:43:39 UTC",
+  "provider": "Google Colab",
+  "method": "Official Colab CLI with ADC; read-only sessions listing. Raw authentication and session identifiers are excluded.",
+  "accountListing": {
+    "exitCode": 0,
+    "noActiveSessions": true,
+    "authFailure": false
+  },
+  "dedicatedFormalRuntimeStop": {
+    "kai": "Session terminated",
+    "eos": "Session terminated",
+    "sol": "Session terminated",
+    "sol-reasoning": "Session terminated",
+    "nox": "Session terminated",
+    "lux": "Session terminated",
+    "vega": "Session terminated"
+  },
+  "scope": "All dedicated formal benchmark runtimes were stopped by their owners. No unrelated runtime was stopped."
+}
