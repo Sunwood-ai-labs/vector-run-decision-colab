@@ -6,6 +6,8 @@
 *.json text eol=lf
 # Preserve exact bytes of hashed recording evidence, including the path inventory snapshot.
 videos/*.json -text
+# Keep formal evidence byte-identical across Windows and Linux checkouts.
+results/**/*.json -text
 *.md text eol=lf
 *.yml text eol=lf
 *.bat text eol=crlf
