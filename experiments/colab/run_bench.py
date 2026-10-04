@@ -118,6 +118,10 @@ class MeasuredApp:
         try:
             result = self.app.answer(payload)
             record.update({"status": "ok", **result.get("measurements", {})})
+            answer_errors = {key: public_error(value["error"]) for key, value in result.get("answers", {}).items()
+                             if isinstance(value, dict) and value.get("error")}
+            if answer_errors:
+                record.update({"status": "answer_error", "answer_errors": answer_errors})
             return result
         except Exception as error:
             record.update({"status": "error", "error": public_error(error)})
@@ -196,7 +200,7 @@ def main() -> int:
             blocked = gate or ("Previous inference did not drain; refusing concurrent GPU loads" if fatal_drain else None)
             if entry.get("status") in ("blocked", "unavailable"):
                 blocked = blocked or entry.get("blocked_reason") or "Model manifest marks model unavailable"
-            minimum = entry.get("minimum_gpu_memory_bytes") or entry.get("required_gpu_memory_bytes")
+            minimum = entry.get("minimum_gpu_memory_bytes") or entry.get("required_gpu_memory_bytes") or entry.get("memory_estimate", {}).get("minimum_bytes")
             if minimum and env["gpu"] and minimum > env["gpu"]["free_memory_before_load_bytes"]:
                 blocked = f"GPU memory preflight: requires {minimum} bytes; available {env['gpu']['free_memory_before_load_bytes']} bytes. No quantization/offload applied."
             if blocked:
