@@ -1,7 +1,7 @@
-"""Decision Lane の System One エンドポイント。
+"""VECTOR RUN の System One エンドポイント。
 
---mock（既定）はコースに書いたルールで答えます。GPU も transformers も要りません。
---model vllm-sr/Decision-2.0-Kai-0.6B で公開モデルをその場で読みます。
+--mock は明示した場合だけコースに書いたルールで答えます。
+公開モデルは --model と --revision で固定し、単一 CUDA GPU で読みます。
 """
 
 from __future__ import annotations
@@ -115,6 +115,7 @@ class App:
 
     def answer(self, payload: dict[str, Any]) -> dict[str, Any]:
         state = payload.get("state")
+        model_state = state
         questions = payload.get("questions")
         if isinstance(state, str):
             state = json.loads(state)
@@ -135,7 +136,7 @@ class App:
             if cuda:
                 torch.cuda.synchronize()
             started = time.perf_counter()
-            result = self.model.system_one(state=state, questions=questions)
+            result = self.model.system_one(state=model_state, questions=questions)
             if cuda:
                 torch.cuda.synchronize()
             elapsed = (time.perf_counter() - started) * 1000
@@ -144,7 +145,8 @@ class App:
             self.request_index += 1
             result = dict(result)
             result["measurements"] = {
-                "forward_ms": elapsed,
+                "system_one_ms": elapsed,
+                "timing_scope": "synchronized system_one call including tokenization and wrapper; not isolated neural forward",
                 "request_index": self.request_index,
                 "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated() if cuda else None,
                 "gpu_peak_reserved_bytes": torch.cuda.max_memory_reserved() if cuda else None,
